@@ -1,0 +1,16 @@
+[
+  {
+    "category": "Core",
+    "items": [
+      "Python",
+      "SQL",
+      "pandas",
+      "NumPy",
+      "ETL Pipelines",
+      "Git",
+      "Power BI",
+      "Data Visualization",
+      "Data Cleaning"
+    ]
+  }
+]

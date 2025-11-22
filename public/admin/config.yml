@@ -1,0 +1,87 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "config"
+    label: "Site Configuration"
+    files:
+      - name: "profile"
+        label: "Profile Info"
+        file: "src/content/profile.json"
+        fields:
+          - {label: "Name", name: "name", widget: "string"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Bio", name: "bio", widget: "text"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Phone", name: "phone", widget: "string"}
+          - {label: "LinkedIn", name: "linkedin", widget: "string"}
+          - {label: "GitHub", name: "github", widget: "string"}
+
+      - name: "education"
+        label: "Education (Source)"
+        file: "src/content/education.json"
+        fields:
+          - label: "Education List"
+            name: "education"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "string"}
+              - {label: "Degree", name: "degree", widget: "string"}
+              - {label: "Institution", name: "institution", widget: "string"}
+              - {label: "Period", name: "period", widget: "string"}
+
+      - name: "experience"
+        label: "Experience (Load)"
+        file: "src/content/experience.json"
+        fields:
+          - label: "Experience List"
+            name: "experience"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Organization", name: "organization", widget: "string"}
+              - {label: "Period", name: "period", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Type", name: "type", widget: "select", options: ["work", "volunteer"]}
+
+      - name: "skills"
+        label: "Skills (Transform)"
+        file: "src/content/skills.json"
+        fields:
+          - label: "Skill Categories"
+            name: "skills"
+            widget: "list"
+            fields:
+              - {label: "Category", name: "category", widget: "string"}
+              - {label: "Items", name: "items", widget: "list"}
+
+      - name: "certificates"
+        label: "Certificates"
+        file: "src/content/certificates.json"
+        fields:
+          - label: "Cert List"
+            name: "certificates"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "string"}
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Issuer", name: "issuer", widget: "string"}
+
+      - name: "blog"
+        label: "Blog Posts"
+        file: "src/content/blog.json"
+        fields:
+          - label: "Posts"
+            name: "posts"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Publish Date", name: "date", widget: "datetime"}
+              - {label: "Slug", name: "slug", widget: "string"}
+              - {label: "Excerpt", name: "excerpt", widget: "text"}
+              - {label: "Content", name: "content", widget: "markdown"}

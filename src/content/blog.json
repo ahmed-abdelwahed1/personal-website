@@ -1,0 +1,11 @@
+{
+  "posts": [
+    {
+      "title": "Building Robust ETL Pipelines with Python",
+      "date": "2024-03-15",
+      "slug": "building-etl-pipelines",
+      "excerpt": "A deep dive into how I automated data processing flows using Pandas and raw SQL optimization techniques.",
+      "content": "Full markdown content would go here..."
+    }
+  ]
+}
