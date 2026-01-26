@@ -37,6 +37,23 @@
 }
 </script>
 <link rel="stylesheet" href="/index.css">
+    <script>
+      // Netlify Identity sends password recovery/invite links to:
+      //   https://site/#recovery_token=...
+      // Decap CMS + netlify-identity-widget live under /admin/,
+      // so we forward tokens there so the widget can handle them.
+      (function () {
+        var hash = window.location.hash || '';
+        var hasIdentityToken =
+          hash.indexOf('recovery_token=') !== -1 ||
+          hash.indexOf('invite_token=') !== -1 ||
+          hash.indexOf('confirmation_token=') !== -1;
+
+        if (hasIdentityToken && window.location.pathname.indexOf('/admin') !== 0) {
+          window.location.replace('/admin/' + hash);
+        }
+      })();
+    </script>
 </head>
   <body class="font-sans bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 antialiased">
     <div id="root"></div>
