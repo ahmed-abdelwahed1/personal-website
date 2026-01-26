@@ -20,8 +20,9 @@ export const CredlyBadges: React.FC<CredlyBadgesProps> = ({
   return (
     <div
       className={[
-        'grid gap-4 justify-items-center',
-        'grid-cols-[repeat(auto-fit,minmax(160px,1fr))]',
+        // Mobile: always 2 columns, slightly tighter gap.
+        // Larger screens: auto-fit columns.
+        'grid grid-cols-2 gap-3 justify-items-center sm:gap-4 sm:grid-cols-[repeat(auto-fit,minmax(160px,1fr))]',
         className ?? '',
       ].join(' ')}
     >
@@ -39,7 +40,12 @@ export const CredlyBadges: React.FC<CredlyBadgesProps> = ({
             src={`${normalizedHost}/embedded_badge/${id}`}
             style={{ width: `${iframeWidth}px`, height: `${iframeHeight}px` }}
             title="View my verified achievement on Credly."
-            className="mx-auto block"
+            className={[
+              // Smaller on mobile
+              'mx-auto block origin-top scale-[0.92] sm:scale-100',
+              // Make badge match dark mode (Credly iframe is light by default)
+              'dark:invert dark:hue-rotate-180',
+            ].join(' ')}
           />
         </div>
       ))}
