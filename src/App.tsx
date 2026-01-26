@@ -1,6 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import { BookOpen, Github, Instagram, Linkedin } from 'lucide-react';
 import Layout from './components/Layout';
 import ProfileOverview from './components/ProfileOverview';
 import { ThemeToggle } from './components/ThemeToggle';
@@ -13,6 +14,12 @@ const Home = () => {
     .slice()
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3);
+
+  const socialBaseClass =
+    'inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white/70 text-sm font-semibold text-slate-900 hover:bg-slate-100 ' +
+    'dark:border-slate-800 dark:bg-slate-950/20 dark:text-slate-50 dark:hover:bg-slate-900 ' +
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 ' +
+    'dark:focus-visible:ring-offset-slate-950';
 
   return (
     <div className="space-y-10">
@@ -51,85 +58,84 @@ const Home = () => {
             >
               Contact me
             </a>
+          </div>
+
+          {/* Socials (icons on mobile, labels on >= sm) */}
+          <div className="flex items-center gap-2 overflow-x-auto sm:overflow-visible">
             {data.profile.linkedin && (
               <a
                 href={`https://${data.profile.linkedin}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white/70 px-4 py-2.5 text-sm font-semibold text-slate-900 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950/20 dark:text-slate-50 dark:hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-slate-950"
+                className={`${socialBaseClass} h-11 w-11 flex-none p-0 sm:h-auto sm:w-auto sm:flex-none sm:gap-2 sm:px-4 sm:py-2.5`}
+                aria-label="LinkedIn"
+                title="LinkedIn"
               >
-                LinkedIn
+                <Linkedin size={18} />
+                <span className="sr-only">LinkedIn</span>
+                <span className="hidden sm:inline">LinkedIn</span>
               </a>
             )}
+
             {data.profile.github && (
               <a
                 href={`https://${data.profile.github}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white/70 px-4 py-2.5 text-sm font-semibold text-slate-900 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950/20 dark:text-slate-50 dark:hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-slate-950"
+                className={`${socialBaseClass} h-11 w-11 flex-none p-0 sm:h-auto sm:w-auto sm:flex-none sm:gap-2 sm:px-4 sm:py-2.5`}
+                aria-label="GitHub"
+                title="GitHub"
               >
-                GitHub
+                <Github size={18} />
+                <span className="sr-only">GitHub</span>
+                <span className="hidden sm:inline">GitHub</span>
               </a>
             )}
+
             {data.profile.instagram && (
               <a
                 href={`https://${data.profile.instagram}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white/70 px-4 py-2.5 text-sm font-semibold text-slate-900 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950/20 dark:text-slate-50 dark:hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-slate-950"
+                className={`${socialBaseClass} h-11 w-11 flex-none p-0 sm:h-auto sm:w-auto sm:flex-none sm:gap-2 sm:px-4 sm:py-2.5`}
+                aria-label="Instagram"
+                title="Instagram"
               >
-                Instagram
+                <Instagram size={18} />
+                <span className="sr-only">Instagram</span>
+                <span className="hidden sm:inline">Instagram</span>
               </a>
             )}
+
             {data.profile.x && (
               <a
                 href={`https://${data.profile.x}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white/70 px-4 py-2.5 text-sm font-semibold text-slate-900 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950/20 dark:text-slate-50 dark:hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-slate-950"
+                className={`${socialBaseClass} h-11 w-11 flex-none p-0 sm:h-auto sm:w-auto sm:flex-none sm:gap-2 sm:px-4 sm:py-2.5`}
+                aria-label="X"
+                title="X"
               >
-                X
+                <span className="font-mono text-sm leading-none">𝕏</span>
+                <span className="sr-only">X</span>
+                <span className="hidden sm:inline">X</span>
               </a>
             )}
+
             {data.profile.medium && (
               <a
                 href={`https://${data.profile.medium}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white/70 px-4 py-2.5 text-sm font-semibold text-slate-900 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950/20 dark:text-slate-50 dark:hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-slate-950"
+                className={`${socialBaseClass} h-11 w-11 flex-none p-0 sm:h-auto sm:w-auto sm:flex-none sm:gap-2 sm:px-4 sm:py-2.5`}
+                aria-label="Medium"
+                title="Medium"
               >
-                Medium
+                <BookOpen size={18} />
+                <span className="sr-only">Medium</span>
+                <span className="hidden sm:inline">Medium</span>
               </a>
             )}
-          </div>
-
-          <div className="mt-2 flex flex-wrap gap-2">
-            <a
-              href="#profile"
-              className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950/20 dark:text-slate-50 dark:hover:bg-slate-900"
-            >
-              Profile
-            </a>
-            {data.profile.credlyBadges && data.profile.credlyBadges.length > 0 && (
-              <a
-                href="#badges"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950/20 dark:text-slate-50 dark:hover:bg-slate-900"
-              >
-                Badges
-              </a>
-            )}
-            <a
-              href="#latest-posts"
-              className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950/20 dark:text-slate-50 dark:hover:bg-slate-900"
-            >
-              Latest posts
-            </a>
-            <Link
-              to="/blog"
-              className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950/20 dark:text-slate-50 dark:hover:bg-slate-900"
-            >
-              All posts
-            </Link>
           </div>
         </div>
       </section>
@@ -171,7 +177,7 @@ const Home = () => {
           </div>
 
           <div className="mt-6">
-            <CredlyBadges badgeIds={data.profile.credlyBadges} iframeWidth={170} iframeHeight={300} />
+            <CredlyBadges badgeIds={data.profile.credlyBadges} iframeWidth={160} iframeHeight={285} />
           </div>
         </section>
       )}
