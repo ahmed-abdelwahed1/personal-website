@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { BookOpen, Github, Instagram, Linkedin } from 'lucide-react';
 import Layout from './components/Layout';

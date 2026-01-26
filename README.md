@@ -6,6 +6,27 @@
 
 Personal portfolio website built with React + Vite.
 
+## Features
+
+- Home page with profile, Credly badges, and latest blog posts
+- Blog list + individual post pages (markdown content)
+- Light/dark theme toggle (saved in `localStorage`)
+- Content managed via Decap CMS (stored in `src/content/`)
+
+## Project structure
+
+```
+src/
+  App.tsx
+  main.tsx
+  components/
+  content/        # JSON content (edited by CMS)
+  services/       # content loader
+  types.ts
+public/
+  admin/          # Decap CMS
+```
+
 ## Run Locally
 
 **Prerequisites:**  Node.js
@@ -15,3 +36,12 @@ Personal portfolio website built with React + Vite.
    `npm install`
 2. Run the app:
    `npm run dev`
+
+## Build
+
+`npm run build`
+
+## Edit content
+
+- **Via CMS**: open `public/admin/` in your deployed site (or local server) and edit collections.
+- **Via files**: update JSON files in `src/content/`.
