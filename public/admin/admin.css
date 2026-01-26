@@ -1,0 +1,19 @@
+/* Light-touch admin polish.
+   Decap/Netlify CMS uses styled-components; this mainly affects base fonts and page background. */
+
+html,
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: #0b1220;
+}
+
+/* Make the login screen feel nicer */
+body {
+  margin: 0;
+}
+
+/* Improve focus visibility */
+*:focus {
+  outline: none;
+}
+

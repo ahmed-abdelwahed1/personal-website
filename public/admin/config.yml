@@ -5,6 +5,8 @@ backend:
 media_folder: "public/images"
 public_folder: "/images"
 
+logo_url: "/admin/logo.svg"
+
 collections:
   - name: "config"
     label: "Site Configuration"
@@ -15,7 +17,7 @@ collections:
         fields:
           - {label: "Name", name: "name", widget: "string"}
           - {label: "Title", name: "title", widget: "string"}
-          - {label: "Bio", name: "bio", widget: "text"}
+          - {label: "Bio", name: "bio", widget: "text", hint: "Short professional summary."}
           - {label: "Email", name: "email", widget: "string"}
           - {label: "LinkedIn", name: "linkedin", widget: "string"}
           - {label: "GitHub", name: "github", widget: "string"}
@@ -27,7 +29,7 @@ collections:
             name: "credlyBadges"
             widget: "list"
             required: false
-            field: {label: "Badge ID", name: "badgeId", widget: "string"}
+            hint: "Paste the badge UUID from Credly embed code."
 
       - name: "education"
         label: "Education (Source)"
@@ -36,6 +38,8 @@ collections:
           - label: "Education List"
             name: "education"
             widget: "list"
+            collapsed: true
+            summary: "{{fields.degree}} — {{fields.period}}"
             fields:
               - {label: "ID", name: "id", widget: "string"}
               - {label: "Degree", name: "degree", widget: "string"}
@@ -49,6 +53,8 @@ collections:
           - label: "Experience List"
             name: "experience"
             widget: "list"
+            collapsed: true
+            summary: "{{fields.title}} — {{fields.organization}} ({{fields.period}})"
             fields:
               - {label: "ID", name: "id", widget: "string"}
               - {label: "Title", name: "title", widget: "string"}
@@ -64,6 +70,8 @@ collections:
           - label: "Skill Categories"
             name: "skills"
             widget: "list"
+            collapsed: true
+            summary: "{{fields.category}}"
             fields:
               - {label: "Category", name: "category", widget: "string"}
               - {label: "Items", name: "items", widget: "list"}
@@ -75,6 +83,8 @@ collections:
           - label: "Cert List"
             name: "certificates"
             widget: "list"
+            collapsed: true
+            summary: "{{fields.name}} — {{fields.issuer}}"
             fields:
               - {label: "ID", name: "id", widget: "string"}
               - {label: "Name", name: "name", widget: "string"}
@@ -87,9 +97,11 @@ collections:
           - label: "Posts"
             name: "posts"
             widget: "list"
+            collapsed: true
+            summary: "{{fields.title}} — {{fields.date}}"
             fields:
               - {label: "Title", name: "title", widget: "string"}
-              - {label: "Publish Date", name: "date", widget: "datetime"}
-              - {label: "Slug", name: "slug", widget: "string"}
+              - {label: "Publish Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD"}
+              - {label: "Slug", name: "slug", widget: "string", hint: "URL slug, e.g. my-first-post"}
               - {label: "Excerpt", name: "excerpt", widget: "text"}
               - {label: "Content", name: "content", widget: "markdown"}
