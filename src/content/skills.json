@@ -1,16 +1,63 @@
-[
-  {
-    "category": "Core",
-    "items": [
-      "Python",
-      "SQL",
-      "pandas",
-      "NumPy",
-      "ETL Pipelines",
-      "Git",
-      "Power BI",
-      "Data Visualization",
-      "Data Cleaning"
-    ]
-  }
-]
+{
+  "skills": [
+    {
+      "category": "Languages",
+      "items": [
+        "Python",
+        "SQL",
+        "C#",
+        "VB.NET",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "TypeScript"
+      ]
+    },
+    {
+      "category": "Data Engineering & Analysis (Concepts)",
+      "items": [
+        "ETL Pipelines",
+        "Data Modeling",
+        "Data Cleaning",
+        "Exploratory Data Analysis (EDA)",
+        "Data Visualization"
+      ]
+    },
+    {
+      "category": "Libraries & Frameworks",
+      "items": [
+        "pandas",
+        "NumPy",
+        "Matplotlib",
+        "Seaborn",
+        "Next.js"
+      ]
+    },
+    {
+      "category": "Databases & Tools",
+      "items": [
+        "MySQL",
+        "PostgreSQL",
+        "Supabase",
+        "Conda",
+        "Git",
+        "GitHub",
+        "VS Code",
+        "Visual Studio",
+        "Terminal",
+        "Excel",
+        "Ubuntu Linux"
+      ]
+    },
+    {
+      "category": "Soft Skills",
+      "items": [
+        "Communication",
+        "Problem Solving",
+        "Teamwork",
+        "Adaptability",
+        "Decision Making"
+      ]
+    }
+  ]
+}

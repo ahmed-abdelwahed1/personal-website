@@ -3,9 +3,14 @@ export interface Profile {
   title: string;
   bio: string;
   email: string;
-  phone: string;
   linkedin: string;
   github: string;
+  phone?: string;
+  instagram?: string;
+  x?: string;
+  medium?: string;
+  credly?: string;
+  credlyBadges?: string[];
 }
 
 export interface ExperienceItem {
@@ -50,3 +55,4 @@ export interface AppData {
   skills: SkillItem[];
   certificates: CertificateItem[];
 }
+

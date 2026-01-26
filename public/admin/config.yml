@@ -17,9 +17,17 @@ collections:
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Bio", name: "bio", widget: "text"}
           - {label: "Email", name: "email", widget: "string"}
-          - {label: "Phone", name: "phone", widget: "string"}
           - {label: "LinkedIn", name: "linkedin", widget: "string"}
           - {label: "GitHub", name: "github", widget: "string"}
+          - {label: "Instagram", name: "instagram", widget: "string", required: false}
+          - {label: "X (Twitter)", name: "x", widget: "string", required: false}
+          - {label: "Medium", name: "medium", widget: "string", required: false}
+          - {label: "Credly Profile", name: "credly", widget: "string", required: false}
+          - label: "Credly Badge IDs"
+            name: "credlyBadges"
+            widget: "list"
+            required: false
+            field: {label: "Badge ID", name: "badgeId", widget: "string"}
 
       - name: "education"
         label: "Education (Source)"

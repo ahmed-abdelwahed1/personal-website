@@ -1,18 +1,28 @@
-[
-  {
-    "id": "exp_volvo",
-    "title": "Internship (Data Engineering)",
-    "organization": "Volvo Cars, Gothenburg Sweden",
-    "period": "Feb 2024 - July 2024",
-    "description": "Analyzed large-scale durability test data, developed Python automated pipelines, authored documentation, improved report accuracy by 15% using data cleaning tools.",
-    "type": "work"
-  },
-  {
-    "id": "exp_ieee",
-    "title": "Volunteer (Data Engineering Committee)",
-    "organization": "IEEE Mansoura Computer Society Chapter",
-    "period": "Dec 2024 - Present",
-    "description": "Data processing skills, workshops, collaborative problem-solving.",
-    "type": "volunteer"
-  }
-]
+{
+  "experience": [
+    {
+      "id": "exp_cyan",
+      "title": "Junior Data Engineer",
+      "organization": "Cyan Group (Remote, Kuwait)",
+      "period": "January 2026 – Present",
+      "description": "Designing efficient PostgreSQL schemas (via Supabase) to capture complex order workflows, automating data flow between inventory and production stages, and establishing validation rules to ensure accurate real-time tracking for decision-making.",
+      "type": "work"
+    },
+    {
+      "id": "exp_volvo",
+      "title": "Data Engineering Intern",
+      "organization": "Volvo Cars (Gothenburg, Sweden)",
+      "period": "February 2024 – July 2024",
+      "description": "Developed automated data pipelines using Python, authored technical documentation for data collection and processing, engineered reliable methods for data recording throughout testing, and improved data integrity using cleaning techniques (25% increase in report accuracy).",
+      "type": "work"
+    },
+    {
+      "id": "exp_ieee",
+      "title": "Data Engineering Committee Volunteer",
+      "organization": "IEEE Mansoura Computer Society Chapter",
+      "period": "December 2024 – September 2025",
+      "description": "Volunteered with the Data Engineering Committee through workshops and collaborative problem-solving activities.",
+      "type": "volunteer"
+    }
+  ]
+}

@@ -1,12 +1,3 @@
-[
-  {
-    "id": "cert_ibm",
-    "name": "IBM Data Analyst Professional Certificate",
-    "issuer": "IBM (9 Certificates)"
-  },
-  {
-    "id": "cert_upenn",
-    "name": "Data Analysis Using Python",
-    "issuer": "UPenn"
-  }
-]
+{
+  "certificates": []
+}
