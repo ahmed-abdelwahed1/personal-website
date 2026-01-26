@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { BookOpen, Github, Instagram, Linkedin } from 'lucide-react';
 import Layout from './components/Layout';
 import ProfileOverview from './components/ProfileOverview';
@@ -339,7 +340,7 @@ const BlogPostPage = () => {
         </div>
 
         <div className="prose prose-slate mt-6 max-w-none dark:prose-invert">
-          <ReactMarkdown>{post.content}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
         </div>
       </div>
     </div>
