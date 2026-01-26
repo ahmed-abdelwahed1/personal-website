@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -243,10 +243,23 @@ const Home = () => {
 
 const Blog = () => {
   const posts = getBlogPosts();
+  const [query, setQuery] = useState('');
+
+  const filteredPosts = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    const sorted = posts
+      .slice()
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    if (!normalized) return sorted;
+    return sorted.filter((p) => {
+      const haystack = `${p.title}\n${p.excerpt}\n${p.slug}`.toLowerCase();
+      return haystack.includes(normalized);
+    });
+  }, [posts, query]);
 
   return (
     <div className="mx-auto max-w-3xl">
-      <div className="mb-4">
+      <div className="sticky top-0 z-20 -mx-4 mb-4 border-b border-slate-200/70 bg-slate-50/85 px-4 py-2 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/70 sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0">
         <Link
           to="/"
           className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-100 dark:text-slate-50 dark:hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-slate-950"
@@ -261,16 +274,32 @@ const Blog = () => {
         <p className="mt-2 text-slate-600 dark:text-slate-300">
           Notes on data engineering, automation, and things I’m learning.
         </p>
+        <div className="mt-4">
+          <label className="sr-only" htmlFor="blog-search">
+            Search posts
+          </label>
+          <input
+            id="blog-search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search posts…"
+            className="w-full rounded-xl border border-slate-200 bg-white/70 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 shadow-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-800 dark:bg-slate-950/20 dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus:border-indigo-500 dark:focus:ring-indigo-900/40"
+          />
+          <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+            {filteredPosts.length} post{filteredPosts.length === 1 ? '' : 's'}
+          </p>
+        </div>
       </div>
 
       <div className="space-y-4">
-        {posts.map((post) => (
+        {filteredPosts.map((post) => (
           <article
             key={post.slug}
-            className="rounded-2xl border border-slate-200/70 bg-white/70 p-6 shadow-soft backdrop-blur dark:border-slate-800/70 dark:bg-slate-900/50"
+            className="rounded-2xl border border-slate-200/70 bg-white/70 p-4 shadow-soft backdrop-blur transition hover:-translate-y-0.5 hover:shadow-soft-lg dark:border-slate-800/70 dark:bg-slate-900/50 sm:p-6"
           >
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+                <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50 sm:text-xl">
                 <Link
                   to={`/blog/${post.slug}`}
                   className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-slate-950"
@@ -278,11 +307,14 @@ const Blog = () => {
                   {post.title}
                 </Link>
               </h2>
-              <span className="font-mono text-xs text-slate-500 dark:text-slate-400">{post.date}</span>
+                <span className="font-mono text-xs text-slate-500 dark:text-slate-400">{post.date}</span>
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                  {post.excerpt}
+                </p>
+              </div>
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              {post.excerpt}
-            </p>
             <div className="mt-4">
               <Link
                 to={`/blog/${post.slug}`}
@@ -302,6 +334,11 @@ const Blog = () => {
 const BlogPostPage = () => {
   const { slug } = useParams();
   const post = getBlogPosts().find((p) => p.slug === slug);
+  const readingMinutes = useMemo(() => {
+    if (!post?.content) return 1;
+    const words = post.content.trim().split(/\s+/).filter(Boolean).length;
+    return Math.max(1, Math.round(words / 200));
+  }, [post?.content]);
 
   if (!post) {
     return (
@@ -324,25 +361,40 @@ const BlogPostPage = () => {
 
   return (
     <div className="mx-auto max-w-3xl">
-      <Link
-        to="/blog"
-        className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-100 dark:text-slate-50 dark:hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-slate-950"
-      >
-        ← Back to blog
-      </Link>
-
-      <div className="mt-6 rounded-3xl border border-slate-200/70 bg-white/70 p-6 shadow-soft backdrop-blur dark:border-slate-800/70 dark:bg-slate-900/50 sm:p-10">
-        <div className="flex flex-col gap-2">
-          <div className="font-mono text-xs text-slate-500 dark:text-slate-400">{post.date}</div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
-            {post.title}
-          </h1>
-        </div>
-
-        <div className="prose prose-slate mt-6 max-w-none dark:prose-invert">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
-        </div>
+      <div className="sticky top-0 z-20 -mx-4 border-b border-slate-200/70 bg-slate-50/85 px-4 py-2 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/70 sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0">
+        <Link
+          to="/blog"
+          className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-100 dark:text-slate-50 dark:hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-slate-950"
+        >
+          ← Back to blog
+        </Link>
       </div>
+
+      <article className="mt-4 sm:mt-6">
+        <header className="rounded-3xl border border-slate-200/70 bg-white/70 p-5 shadow-soft backdrop-blur dark:border-slate-800/70 dark:bg-slate-900/50 sm:p-10">
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500 dark:text-slate-400">
+              <span className="font-mono">{post.date}</span>
+              <span aria-hidden>•</span>
+              <span className="font-mono">{readingMinutes} min read</span>
+            </div>
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
+              {post.title}
+            </h1>
+            {post.excerpt && (
+              <p className="max-w-2xl text-slate-600 dark:text-slate-300">
+                {post.excerpt}
+              </p>
+            )}
+          </div>
+        </header>
+
+        <div className="mt-4 rounded-3xl border border-slate-200/70 bg-white/70 p-5 shadow-soft backdrop-blur dark:border-slate-800/70 dark:bg-slate-900/50 sm:mt-6 sm:p-10">
+          <div className="prose prose-slate prose-sm max-w-none dark:prose-invert sm:prose-base">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
+          </div>
+        </div>
+      </article>
     </div>
   );
 };
