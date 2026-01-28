@@ -16,37 +16,37 @@ export const CredlyBadges: React.FC<CredlyBadgesProps> = ({
   className,
 }) => {
   const normalizedHost = host.replace(/\/+$/, '');
+  const aspectPercent = (iframeHeight / iframeWidth) * 100;
 
   return (
     <div
       className={[
-        // Mobile: always 2 columns, slightly tighter gap.
-        // Larger screens: auto-fit columns.
-        'grid grid-cols-2 gap-3 justify-items-center sm:gap-4 sm:grid-cols-[repeat(auto-fit,minmax(160px,1fr))]',
+        'grid grid-cols-2 gap-4 place-items-center',
+        'sm:grid-cols-[repeat(auto-fit,minmax(160px,1fr))] sm:justify-items-center',
         className ?? '',
       ].join(' ')}
     >
       {badgeIds.map((id) => (
         <div
           key={id}
-          className="group w-full overflow-hidden rounded-2xl border border-slate-200/70 bg-white/60 p-2 shadow-sm transition hover:-translate-y-0.5 hover:shadow-soft dark:border-slate-800/70 dark:bg-slate-950/20"
-          style={{ maxWidth: `${iframeWidth + 16}px` }}
+          className="w-full max-w-[140px] sm:max-w-none flex justify-center"
         >
-          <iframe
-            name={`credly-badge-${id}`}
-            frameBorder={0}
-            scrolling="no"
-            loading="lazy"
-            src={`${normalizedHost}/embedded_badge/${id}`}
-            style={{ width: `${iframeWidth}px`, height: `${iframeHeight}px` }}
-            title="View my verified achievement on Credly."
-            className={[
-              // Smaller on mobile
-              'mx-auto block origin-top scale-[0.92] sm:scale-100',
-              // Make badge match dark mode (Credly iframe is light by default)
-              'dark:invert dark:hue-rotate-180',
-            ].join(' ')}
-          />
+          <div className="w-full max-w-[140px] sm:max-w-[176px] group overflow-hidden rounded-2xl border border-slate-200/70 bg-white/60 p-2 shadow-sm transition hover:-translate-y-0.5 hover:shadow-soft dark:border-slate-800/70 dark:bg-slate-950/20">
+            <div
+              className="relative w-full overflow-hidden rounded-xl"
+              style={{ paddingBottom: `${aspectPercent}%` }}
+            >
+              <iframe
+                name={`credly-badge-${id}`}
+                frameBorder={0}
+                scrolling="no"
+                loading="lazy"
+                src={`${normalizedHost}/embedded_badge/${id}`}
+                title="View my verified achievement on Credly."
+                className="absolute inset-0 left-0 top-0 h-full w-full dark:invert dark:hue-rotate-180"
+              />
+            </div>
+          </div>
         </div>
       ))}
     </div>
