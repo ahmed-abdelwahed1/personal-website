@@ -28,18 +28,16 @@ export default function ProjectsSection({
           {sorted.map((project, index) => (
             <AnimatedSection key={project.name} delay={index * 0.15}>
               <div className="card project-card">
-                <div className="project-header">
-                  <h3>{project.name}</h3>
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-primary btn-sm github-btn"
-                  >
-                    <FaGithub /> View on GitHub
-                  </a>
-                </div>
+                <h3 className="project-name">{project.name}</h3>
                 <p className="project-description">{project.description}</p>
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary btn-sm github-btn"
+                >
+                  <FaGithub /> View on GitHub
+                </a>
               </div>
             </AnimatedSection>
           ))}
