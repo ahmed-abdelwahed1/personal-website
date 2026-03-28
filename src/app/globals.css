@@ -217,67 +217,65 @@ ul, ol {
   transform: translateY(-3px) scale(1.1);
 }
 
-/* ---- Theme Toggle ---- */
+/* ---- Professional Theme Toggle ---- */
 .theme-toggle-placeholder {
-  width: 60px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
 }
 
 .theme-toggle {
   position: fixed;
   top: 24px;
   right: 24px;
-  background: transparent;
-  border: none;
+  width: 44px;
+  height: 44px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-muted);
   cursor: pointer;
   z-index: 1000;
-  padding: 0;
-  border-radius: 30px;
-}
-
-.theme-toggle-slider {
-  width: 60px;
-  height: 32px;
-  background-color: var(--border-muted);
-  border-radius: 30px;
-  position: relative;
-  transition: background-color var(--transition-medium);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  padding: 0 4px;
-}
-
-.theme-toggle-slider[data-dark="true"] {
-  background-color: var(--bg-card);
-}
-
-.theme-toggle-knob {
-  width: 24px;
-  height: 24px;
-  background-color: var(--text);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform var(--transition-slow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
-.theme-toggle-slider[data-dark="true"] .theme-toggle-knob {
-  transform: translateX(26px);
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  border-color: var(--text-muted);
 }
 
-.icon-moon,
-.icon-sun {
-  color: var(--bg);
-  font-size: 14px;
+.theme-toggle:active {
+  transform: translateY(0);
 }
 
-[data-theme="light"] .icon-sun {
-  color: #f8b400; /* vibrant sun in light mode */
+.theme-toggle-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-[data-theme="dark"] .icon-moon {
-  color: #090808; /* cut-out mask effect against knob */
+
+.icon-moon-new,
+.icon-sun-new {
+  font-size: 18px;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+[data-theme="light"] .icon-sun-new {
+  color: #f59e0b; /* Professional warm amber */
+}
+
+[data-theme="dark"] .icon-moon-new {
+  color: #e2e8f0; /* Crisp slate white */
 }
 
 /* ============================================
@@ -373,10 +371,13 @@ ul, ol {
 .experience-logo {
   height: 30px;
   width: auto;
+  max-width: 100%;
   object-fit: contain;
   object-position: left;
   filter: brightness(0) invert(1);
   align-self: flex-start;
+  margin: 0;
+  margin-right: auto;
 }
 
 [data-theme="light"] .experience-logo {

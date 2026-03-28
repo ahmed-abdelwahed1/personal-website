@@ -42,7 +42,6 @@ export default function ExperienceSection({
                     width={200}
                     height={40}
                     className="experience-logo"
-                    style={{ width: "auto", height: "30px" }}
                   />
                 )}
                 <div className="experience-header">

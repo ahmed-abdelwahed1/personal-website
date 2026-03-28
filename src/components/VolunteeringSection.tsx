@@ -37,7 +37,6 @@ export default function VolunteeringSection({
                     width={200}
                     height={40}
                     className="experience-logo"
-                    style={{ width: "auto", height: "35px" }}
                   />
                 )}
                 <div className="experience-header">
