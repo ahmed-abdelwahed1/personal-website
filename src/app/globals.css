@@ -369,19 +369,28 @@ ul, ol {
 }
 
 .experience-logo {
-  height: 30px;
+  height: 44px;
+  max-width: 160px;
   width: auto;
-  max-width: 100%;
   object-fit: contain;
   object-position: left;
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1) opacity(0.85);
   align-self: flex-start;
-  margin: 0;
-  margin-right: auto;
+  margin: 0 0 8px 0;
+  transition: all var(--transition-medium);
+}
+
+.experience-card:hover .experience-logo {
+  filter: brightness(0) invert(1) opacity(1);
+  transform: scale(1.02) translateX(2px);
 }
 
 [data-theme="light"] .experience-logo {
-  filter: brightness(0);
+  filter: brightness(0) opacity(0.75);
+}
+
+[data-theme="light"] .experience-card:hover .experience-logo {
+  filter: brightness(0) opacity(1);
 }
 
 .experience-header {
@@ -426,9 +435,7 @@ ul, ol {
 /* ============================================
    VOLUNTEERING SECTION
    ============================================ */
-.volunteering-card .experience-logo {
-  height: 35px;
-}
+/* Unified styling shared with experience-logo */
 
 /* ============================================
    EDUCATION SECTION
@@ -771,12 +778,16 @@ ul, ol {
    FOOTER
    ============================================ */
 .footer {
-  padding: 30px 0 40px;
+  padding: 60px 0 40px;
   text-align: center;
 }
 
 .footer-divider {
-  margin-bottom: 20px;
+  width: 100%;
+  max-width: var(--container-width);
+  height: 1px;
+  background-color: var(--border-muted);
+  margin: 0 auto 30px;
 }
 
 .footer-text {
