@@ -9,9 +9,6 @@ tags:
   - Python
   - Tips
 ---
-
-
-
 In the ever-evolving Python ecosystem, maintaining clean, efficient, and error-free code is paramount for developers. Enter Ruff, a lightning-fast Python linter and code analyzer. Designed to streamline code quality checks, Ruff is gaining traction as a powerful alternative to traditional tools. Whether you’re a seasoned Pythonista or a data scientist dabbling in development, Ruff has something to offer.
 
 ### What Is Ruff?
@@ -54,15 +51,27 @@ Unlike many linters, Ruff isn’t just about pointing out errors; it helps devel
 
 Installing Ruff is straightforward using pip:
 
+`pip install ruff`
+
 Alternatively, use a precompiled binary for even faster setup. Visit [Ruff’s GitHub repository](https://github.com/charliermarsh/ruff) for details.
 
 ### Basic Usage
 
 Once installed, you can lint your Python files with a single command:
 
+`ruff check .`
+
 ### Configuration
 
 To customize Ruff, create a `pyproject.toml` file in your project's root directory:
+
+`[tool.ruff]`
+
+`line-length = 88`
+
+`select = ["E", "F"]`
+
+`ignore = ["W503"]`
 
 * `line-length`
 
@@ -82,21 +91,75 @@ Ruff can automatically fix many common issues. For instance:
 
 Before:
 
+`import os`
+
+`import sys`
+
+``
+
+`print("Hello, World!")`
+
 Run Ruff autofix:
 
+`ruff check . --fix`
+
 After:
+
+`print("Hello, World!")`
 
 #### Example 2: Improper Indentation
 
 Before:
 
+`def greet():`
+
+`    print("Hello")`
+
+`     print("World")`
+
 After running Ruff:
+
+`def greet():`
+
+`    print("Hello")`
+
+`    print("World")`
 
 ### Real-World Applications
 
 ### 1. Continuous Integration (CI)
 
 Integrate Ruff into your CI pipeline to enforce code quality:
+
+`name: Lint`
+
+`on: [push, pull_request]`
+
+`jobs:`
+
+`  lint:`
+
+`    runs-on: ubuntu-latest`
+
+`    steps:`
+
+`      - uses: actions/checkout@v2`
+
+`      - name: Set up Python`
+
+`        uses: actions/setup-python@v2`
+
+`        with:`
+
+`          python-version: '3.x'`
+
+`      - name: Install Ruff`
+
+`        run: pip install ruff`
+
+`      - name: Run Ruff`
+
+`        run: ruff check .`
 
 ### 2. IDE Integration
 
@@ -108,27 +171,21 @@ While Ruff is a robust tool, there are a few considerations:
 
 1. **Limited Type Checking:**
 
-    Ruff is not a replacement for tools like mypy when it comes to type annotations.
+   Ruff is not a replacement for tools like mypy when it comes to type annotations.
 2. **New Kid on the Block:**
 
-    As a relatively new tool, its ecosystem and community are still growing.
+   As a relatively new tool, its ecosystem and community are still growing.
 3. **Rule Overlap:**
 
-    If you’re using multiple linters, ensure there’s no redundancy in rules.
+   If you’re using multiple linters, ensure there’s no redundancy in rules.
 
 ### Further Resources
 
 To dive deeper into Ruff, check out these resources:
 
-*   [Official Documentation](https://docs.astral.sh/ruff/)
-
-
-*   [GitHub Repository](https://github.com/charliermarsh/ruff)
-
-
-*   [PEP 8 — Style Guide for Python Code](https://peps.python.org/pep-0008/)
-
-
+* [Official Documentation](https://docs.astral.sh/ruff/)
+* [GitHub Repository](https://github.com/charliermarsh/ruff)
+* [PEP 8 — Style Guide for Python Code](https://peps.python.org/pep-0008/)
 
 ### Conclusion
 
