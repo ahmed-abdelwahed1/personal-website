@@ -22,6 +22,9 @@ export const metadata: Metadata = {
       "I design systems, build data pipelines, and turn ideas into working products.",
     type: "website",
   },
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
