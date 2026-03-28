@@ -7,6 +7,11 @@ import remarkGfm from "remark-gfm";
 
 const blogDirectory = path.join(process.cwd(), "content/blog");
 
+function estimateReadingTime(text: string): number {
+  const words = text.trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 230));
+}
+
 export interface BlogPostMeta {
   slug: string;
   title: string;
@@ -14,6 +19,7 @@ export interface BlogPostMeta {
   excerpt: string;
   coverImage?: string;
   tags?: string[];
+  readingTime: number;
 }
 
 export interface BlogPost extends BlogPostMeta {
@@ -32,7 +38,7 @@ export function getAllPosts(): BlogPostMeta[] {
       const slug = fileName.replace(/\.md$/, "");
       const fullPath = path.join(blogDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, "utf8");
-      const { data } = matter(fileContents);
+      const { data, content } = matter(fileContents);
 
       return {
         slug,
@@ -41,6 +47,7 @@ export function getAllPosts(): BlogPostMeta[] {
         excerpt: data.excerpt || "",
         coverImage: data.coverImage || "",
         tags: data.tags || [],
+        readingTime: estimateReadingTime(content),
       };
     });
 
@@ -69,6 +76,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       excerpt: data.excerpt || "",
       coverImage: data.coverImage || "",
       tags: data.tags || [],
+      readingTime: estimateReadingTime(content),
       contentHtml,
     };
   } catch {

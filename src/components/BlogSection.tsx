@@ -9,6 +9,16 @@ interface BlogPost {
   title: string;
   date: string;
   excerpt: string;
+  readingTime: number;
+}
+
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 }
 
 export default function BlogSection({ posts }: { posts: BlogPost[] }) {
@@ -27,17 +37,24 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
         <div className="blog-grid">
           {posts.map((post, index) => (
             <AnimatedSection key={post.slug} delay={index * 0.15}>
-              <Link href={`/blog/${post.slug}`} style={{ display: "block" }}>
-                <div className="card blog-card">
-                  <div>
-                    <p className="blog-card-date">{post.date}</p>
+              <Link
+                href={`/blog/${post.slug}`}
+                className="blog-listing-card-link"
+              >
+                <article className="card blog-card">
+                  <div className="blog-card-body">
+                    <div className="blog-card-meta">
+                      <time dateTime={post.date}>{formatDate(post.date)}</time>
+                      <span className="blog-card-meta-sep">·</span>
+                      <span>{post.readingTime} min read</span>
+                    </div>
                     <h3 className="blog-card-title">{post.title}</h3>
                     <p className="blog-card-excerpt">{post.excerpt}</p>
                   </div>
                   <span className="blog-read-link">
                     Read <FaArrowRight />
                   </span>
-                </div>
+                </article>
               </Link>
             </AnimatedSection>
           ))}
