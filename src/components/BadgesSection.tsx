@@ -14,11 +14,11 @@ export default function BadgesSection({ items }: { items: BadgeItem[] }) {
   return (
     <section className="section" id="badges">
       <div className="container">
-        <AnimatedSection>
+        <AnimatedSection variant="fade">
           <h2 className="section-title">Badges</h2>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.1}>
+        <AnimatedSection delay={0.08} variant="slide">
           <div>
             {sorted.map((badge) => (
               <div key={badge.name} className="badge-item">

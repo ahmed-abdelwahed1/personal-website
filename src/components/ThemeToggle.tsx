@@ -17,29 +17,34 @@ export default function ThemeToggle() {
     return <div className="theme-toggle-placeholder" />;
   }
 
-  // Use resolvedTheme so it handles any system preferences beautifully if enableSystem is ever restored
   const currentTheme = resolvedTheme || theme;
   const isDark = currentTheme === "dark";
 
   return (
-    <button
+    <motion.button
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className="theme-toggle"
       aria-label="Toggle Theme"
       title={`Switch to ${isDark ? "light" : "dark"} mode`}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.92 }}
     >
       <AnimatePresence mode="wait">
         <motion.div
           key={isDark ? "dark" : "light"}
-          initial={{ y: -20, opacity: 0, rotate: -90, scale: 0.8 }}
-          animate={{ y: 0, opacity: 1, rotate: 0, scale: 1 }}
-          exit={{ y: 20, opacity: 0, rotate: 90, scale: 0.8 }}
-          transition={{ duration: 0.25, ease: "easeInOut" }}
+          initial={{ opacity: 0, rotate: -60, scale: 0.6 }}
+          animate={{ opacity: 1, rotate: 0, scale: 1 }}
+          exit={{ opacity: 0, rotate: 60, scale: 0.6 }}
+          transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           className="theme-toggle-icon-wrapper"
         >
-          {isDark ? <FaMoon className="icon-moon-new" /> : <FaSun className="icon-sun-new" />}
+          {isDark ? (
+            <FaMoon className="icon-moon-new" />
+          ) : (
+            <FaSun className="icon-sun-new" />
+          )}
         </motion.div>
       </AnimatePresence>
-    </button>
+    </motion.button>
   );
 }

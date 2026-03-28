@@ -20,13 +20,17 @@ export default function ProjectsSection({
   return (
     <section className="section" id="projects">
       <div className="container">
-        <AnimatedSection>
+        <AnimatedSection variant="fade">
           <h2 className="section-title">Projects</h2>
         </AnimatedSection>
 
         <div className="content-grid">
           {sorted.map((project, index) => (
-            <AnimatedSection key={project.name} delay={index * 0.15}>
+            <AnimatedSection
+              key={project.name}
+              delay={index * 0.12}
+              variant="rise"
+            >
               <div className="card project-card">
                 <h3 className="project-name">{project.name}</h3>
                 <p className="project-description">{project.description}</p>

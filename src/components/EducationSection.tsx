@@ -19,13 +19,17 @@ export default function EducationSection({
   return (
     <section className="section" id="education">
       <div className="container">
-        <AnimatedSection>
+        <AnimatedSection variant="fade">
           <h2 className="section-title">Education</h2>
         </AnimatedSection>
 
         <div className="content-grid">
           {sorted.map((edu, index) => (
-            <AnimatedSection key={edu.institution} delay={index * 0.1}>
+            <AnimatedSection
+              key={edu.institution}
+              delay={index * 0.08}
+              variant="slide"
+            >
               <div className="education-item">
                 <h3>{edu.degree}</h3>
                 <div className="education-details">

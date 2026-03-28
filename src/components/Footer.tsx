@@ -7,7 +7,7 @@ export default function Footer() {
 
   return (
     <footer className="footer" id="footer">
-      <AnimatedSection>
+      <AnimatedSection variant="fade">
         <div className="footer-divider divider" />
         <p className="footer-text">© {currentYear} Ahmed Abdelwahed</p>
       </AnimatedSection>

@@ -31,10 +31,12 @@
   --fs-body-sm: clamp(13px, 1.1vw, 15px);
   --fs-small: clamp(12px, 0.9vw, 14px);
 
-  /* Transitions */
-  --transition-fast: 0.2s ease;
-  --transition-medium: 0.3s ease;
-  --transition-slow: 0.5s ease;
+  /* Transitions — cubic-bezier for a professional spring feel */
+  --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-fast: 0.2s var(--ease-out);
+  --transition-medium: 0.35s var(--ease-out);
+  --transition-slow: 0.5s var(--ease-out);
 
   /* Border radius */
   --radius: 6px;
@@ -94,7 +96,7 @@ ul, ol {
   margin: 0 auto;
   padding: 0 var(--container-padding);
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ---- Section ---- */
@@ -108,6 +110,24 @@ ul, ol {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 24px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: var(--text);
+  transition: width 0.6s var(--ease-out);
+}
+
+.section:hover .section-title::after,
+.section-header:hover .section-title::after {
+  width: 100%;
 }
 
 .section-header {
@@ -148,8 +168,13 @@ ul, ol {
 
 .btn-primary:hover {
   background-color: #e0e0e0;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.12);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
 }
 
 .btn-outline {
@@ -161,8 +186,13 @@ ul, ol {
 .btn-outline:hover {
   background-color: var(--accent);
   color: var(--bg);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.12);
+}
+
+.btn-outline:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
 }
 
 .btn-sm {
@@ -176,15 +206,19 @@ ul, ol {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: var(--card-padding);
-  transition: all var(--transition-medium);
+  transition:
+    border-color var(--transition-medium),
+    box-shadow var(--transition-medium),
+    transform 0.4s var(--ease-spring);
   min-width: 0;
   overflow: hidden;
+  will-change: transform;
 }
 
 .card:hover {
   border-color: var(--text-muted);
-  box-shadow: 0 2px 16px rgba(255, 255, 255, 0.04);
-  transform: translateY(-2px);
+  box-shadow: 0 4px 24px rgba(255, 255, 255, 0.05);
+  transform: translateY(-4px);
 }
 
 /* ---- Divider ---- */
@@ -192,7 +226,13 @@ ul, ol {
   width: 400px;
   max-width: 80%;
   height: 1px;
-  background: var(--border);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--border) 20%,
+    var(--border) 80%,
+    transparent 100%
+  );
   margin: 0 auto;
 }
 
@@ -211,13 +251,8 @@ ul, ol {
   height: 38px;
   font-size: 20px;
   color: var(--text);
-  transition: all var(--transition-medium);
+  transition: color var(--transition-medium), transform 0.4s var(--ease-spring);
   border-radius: 50%;
-}
-
-.social-icon:hover {
-  color: var(--text-muted);
-  transform: translateY(-2px) scale(1.05);
 }
 
 /* ---- Professional Theme Toggle ---- */
@@ -244,20 +279,14 @@ ul, ol {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   backdrop-filter: blur(10px);
 }
 
 .theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   border-color: var(--text-muted);
-}
-
-.theme-toggle:active {
-  transform: translateY(0);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .theme-toggle-icon-wrapper {
@@ -381,12 +410,12 @@ ul, ol {
   filter: brightness(0) invert(1) opacity(0.85);
   align-self: flex-start;
   margin: 0 0 8px 0;
-  transition: all var(--transition-medium);
+  transition: filter var(--transition-medium), transform 0.4s var(--ease-spring);
 }
 
 .experience-card:hover .experience-logo {
   filter: brightness(0) invert(1) opacity(1);
-  transform: scale(1.02) translateX(2px);
+  transform: scale(1.03);
 }
 
 [data-theme="light"] .experience-logo {
@@ -538,6 +567,11 @@ ul, ol {
   align-items: center;
   padding: 16px 0;
   border-bottom: 1px solid var(--border-muted);
+  transition: padding-left var(--transition-medium);
+}
+
+.badge-item:hover {
+  padding-left: 8px;
 }
 
 .badge-item:last-child {
@@ -554,13 +588,14 @@ ul, ol {
   font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 4px;
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast), letter-spacing var(--transition-medium);
   white-space: nowrap;
   margin-left: 16px;
 }
 
 .badge-link:hover {
   color: var(--text-muted);
+  letter-spacing: 0.5px;
 }
 
 /* ============================================
@@ -573,8 +608,13 @@ ul, ol {
   height: 2px;
   background: var(--text);
   z-index: 1100;
-  transition: width 0.1s linear;
+  transition: width 0.15s linear;
   will-change: width;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="light"] .reading-progress {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
 }
 
 /* ============================================
@@ -649,15 +689,16 @@ ul, ol {
   font-size: var(--fs-small);
   font-weight: 500;
   margin-top: 12px;
-  transition: gap var(--transition-medium), color var(--transition-fast);
-}
-
-.blog-read-link:hover {
-  gap: 12px;
+  transition: color var(--transition-fast);
 }
 
 .blog-read-link svg {
   font-size: 11px;
+  transition: transform 0.35s var(--ease-spring);
+}
+
+.blog-card:hover .blog-read-link svg {
+  transform: translateX(5px);
 }
 
 /* ============================================
@@ -726,15 +767,20 @@ ul, ol {
   font-size: var(--fs-small);
   font-weight: 400;
   color: var(--text-muted);
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast), gap var(--transition-medium);
 }
 
 .blog-post-back svg {
   font-size: 10px;
+  transition: transform 0.35s var(--ease-spring);
 }
 
 .blog-post-back:hover {
   color: var(--text);
+}
+
+.blog-post-back:hover svg {
+  transform: translateX(-3px);
 }
 
 .blog-post-header {
@@ -776,7 +822,12 @@ ul, ol {
   font-size: 11px;
   font-weight: 400;
   color: var(--text-muted);
-  transition: border-color var(--transition-fast);
+  transition: border-color var(--transition-medium), color var(--transition-medium);
+}
+
+.blog-tag:hover {
+  border-color: var(--text);
+  color: var(--text);
 }
 
 .blog-post-divider {
@@ -860,11 +911,13 @@ ul, ol {
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-color: var(--border-muted);
-  transition: text-decoration-color var(--transition-fast);
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color var(--transition-medium), text-underline-offset var(--transition-medium);
 }
 
 .blog-content a:hover {
   text-decoration-color: var(--text);
+  text-underline-offset: 5px;
 }
 
 .blog-content strong {
@@ -968,7 +1021,13 @@ ul, ol {
   width: 100%;
   max-width: var(--container-width);
   height: 1px;
-  background-color: var(--border-muted);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--border-muted) 15%,
+    var(--border-muted) 85%,
+    transparent 100%
+  );
   margin: 0 auto 20px;
 }
 
@@ -1243,5 +1302,41 @@ ul, ol {
 
   .blog-content pre code {
     font-size: 11.5px;
+  }
+}
+
+/* ============================================
+   THEME TRANSITION
+   ============================================ */
+html,
+html body {
+  transition: background-color 0.4s var(--ease-out), color 0.4s var(--ease-out);
+}
+
+.card,
+.theme-toggle,
+.blog-content pre,
+.blog-content blockquote,
+.blog-content code {
+  transition-property: background-color, border-color, box-shadow, transform, color;
+  transition-duration: 0.4s, 0.35s, 0.35s, 0.4s, 0.4s;
+  transition-timing-function: var(--ease-out);
+}
+
+/* ============================================
+   REDUCED MOTION — accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reading-progress {
+    transition: none;
   }
 }

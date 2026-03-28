@@ -22,13 +22,17 @@ export default function VolunteeringSection({
   return (
     <section className="section" id="volunteering">
       <div className="container">
-        <AnimatedSection>
+        <AnimatedSection variant="fade">
           <h2 className="section-title">Volunteering</h2>
         </AnimatedSection>
 
         <div className="content-grid">
           {sorted.map((vol, index) => (
-            <AnimatedSection key={vol.organization} delay={index * 0.15}>
+            <AnimatedSection
+              key={vol.organization}
+              delay={index * 0.1}
+              variant="rise"
+            >
               <div className="card volunteering-card experience-card">
                 {vol.logo && (
                   <Image

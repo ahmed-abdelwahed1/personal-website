@@ -25,7 +25,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
   return (
     <section className="section" id="blog">
       <div className="container">
-        <AnimatedSection>
+        <AnimatedSection variant="fade">
           <div className="section-header">
             <h2 className="section-title">Blog</h2>
             <Link href="/blog" className="btn btn-primary btn-sm">
@@ -36,7 +36,11 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
 
         <div className="blog-grid">
           {posts.map((post, index) => (
-            <AnimatedSection key={post.slug} delay={index * 0.15}>
+            <AnimatedSection
+              key={post.slug}
+              delay={index * 0.1}
+              variant="scale"
+            >
               <Link
                 href={`/blog/${post.slug}`}
                 className="blog-listing-card-link"

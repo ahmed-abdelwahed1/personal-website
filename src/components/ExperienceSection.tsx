@@ -23,7 +23,7 @@ export default function ExperienceSection({
   return (
     <section className="section" id="experience">
       <div className="container">
-        <AnimatedSection>
+        <AnimatedSection variant="fade">
           <h2 className="section-title">Experience</h2>
         </AnimatedSection>
 
@@ -31,8 +31,8 @@ export default function ExperienceSection({
           {sorted.map((exp, index) => (
             <AnimatedSection
               key={exp.company}
-              delay={index * 0.15}
-              direction="left"
+              delay={index * 0.1}
+              variant="rise"
             >
               <div className="card experience-card">
                 {exp.logo && (

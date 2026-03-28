@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { FaLinkedinIn, FaGithub, FaMediumM } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -17,27 +17,64 @@ interface HeroData {
   cvFile: string;
 }
 
+const ease = [0.25, 0.1, 0.25, 1] as const;
+
+const container: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 32 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease },
+  },
+};
+
+const fadeIn: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { duration: 1, ease },
+  },
+};
+
+const scaleIn: Variants = {
+  hidden: { opacity: 0, scaleX: 0 },
+  show: {
+    opacity: 1,
+    scaleX: 1,
+    transition: { duration: 0.8, ease },
+  },
+};
+
+const staggerIcons: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.06,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const iconPop: Variants = {
+  hidden: { opacity: 0, scale: 0.5 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.4, ease },
+  },
+};
+
 export default function Hero({ data }: { data: HeroData }) {
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" as const },
-    },
-  };
-
   return (
     <section className="hero" id="hero">
       <motion.div
@@ -46,25 +83,29 @@ export default function Hero({ data }: { data: HeroData }) {
         initial="hidden"
         animate="show"
       >
-        <motion.h1 className="hero-name" variants={item}>
+        <motion.h1 className="hero-name" variants={fadeUp}>
           Hi, I&apos;m {data.name}
         </motion.h1>
 
-        <motion.p className="hero-title" variants={item}>
+        <motion.p className="hero-title" variants={fadeUp}>
           {data.title}
         </motion.p>
 
-        <motion.div className="hero-divider divider" variants={item} />
+        <motion.div
+          className="hero-divider divider"
+          variants={scaleIn}
+          style={{ originX: 0.5 }}
+        />
 
-        <motion.p className="hero-bio" variants={item}>
+        <motion.p className="hero-bio" variants={fadeIn}>
           {data.bio}
         </motion.p>
 
-        <motion.p className="hero-open" variants={item}>
+        <motion.p className="hero-open" variants={fadeIn}>
           {data.openTo}
         </motion.p>
 
-        <motion.div className="hero-actions" variants={item}>
+        <motion.div className="hero-actions" variants={fadeUp}>
           <div className="hero-buttons">
             <a href={data.cvFile} className="btn btn-primary" download>
               Download CV
@@ -74,44 +115,31 @@ export default function Hero({ data }: { data: HeroData }) {
             </a>
           </div>
 
-          <div className="hero-social">
-            <a
-              href={data.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedinIn />
-            </a>
-            <a
-              href={data.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon"
-              aria-label="GitHub"
-            >
-              <FaGithub />
-            </a>
-            <a
-              href={data.x}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon"
-              aria-label="X (Twitter)"
-            >
-              <FaXTwitter />
-            </a>
-            <a
-              href={data.medium}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon"
-              aria-label="Medium"
-            >
-              <FaMediumM />
-            </a>
-          </div>
+          <motion.div
+            className="hero-social"
+            variants={staggerIcons}
+          >
+            {[
+              { href: data.linkedin, icon: <FaLinkedinIn />, label: "LinkedIn" },
+              { href: data.github, icon: <FaGithub />, label: "GitHub" },
+              { href: data.x, icon: <FaXTwitter />, label: "X (Twitter)" },
+              { href: data.medium, icon: <FaMediumM />, label: "Medium" },
+            ].map((link) => (
+              <motion.a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon"
+                aria-label={link.label}
+                variants={iconPop}
+                whileHover={{ y: -3, scale: 1.15 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {link.icon}
+              </motion.a>
+            ))}
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>
