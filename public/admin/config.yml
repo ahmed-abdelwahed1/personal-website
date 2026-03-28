@@ -2,106 +2,168 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "public/images"
-public_folder: "/images"
+publish_mode: editorial_workflow
 
-logo_url: "/admin/logo.svg"
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+site_url: https://ahmedabdelwahed.me
+display_url: https://ahmedabdelwahed.me
+logo_url: https://ahmedabdelwahed.me/favicon.ico
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
 
 collections:
-  - name: "config"
-    label: "Site Configuration"
+  # ---- Hero / Site Info ----
+  - name: "site"
+    label: "Site Settings"
     files:
-      - name: "profile"
-        label: "Profile Info"
-        file: "src/content/profile.json"
+      - name: "hero"
+        label: "Hero Section"
+        file: "content/site/hero.json"
         fields:
-          - {label: "Name", name: "name", widget: "string"}
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Bio", name: "bio", widget: "text", hint: "Short professional summary."}
-          - {label: "Email", name: "email", widget: "string"}
-          - {label: "LinkedIn", name: "linkedin", widget: "string"}
-          - {label: "GitHub", name: "github", widget: "string"}
-          - {label: "Instagram", name: "instagram", widget: "string", required: false}
-          - {label: "X (Twitter)", name: "x", widget: "string", required: false}
-          - {label: "Medium", name: "medium", widget: "string", required: false}
-          - {label: "Credly Profile", name: "credly", widget: "string", required: false}
-          - label: "Credly Badge IDs"
-            name: "credlyBadges"
-            widget: "list"
-            required: false
-            hint: "Paste the badge UUID from Credly embed code."
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Job Title", name: "title", widget: "string" }
+          - { label: "Bio", name: "bio", widget: "text" }
+          - { label: "Open To (Tagline)", name: "openTo", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "LinkedIn URL", name: "linkedin", widget: "string" }
+          - { label: "GitHub URL", name: "github", widget: "string" }
+          - { label: "X (Twitter) URL", name: "x", widget: "string" }
+          - { label: "Medium URL", name: "medium", widget: "string" }
+          - { label: "CV File Path", name: "cvFile", widget: "file", media_folder: "/public", public_folder: "/" }
 
-      - name: "education"
-        label: "Education (Source)"
-        file: "src/content/education.json"
-        fields:
-          - label: "Education List"
-            name: "education"
-            widget: "list"
-            collapsed: true
-            summary: "{{fields.degree}} — {{fields.period}}"
-            fields:
-              - {label: "ID", name: "id", widget: "string"}
-              - {label: "Degree", name: "degree", widget: "string"}
-              - {label: "Institution", name: "institution", widget: "string"}
-              - {label: "Period", name: "period", widget: "string"}
+  # ---- Experience ----
+  - name: "experience"
+    label: "Experience"
+    label_singular: "Experience Entry"
+    folder: "content/experience"
+    create: true
+    delete: true
+    extension: "json"
+    format: "json"
+    slug: "{{fields.company}}"
+    identifier_field: "company"
+    summary: "{{fields.jobTitle}} at {{fields.company}}"
+    sortable_fields: ["order", "company"]
+    fields:
+      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 1 }
+      - { label: "Job Title", name: "jobTitle", widget: "string" }
+      - { label: "Company", name: "company", widget: "string" }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Date Range", name: "dateRange", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Company Logo", name: "logo", widget: "image", required: false, media_folder: "/public/images/logos", public_folder: "/images/logos" }
 
-      - name: "experience"
-        label: "Experience (Load)"
-        file: "src/content/experience.json"
-        fields:
-          - label: "Experience List"
-            name: "experience"
-            widget: "list"
-            collapsed: true
-            summary: "{{fields.title}} — {{fields.organization}} ({{fields.period}})"
-            fields:
-              - {label: "ID", name: "id", widget: "string"}
-              - {label: "Title", name: "title", widget: "string"}
-              - {label: "Organization", name: "organization", widget: "string"}
-              - {label: "Period", name: "period", widget: "string"}
-              - {label: "Description", name: "description", widget: "text"}
-              - {label: "Type", name: "type", widget: "select", options: ["work", "volunteer"]}
+  # ---- Volunteering ----
+  - name: "volunteering"
+    label: "Volunteering"
+    label_singular: "Volunteering Entry"
+    folder: "content/volunteering"
+    create: true
+    delete: true
+    extension: "json"
+    format: "json"
+    slug: "{{fields.organization}}"
+    identifier_field: "organization"
+    summary: "{{fields.role}} at {{fields.organization}}"
+    sortable_fields: ["order", "organization"]
+    fields:
+      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 1 }
+      - { label: "Role", name: "role", widget: "string" }
+      - { label: "Organization", name: "organization", widget: "string" }
+      - { label: "Date Range", name: "dateRange", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Organization Logo", name: "logo", widget: "image", required: false, media_folder: "/public/images/logos", public_folder: "/images/logos" }
 
-      - name: "skills"
-        label: "Skills (Transform)"
-        file: "src/content/skills.json"
-        fields:
-          - label: "Skill Categories"
-            name: "skills"
-            widget: "list"
-            collapsed: true
-            summary: "{{fields.category}}"
-            fields:
-              - {label: "Category", name: "category", widget: "string"}
-              - {label: "Items", name: "items", widget: "list"}
+  # ---- Education ----
+  - name: "education"
+    label: "Education"
+    label_singular: "Education Entry"
+    folder: "content/education"
+    create: true
+    delete: true
+    extension: "json"
+    format: "json"
+    slug: "{{fields.institution}}"
+    identifier_field: "institution"
+    summary: "{{fields.degree}} — {{fields.institution}}"
+    sortable_fields: ["order", "institution"]
+    fields:
+      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 1 }
+      - { label: "Degree / Program", name: "degree", widget: "string" }
+      - { label: "Institution", name: "institution", widget: "string" }
+      - { label: "Date Range", name: "dateRange", widget: "string" }
 
-      - name: "certificates"
-        label: "Certificates"
-        file: "src/content/certificates.json"
-        fields:
-          - label: "Cert List"
-            name: "certificates"
-            widget: "list"
-            collapsed: true
-            summary: "{{fields.name}} — {{fields.issuer}}"
-            fields:
-              - {label: "ID", name: "id", widget: "string"}
-              - {label: "Name", name: "name", widget: "string"}
-              - {label: "Issuer", name: "issuer", widget: "string"}
+  # ---- Projects ----
+  - name: "projects"
+    label: "Projects"
+    label_singular: "Project"
+    folder: "content/projects"
+    create: true
+    delete: true
+    extension: "json"
+    format: "json"
+    slug: "{{fields.name}}"
+    identifier_field: "name"
+    summary: "{{fields.name}}"
+    sortable_fields: ["order", "name"]
+    fields:
+      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 1 }
+      - { label: "Project Name", name: "name", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "GitHub URL", name: "githubUrl", widget: "string" }
 
-      - name: "blog"
-        label: "Blog Posts"
-        file: "src/content/blog.json"
-        fields:
-          - label: "Posts"
-            name: "posts"
-            widget: "list"
-            collapsed: true
-            summary: "{{fields.title}} — {{fields.date}}"
-            fields:
-              - {label: "Title", name: "title", widget: "string"}
-              - {label: "Publish Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD"}
-              - {label: "Slug", name: "slug", widget: "string", hint: "URL slug, e.g. my-first-post"}
-              - {label: "Excerpt", name: "excerpt", widget: "text"}
-              - {label: "Content", name: "content", widget: "markdown"}
+  # ---- Badges / Certifications ----
+  - name: "badges"
+    label: "Badges & Certifications"
+    label_singular: "Badge"
+    folder: "content/badges"
+    create: true
+    delete: true
+    extension: "json"
+    format: "json"
+    slug: "{{fields.name}}"
+    identifier_field: "name"
+    summary: "{{fields.name}}"
+    sortable_fields: ["order", "name"]
+    fields:
+      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 1 }
+      - { label: "Badge Name", name: "name", widget: "string" }
+      - { label: "Credential URL", name: "url", widget: "string" }
+
+  # ---- Blog ----
+  - name: "blog"
+    label: "Blog Posts"
+    label_singular: "Blog Post"
+    folder: "content/blog"
+    create: true
+    delete: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    identifier_field: "title"
+    summary: "{{fields.title}} — {{fields.date}}"
+    sortable_fields: ["date", "title"]
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text", hint: "A short summary shown on the blog listing and homepage." }
+      - { label: "Cover Image", name: "coverImage", widget: "image", required: false, media_folder: "/public/images/uploads", public_folder: "/images/uploads" }
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        required: false
+        field: { label: "Tag", name: "tag", widget: "string" }
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        editor_components:
+          - "image"
+          - "code-block"
+        hint: "Write your blog post here. You can add headings, bold, italic, links, images, code blocks, lists, quotes, and more."

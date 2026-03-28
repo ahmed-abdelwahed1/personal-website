@@ -1,0 +1,9 @@
+{
+  "order": 2,
+  "jobTitle": "Intern Data Engineer",
+  "company": "Volvo Cars",
+  "location": "Gothenburg, Sweden",
+  "dateRange": "February 2024 – July 2024",
+  "description": "Participated in developing automated data pipelines using Python, authored technical documentation for data collection and processing, engineered reliable methods for data recording throughout testing, and improved data integrity using cleaning techniques.",
+  "logo": "/images/logos/volvo-logo.png"
+}

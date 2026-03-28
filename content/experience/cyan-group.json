@@ -1,0 +1,9 @@
+{
+  "order": 1,
+  "jobTitle": "Junior Data Engineer",
+  "company": "Cyan Group",
+  "location": "Remote, Kuwait",
+  "dateRange": "January 2026 – Present",
+  "description": "Designing efficient PostgreSQL schemas (via Supabase) to capture complex order workflows, automating data flow between inventory and production stages, and establishing validation rules to ensure accurate real-time tracking for decision-making.",
+  "logo": "/images/logos/cyan-logo.png"
+}

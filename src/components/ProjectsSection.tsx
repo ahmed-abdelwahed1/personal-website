@@ -1,0 +1,50 @@
+"use client";
+
+import { FaGithub } from "react-icons/fa";
+import AnimatedSection from "./AnimatedSection";
+
+interface ProjectItem {
+  order: number;
+  name: string;
+  description: string;
+  githubUrl: string;
+}
+
+export default function ProjectsSection({
+  items,
+}: {
+  items: ProjectItem[];
+}) {
+  const sorted = [...items].sort((a, b) => a.order - b.order);
+
+  return (
+    <section className="section" id="projects">
+      <div className="container">
+        <AnimatedSection>
+          <h2 className="section-title">Projects</h2>
+        </AnimatedSection>
+
+        <div className="content-grid">
+          {sorted.map((project, index) => (
+            <AnimatedSection key={project.name} delay={index * 0.15}>
+              <div className="card project-card">
+                <div className="project-header">
+                  <h3>{project.name}</h3>
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary btn-sm github-btn"
+                  >
+                    <FaGithub /> View on GitHub
+                  </a>
+                </div>
+                <p className="project-description">{project.description}</p>
+              </div>
+            </AnimatedSection>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
