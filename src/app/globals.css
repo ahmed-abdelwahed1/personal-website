@@ -672,6 +672,7 @@ ul, ol {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  line-clamp: 3;
   overflow: hidden;
 }
 
@@ -1242,7 +1243,7 @@ ul, ol {
   .blog-listing-title { margin-bottom: 6px; }
   .blog-listing-header { margin-bottom: 24px; }
 
-  .blog-card-excerpt { -webkit-line-clamp: 2; }
+  .blog-card-excerpt { -webkit-line-clamp: 2; line-clamp: 2; }
 
   /* Blog post */
   .blog-post {
