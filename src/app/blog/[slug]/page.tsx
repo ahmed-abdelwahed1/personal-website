@@ -34,7 +34,7 @@ export async function generateMetadata({
       canonical: postUrl,
     },
     openGraph: {
-      title: `${post.title} — Ahmed Shehata Said Abdelwahed`,
+      title: `${post.title} — Ahmed Abdelwahed`,
       description: post.excerpt,
       url: postUrl,
       type: "article",

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     canonical: "https://ahmedabdelwahed.me/blog/",
   },
   openGraph: {
-    title: "Blog — Ahmed Shehata Said Abdelwahed",
+    title: "Blog — Ahmed Abdelwahed",
     description:
       "Thoughts on data engineering, Python, ETL pipelines, and building software.",
     url: "https://ahmedabdelwahed.me/blog/",
