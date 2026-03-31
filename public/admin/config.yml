@@ -9,7 +9,7 @@ public_folder: "/images/uploads"
 
 site_url: https://ahmedabdelwahed.me
 display_url: https://ahmedabdelwahed.me
-logo_url: https://ahmedabdelwahed.me/favicon.ico
+logo_url: /icon.svg
 
 slug:
   encoding: "ascii"
