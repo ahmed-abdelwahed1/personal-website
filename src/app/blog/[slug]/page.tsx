@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { FaArrowLeft } from "react-icons/fa";
 import { getPostBySlug, getAllPostSlugs } from "@/lib/blog";
 import { notFound } from "next/navigation";
@@ -111,6 +112,19 @@ export default async function BlogPostPage({
             </div>
           )}
         </header>
+
+        {post.coverImage && (
+          <div className="blog-post-cover">
+            <Image
+              src={post.coverImage}
+              alt={post.title}
+              width={680}
+              height={383}
+              priority
+              className="blog-post-cover-img"
+            />
+          </div>
+        )}
 
         <div className="blog-post-divider" />
 

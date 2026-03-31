@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { getAllPosts } from "@/lib/blog";
 import type { Metadata } from "next";
@@ -59,6 +60,17 @@ export default function BlogPage() {
               className="blog-listing-card-link"
             >
               <article className="card blog-card">
+                {post.coverImage && (
+                  <div className="blog-card-cover">
+                    <Image
+                      src={post.coverImage}
+                      alt={post.title}
+                      width={600}
+                      height={340}
+                      className="blog-card-cover-img"
+                    />
+                  </div>
+                )}
                 <div className="blog-card-body">
                   <div className="blog-card-meta">
                     <time dateTime={post.date}>{formatDate(post.date)}</time>
