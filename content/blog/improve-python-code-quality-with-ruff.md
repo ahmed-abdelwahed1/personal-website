@@ -51,7 +51,9 @@ Unlike many linters, Ruff isn’t just about pointing out errors; it helps devel
 
 Installing Ruff is straightforward using pip:
 
-`pip install ruff`
+```
+pip install ruff
+```
 
 Alternatively, use a precompiled binary for even faster setup. Visit [Ruff’s GitHub repository](https://github.com/charliermarsh/ruff) for details.
 
@@ -59,19 +61,20 @@ Alternatively, use a precompiled binary for even faster setup. Visit [Ruff’s G
 
 Once installed, you can lint your Python files with a single command:
 
-`ruff check .`
+```
+ruff check .
+```
 
 ### Configuration
 
 To customize Ruff, create a `pyproject.toml` file in your project's root directory:
 
-`[tool.ruff]`
-
-`line-length = 88`
-
-`select = ["E", "F"]`
-
-`ignore = ["W503"]`
+```
+[tool.ruff]
+line-length = 88
+select = ["E", "F"]
+ignore = ["W503"]
+```
 
 * `line-length`
 
@@ -91,39 +94,42 @@ Ruff can automatically fix many common issues. For instance:
 
 Before:
 
-`import os`
+```
+import os
+import sys
 
-`import sys`
-
-``
-
-`print("Hello, World!")`
+print("Hello, World!")
+```
 
 Run Ruff autofix:
 
-`ruff check . --fix`
+```
+ruff check . --fix
+```
 
 After:
 
-`print("Hello, World!")`
+```
+print("Hello, World!")
+```
 
 #### Example 2: Improper Indentation
 
 Before:
 
-`def greet():`
-
-`    print("Hello")`
-
-`     print("World")`
+```
+def greet():
+    print("Hello")
+     print("World")
+```
 
 After running Ruff:
 
-`def greet():`
-
-`    print("Hello")`
-
-`    print("World")`
+```
+def greet():
+    print("Hello")
+    print("World")
+```
 
 ### Real-World Applications
 
@@ -131,35 +137,23 @@ After running Ruff:
 
 Integrate Ruff into your CI pipeline to enforce code quality:
 
-`name: Lint`
-
-`on: [push, pull_request]`
-
-`jobs:`
-
-`  lint:`
-
-`    runs-on: ubuntu-latest`
-
-`    steps:`
-
-`      - uses: actions/checkout@v2`
-
-`      - name: Set up Python`
-
-`        uses: actions/setup-python@v2`
-
-`        with:`
-
-`          python-version: '3.x'`
-
-`      - name: Install Ruff`
-
-`        run: pip install ruff`
-
-`      - name: Run Ruff`
-
-`        run: ruff check .`
+```
+name: Lint
+on: [push, pull_request]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install Ruff
+        run: pip install ruff
+      - name: Run Ruff
+        run: ruff check .
+```
 
 ### 2. IDE Integration
 
