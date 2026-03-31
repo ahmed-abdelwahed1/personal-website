@@ -635,6 +635,25 @@ ul, ol {
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow: hidden;
+}
+
+.blog-card-cover {
+  overflow: hidden;
+  margin: -16px -16px 0;
+  line-height: 0;
+}
+
+.blog-card-cover-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.blog-card:hover .blog-card-cover-img {
+  transform: scale(1.03);
 }
 
 .blog-card-body {
@@ -828,6 +847,19 @@ ul, ol {
 .blog-tag:hover {
   border-color: var(--text);
   color: var(--text);
+}
+
+.blog-post-cover {
+  margin: 24px 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  line-height: 0;
+}
+
+.blog-post-cover-img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
 }
 
 .blog-post-divider {
