@@ -2,28 +2,85 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ThemeToggle from "@/components/ThemeToggle";
+import JsonLd from "@/components/JsonLd";
+import Analytics from "@/components/Analytics";
 import "./globals.css";
 
+const SITE_URL = "https://ahmedabdelwahed.me";
+const FULL_NAME = "Ahmed Shehata Said Abdelwahed";
+const DISPLAY_NAME = "Ahmed Abdelwahed";
+
 export const metadata: Metadata = {
-  title: "Ahmed Abdelwahed — Data Engineer",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: DISPLAY_NAME,
+    template: `%s — ${DISPLAY_NAME}`,
+  },
   description:
-    "I design systems, build data pipelines, and turn ideas into working products. Interested in data engineering, AI-driven tools, and practical software.",
+    "Data Engineer who designs systems, builds data pipelines, and turns ideas into working products. Specializing in data engineering, Python, ETL, AI-driven tools, and practical software.",
   keywords: [
+    "Ahmed Shehata Said Abdelwahed",
     "Ahmed Abdelwahed",
+    "Ahmed Shehata Abdelwahed",
+    "Ahmed Said Abdelwahed",
+    "Ahmed Shehata",
     "Data Engineer",
-    "Portfolio",
-    "Python",
-    "ETL",
+    "Data Engineering Portfolio",
+    "Python Developer",
+    "ETL Developer",
     "Data Pipelines",
+    "AI Tools",
+    "Software Engineer",
+    "Data Engineer Portfolio",
+    "ETL Pipelines",
+    "Data Architecture",
   ],
+  authors: [{ name: FULL_NAME, url: SITE_URL }],
+  creator: FULL_NAME,
+  publisher: FULL_NAME,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "Ahmed Abdelwahed — Data Engineer",
-    description:
-      "I design systems, build data pipelines, and turn ideas into working products.",
     type: "website",
+    locale: "en_US",
+    url: SITE_URL,
+    siteName: FULL_NAME,
+    title: `${FULL_NAME} — Data Engineer`,
+    description:
+      "Data Engineer who designs systems, builds data pipelines, and turns ideas into working products. Specializing in Python, ETL, and AI-driven tools.",
+    images: [
+      {
+        url: `${SITE_URL}/icon.svg`,
+        width: 512,
+        height: 512,
+        alt: FULL_NAME,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: `${FULL_NAME} — Data Engineer`,
+    description:
+      "Data Engineer who designs systems, builds data pipelines, and turns ideas into working products.",
+    creator: "@BinShehata",
+  },
+  alternates: {
+    canonical: SITE_URL,
   },
   icons: {
     icon: "/icon.svg",
+  },
+  other: {
+    "google-site-verification": "REPLACE_WITH_YOUR_VERIFICATION_CODE",
   },
 };
 
@@ -39,18 +96,8 @@ export default function RootLayout({
           <ThemeToggle />
           {children}
         </ThemeProvider>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-XKDMM9RCKL"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-XKDMM9RCKL');
-          `}
-        </Script>
+        <JsonLd />
+        <Analytics />
         <Script
           src="https://identity.netlify.com/v1/netlify-identity-widget.js"
           strategy="afterInteractive"

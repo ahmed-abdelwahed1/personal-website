@@ -4,9 +4,19 @@ import { getAllPosts } from "@/lib/blog";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog — Ahmed Abdelwahed",
+  title: "Blog",
   description:
-    "Thoughts on data engineering, Python, ETL pipelines, and building software.",
+    "Blog by Ahmed Shehata Said Abdelwahed — thoughts on data engineering, Python, ETL pipelines, and building software.",
+  alternates: {
+    canonical: "https://ahmedabdelwahed.me/blog/",
+  },
+  openGraph: {
+    title: "Blog — Ahmed Shehata Said Abdelwahed",
+    description:
+      "Thoughts on data engineering, Python, ETL pipelines, and building software.",
+    url: "https://ahmedabdelwahed.me/blog/",
+    type: "website",
+  },
 };
 
 function formatDate(dateStr: string): string {
