@@ -4,7 +4,7 @@ date: 2025-01-08
 excerpt: In the ever-evolving Python ecosystem, maintaining clean, efficient,
   and error-free code is paramount for developers. Enter Ruff, a lightning-fast
   Python linter and code analyzer.
-coverImage: /images/uploads/ruff.png
+coverImage: "/images/uploads/ruff-new.png"
 tags:
   - Python
   - Tips

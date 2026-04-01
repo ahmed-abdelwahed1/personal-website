@@ -623,7 +623,7 @@ ul, ol {
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  gap: 24px;
 }
 
 .blog-listing-card-link {
@@ -636,12 +636,14 @@ ul, ol {
   flex-direction: column;
   height: 100%;
   overflow: hidden;
+  padding: 0;
 }
 
 .blog-card-cover {
+  position: relative;
   overflow: hidden;
-  margin: -16px -16px 0;
   line-height: 0;
+  background: var(--bg);
 }
 
 .blog-card-cover-img {
@@ -649,18 +651,25 @@ ul, ol {
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s var(--ease-out), filter 0.5s var(--ease-out);
+  filter: brightness(0.92) saturate(0.95);
+}
+
+[data-theme="light"] .blog-card-cover-img {
+  filter: brightness(1) saturate(1);
 }
 
 .blog-card:hover .blog-card-cover-img {
-  transform: scale(1.03);
+  transform: scale(1.04);
+  filter: brightness(1) saturate(1);
 }
 
 .blog-card-body {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   flex-grow: 1;
+  padding: var(--card-padding);
 }
 
 .blog-card-meta {
@@ -699,7 +708,7 @@ ul, ol {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .blog-read-link {
@@ -708,7 +717,7 @@ ul, ol {
   gap: 6px;
   font-size: var(--fs-small);
   font-weight: 500;
-  margin-top: 12px;
+  padding: 0 var(--card-padding) var(--card-padding);
   transition: color var(--transition-fast);
 }
 
@@ -756,7 +765,7 @@ ul, ol {
 .blog-listing-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  gap: 24px;
 }
 
 .blog-empty {
@@ -804,7 +813,7 @@ ul, ol {
 }
 
 .blog-post-header {
-  margin-bottom: 0;
+  margin-bottom: 8px;
 }
 
 .blog-post-meta {
@@ -851,16 +860,23 @@ ul, ol {
 }
 
 .blog-post-cover {
-  margin: 24px 0;
-  border-radius: var(--radius);
+  margin: 20px 0 28px;
+  border-radius: 10px;
   overflow: hidden;
   line-height: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-muted);
 }
 
 .blog-post-cover-img {
   width: 100%;
   height: auto;
-  border-radius: var(--radius);
+  display: block;
+  filter: brightness(0.95) saturate(0.95);
+}
+
+[data-theme="light"] .blog-post-cover-img {
+  filter: brightness(1) saturate(1);
 }
 
 .blog-post-divider {

@@ -2,7 +2,7 @@
 title: "Building Robust ETL Pipelines with Python"
 date: "2026-01-01"
 excerpt: "A deep dive into how I automated data processing flows using Pandas and raw SQL optimization techniques."
-coverImage: ""
+coverImage: "/images/uploads/etl-pipelines.png"
 tags:
   - Python
   - ETL
