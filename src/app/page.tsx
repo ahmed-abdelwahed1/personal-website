@@ -31,6 +31,7 @@ export default function Home() {
     dateRange: string;
     description: string;
     logo: string;
+    isCrossedOut?: boolean;
   }>("content/experience");
 
   const volunteering = loadJsonDir<{

@@ -401,6 +401,11 @@ ul, ol {
   gap: 14px;
 }
 
+.experience-card.crossed-out {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
 .experience-logo {
   height: 34px;
   max-width: 130px;

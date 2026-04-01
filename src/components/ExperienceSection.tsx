@@ -11,6 +11,7 @@ interface ExperienceItem {
   dateRange: string;
   description: string;
   logo: string;
+  isCrossedOut?: boolean;
 }
 
 export default function ExperienceSection({
@@ -34,7 +35,7 @@ export default function ExperienceSection({
               delay={index * 0.1}
               variant="rise"
             >
-              <div className="card experience-card">
+              <div className={`card experience-card ${exp.isCrossedOut ? "crossed-out" : ""}`}>
                 {exp.logo && (
                   <Image
                     src={exp.logo}
