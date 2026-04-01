@@ -7,12 +7,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Blog by Ahmed Shehata Said Abdelwahed — thoughts on data engineering, Python, ETL pipelines, and building software.",
+    "Blog by Ahmed Abdelwahed — thoughts on data engineering, Python, ETL pipelines, and building software.",
   alternates: {
     canonical: "https://ahmedabdelwahed.me/blog/",
   },
   openGraph: {
-    title: "Blog — Ahmed Abdelwahed",
+    title: "Blog | Ahmed Abdelwahed",
     description:
       "Thoughts on data engineering, Python, ETL pipelines, and building software.",
     url: "https://ahmedabdelwahed.me/blog/",

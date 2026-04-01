@@ -35,12 +35,12 @@ export async function generateMetadata({
       canonical: postUrl,
     },
     openGraph: {
-      title: `${post.title} — Ahmed Abdelwahed`,
+      title: `${post.title} | Ahmed Abdelwahed`,
       description: post.excerpt,
       url: postUrl,
       type: "article",
       publishedTime: post.date,
-      authors: ["Ahmed Shehata Said Abdelwahed"],
+      authors: ["Ahmed Abdelwahed"],
       tags: post.tags,
       ...(post.coverImage && {
         images: [{ url: post.coverImage, alt: post.title }],
