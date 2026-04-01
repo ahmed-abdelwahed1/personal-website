@@ -25,10 +25,9 @@ My personal portfolio website showcasing my background, experience, projects, an
 - SEO optimized (sitemap, robots.txt, Open Graph, JSON-LD)
 - Smooth micro-animations with Framer Motion
 
-
 ## Contact
 
-- **Email:** ahmedshehatasaid1@gmail.com
+- **Email:** <ahmedshehatasaid1@gmail.com>
 - **LinkedIn:** [ahmed-abdelwahed](https://linkedin.com/in/ahmed-abdelwahed)
 - **GitHub:** [ahmed-abdelwahed1](https://github.com/ahmed-abdelwahed1)
 - **X:** [@BinShehata](https://x.com/BinShehata)
