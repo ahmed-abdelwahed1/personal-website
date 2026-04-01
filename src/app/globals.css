@@ -236,13 +236,7 @@ ul, ol {
   margin: 0 auto;
 }
 
-/* ---- Social Icons ---- */
-.social-icons {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
+/* ---- Social Icon ---- */
 .social-icon {
   display: flex;
   align-items: center;
@@ -1268,8 +1262,6 @@ ul, ol {
     height: 34px;
     font-size: 20px;
   }
-
-  .social-icons { gap: 10px; }
 
   .btn { padding: 9px 18px; }
   .btn-sm { padding: 7px 14px; }

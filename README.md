@@ -1,6 +1,6 @@
 # Ahmed Abdelwahed | Personal Website
 
-![Website Mockup](public/images/uploads/GitHub.png)
+![Website Mockup](.github/assets/GitHub.png)
 
 My personal portfolio website showcasing my background, experience, projects, and blog posts in Data Engineering and Software Development.
 

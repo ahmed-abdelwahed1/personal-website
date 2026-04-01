@@ -12,6 +12,14 @@ function estimateReadingTime(text: string): number {
   return Math.max(1, Math.ceil(words / 230));
 }
 
+function normalizeDateToIsoString(date: unknown): string {
+  if (!date) return "";
+  if (typeof date === "string") return date;
+  if (date instanceof Date) return date.toISOString().split("T")[0];
+  if (typeof date === "number") return new Date(date).toISOString().split("T")[0];
+  return String(date);
+}
+
 export interface BlogPostMeta {
   slug: string;
   title: string;
@@ -43,7 +51,7 @@ export function getAllPosts(): BlogPostMeta[] {
       return {
         slug,
         title: data.title || "Untitled",
-        date: data.date || "",
+        date: normalizeDateToIsoString(data.date),
         excerpt: data.excerpt || "",
         coverImage: data.coverImage || "",
         tags: data.tags || [],
@@ -64,7 +72,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 
     const processedContent = await remark()
       .use(remarkGfm)
-      .use(html, { sanitize: false })
+      .use(html, { sanitize: true })
       .process(content);
 
     const contentHtml = processedContent.toString();
@@ -72,7 +80,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     return {
       slug,
       title: data.title || "Untitled",
-      date: data.date || "",
+      date: normalizeDateToIsoString(data.date),
       excerpt: data.excerpt || "",
       coverImage: data.coverImage || "",
       tags: data.tags || [],

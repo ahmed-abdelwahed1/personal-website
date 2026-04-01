@@ -48,10 +48,12 @@ export default function BlogPostJsonLd({
       }),
   };
 
+  const safeJson = JSON.stringify(articleSchema).replace(/</g, "\\u003c");
+
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      dangerouslySetInnerHTML={{ __html: safeJson }}
     />
   );
 }

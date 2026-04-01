@@ -79,9 +79,6 @@ export const metadata: Metadata = {
   icons: {
     icon: "/icon.svg",
   },
-  other: {
-    "google-site-verification": "REPLACE_WITH_YOUR_VERIFICATION_CODE",
-  },
 };
 
 export default function RootLayout({

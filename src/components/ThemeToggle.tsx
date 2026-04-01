@@ -9,8 +9,12 @@ export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme, resolvedTheme } = useTheme();
 
+  // Hydration safety: only render theme control after mount
+  // to avoid theme mismatch between server and client
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
+    return () => setMounted(false);
   }, []);
 
   if (!mounted) {

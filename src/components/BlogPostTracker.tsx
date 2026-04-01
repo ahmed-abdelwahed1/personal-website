@@ -9,10 +9,12 @@ interface BlogPostTrackerProps {
 }
 
 export default function BlogPostTracker({ title, slug }: BlogPostTrackerProps) {
-  const startTime = useRef(Date.now());
+  const startTime = useRef<number | null>(null);
   const milestones = useRef(new Set<number>());
 
   useEffect(() => {
+    if (!startTime.current) startTime.current = Date.now();
+
     const handleScroll = () => {
       const article = document.querySelector(".blog-content");
       if (!article) return;
@@ -38,7 +40,7 @@ export default function BlogPostTracker({ title, slug }: BlogPostTrackerProps) {
     handleScroll();
 
     const handleBeforeUnload = () => {
-      const seconds = Math.round((Date.now() - startTime.current) / 1000);
+      const seconds = Math.round((Date.now() - (startTime.current ?? Date.now())) / 1000);
       trackTimeOnPage(seconds, `Blog: ${title}`, `/blog/${slug}/`);
     };
     window.addEventListener("beforeunload", handleBeforeUnload);

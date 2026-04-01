@@ -5,10 +5,11 @@ import { useEffect, useRef, useCallback } from "react";
 import { GA_MEASUREMENT_ID, trackClick, trackOutboundLink, trackDownload, trackScrollDepth, trackTimeOnPage, trackSectionView } from "@/lib/analytics";
 
 export default function Analytics() {
-  const startTime = useRef(Date.now());
+  const startTime = useRef<number | null>(null);
   const scrollMilestones = useRef(new Set<number>());
 
   const handleScrollDepth = useCallback(() => {
+    if (!startTime.current) startTime.current = Date.now();
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     if (docHeight <= 0) return;
@@ -26,6 +27,8 @@ export default function Analytics() {
   }, []);
 
   useEffect(() => {
+    if (!startTime.current) startTime.current = Date.now();
+
     const handleClick = (e: MouseEvent) => {
       const target = (e.target as HTMLElement).closest("a, button");
       if (!target) return;
@@ -74,14 +77,14 @@ export default function Analytics() {
     });
 
     const timeInterval = setInterval(() => {
-      const seconds = Math.round((Date.now() - startTime.current) / 1000);
+      const seconds = Math.round((Date.now() - (startTime.current ?? Date.now())) / 1000);
       if (seconds > 0 && seconds % 30 === 0) {
         trackTimeOnPage(seconds, document.title, window.location.pathname);
       }
     }, 30000);
 
     const handleBeforeUnload = () => {
-      const seconds = Math.round((Date.now() - startTime.current) / 1000);
+      const seconds = Math.round((Date.now() - (startTime.current ?? Date.now())) / 1000);
       trackTimeOnPage(seconds, document.title, window.location.pathname);
     };
     window.addEventListener("beforeunload", handleBeforeUnload);
