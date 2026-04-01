@@ -44,8 +44,8 @@ export default function BlogPostJsonLd({
     ...(coverImage && { image: coverImage }),
     ...(tags &&
       tags.length > 0 && {
-        keywords: tags.join(", "),
-      }),
+      keywords: tags.join(", "),
+    }),
   };
 
   const safeJson = JSON.stringify(articleSchema).replace(/</g, "\\u003c");
