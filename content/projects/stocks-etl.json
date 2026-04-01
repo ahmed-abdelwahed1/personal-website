@@ -1,6 +1,6 @@
 {
   "order": 2,
-  "name": "Stocks Prices ETL Pipeline",
-  "description": "Data Engineering Project through workshops and collaborative problem-solving activities.",
-  "githubUrl": "https://github.com/ahmed-abdelwahed1/Stocks-Prices-ETL-Pipeline"
+  "name": "X-Unbookmarker",
+  "description": "Chrome Extension designed to help you manage your digital footprint on X (formerly Twitter) by automating the process of removing bookmarks.",
+  "githubUrl": "https://github.com/ahmed-abdelwahed1/X-Unbookmarker.git"
 }
