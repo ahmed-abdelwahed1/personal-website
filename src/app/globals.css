@@ -66,6 +66,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: none;
 }
 
 body {
@@ -74,6 +75,11 @@ body {
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 a {
@@ -1456,5 +1462,61 @@ html body {
 
   .reading-progress {
     transition: none;
+  }
+}
+
+/* ============================================
+   GITHUB HEATMAP SECTION
+   ============================================ */
+.github-heatmap-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.heatmap-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0;
+  scrollbar-width: none;
+}
+
+.heatmap-container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.heatmap-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.heatmap-container::-webkit-scrollbar-thumb {
+  background-color: var(--border-muted);
+  border-radius: 10px;
+}
+
+.heatmap-skeleton {
+  height: 120px;
+  width: 100%;
+  background: linear-gradient(90deg,
+      var(--bg-card) 25%,
+      var(--border-muted) 50%,
+      var(--bg-card) 75%);
+  background-size: 200% 100%;
+  animation: heatmap-shimmer 2s infinite;
+  border-radius: var(--radius);
+}
+
+@keyframes heatmap-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
   }
 }

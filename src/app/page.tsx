@@ -4,6 +4,7 @@ import VolunteeringSection from "@/components/VolunteeringSection";
 import EducationSection from "@/components/EducationSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import BadgesSection from "@/components/BadgesSection";
+import GithubHeatmapSection from "@/components/GithubHeatmapSection";
 import BlogSection from "@/components/BlogSection";
 import Footer from "@/components/Footer";
 import { loadJson, loadJsonDir } from "@/lib/content";
@@ -66,6 +67,8 @@ export default function Home() {
   const allPosts = getAllPosts();
   const latestPosts = allPosts.slice(0, 2);
 
+  const githubUsername = hero.github ? hero.github.split("/").filter(Boolean).pop() : undefined;
+
   return (
     <main>
       <Hero data={hero} />
@@ -73,7 +76,13 @@ export default function Home() {
       <VolunteeringSection items={volunteering} />
       <EducationSection items={education} />
       <ProjectsSection items={projects} />
+
+      {githubUsername && (
+        <GithubHeatmapSection username={githubUsername} />
+      )}
+
       <BadgesSection items={badges} />
+
       <BlogSection posts={latestPosts} />
       <Footer />
     </main>
