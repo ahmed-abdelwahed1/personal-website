@@ -127,15 +127,20 @@ ol {
   position: absolute;
   left: 0;
   bottom: -6px;
-  width: 0;
+  width: 100%;
   height: 2px;
-  background: var(--text);
-  transition: width 0.6s var(--ease-out);
+  background: var(--border-muted);
+  opacity: 0.6;
+  transform: scaleX(0.72);
+  transform-origin: left center;
+  transition: transform 0.35s var(--ease-out), opacity 0.35s var(--ease-out), background-color 0.35s var(--ease-out);
 }
 
 .section:hover .section-title::after,
 .section-header:hover .section-title::after {
-  width: 100%;
+  opacity: 0.95;
+  transform: scaleX(1);
+  background: var(--text-muted);
 }
 
 .section-header {
