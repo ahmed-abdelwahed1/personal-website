@@ -10,7 +10,6 @@ Live URL: [ahmedabdelwahed.me](https://ahmedabdelwahed.me/)
 
 This project is built with Next.js App Router and TypeScript, with content sourced from local JSON and Markdown files. It is optimized for performance, SEO, and maintainability.
 
-
 ## Core Features
 
 - Responsive, mobile-first layout
@@ -33,7 +32,6 @@ This project is built with Next.js App Router and TypeScript, with content sourc
 - Content: Markdown with remark plugins and local JSON
 - Theming: [next-themes](https://github.com/pacocoursey/next-themes)
 - Deployment: [Netlify](https://www.netlify.com/)
-
 
 ## Architecture Diagram
 
