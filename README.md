@@ -140,7 +140,11 @@ class node_node_build,node_node_ci toneIndigo
 
 ## Contact
 
-- Email: <ahmedshehatasaid1@gmail.com>
+- Email: <contact@ahmedabdelwahed.me>
 - LinkedIn: [ahmed-abdelwahed](https://linkedin.com/in/ahmed-abdelwahed)
 - GitHub: [ahmed-abdelwahed1](https://github.com/ahmed-abdelwahed1)
 - X: [@BinShehata](https://x.com/BinShehata)
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
