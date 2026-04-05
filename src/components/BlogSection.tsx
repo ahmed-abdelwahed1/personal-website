@@ -24,6 +24,8 @@ function formatDate(dateStr: string): string {
 }
 
 export default function BlogSection({ posts }: { posts: BlogPost[] }) {
+  const useHorizontalScroll = posts.length > 3;
+
   return (
     <section className="section" id="blog">
       <div className="container">
@@ -36,7 +38,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
           </div>
         </AnimatedSection>
 
-        <div className="blog-grid">
+        <div className={`blog-grid${useHorizontalScroll ? " blog-grid--scroll" : ""}`}>
           {posts.map((post, index) => (
             <AnimatedSection
               key={post.slug}

@@ -638,6 +638,18 @@ ol {
   gap: 24px;
 }
 
+.blog-grid--scroll {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding-bottom: 6px;
+}
+
+.blog-grid--scroll>* {
+  flex: 0 0 clamp(280px, 31vw, 360px);
+  scroll-snap-align: start;
+}
+
 .blog-listing-card-link {
   display: block;
   height: 100%;
@@ -1205,6 +1217,14 @@ ol {
   /* Blog grids → single column */
   .blog-grid {
     grid-template-columns: 1fr;
+  }
+
+  .blog-grid--scroll {
+    display: flex;
+  }
+
+  .blog-grid--scroll>* {
+    flex: 0 0 min(86vw, 320px);
   }
 
   .blog-listing-grid {

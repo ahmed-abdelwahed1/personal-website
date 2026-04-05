@@ -6,7 +6,6 @@ import ProjectsSection from "@/components/ProjectsSection";
 import BadgesSection from "@/components/BadgesSection";
 import GithubHeatmapSection from "@/components/GithubHeatmapSection";
 import BlogSection from "@/components/BlogSection";
-import Footer from "@/components/Footer";
 import { loadJson, loadJsonDir } from "@/lib/content";
 import { getAllPosts } from "@/lib/blog";
 
@@ -65,7 +64,15 @@ export default function Home() {
   }>("content/badges");
 
   const allPosts = getAllPosts();
-  const latestPosts = allPosts.slice(0, 2);
+  const configuredHomeBlogPosts = Number.parseInt(
+    process.env.HOMEPAGE_BLOG_POSTS_COUNT ?? process.env.BLOG_POSTS_PER_PAGE ?? "3",
+    10
+  );
+  const homeBlogPostsCount =
+    Number.isFinite(configuredHomeBlogPosts) && configuredHomeBlogPosts > 0
+      ? configuredHomeBlogPosts
+      : 3;
+  const latestPosts = allPosts.slice(0, homeBlogPostsCount);
 
   const githubUsername = hero.github ? hero.github.split("/").filter(Boolean).pop() : undefined;
 
@@ -84,7 +91,6 @@ export default function Home() {
       <BadgesSection items={badges} />
 
       <BlogSection posts={latestPosts} />
-      <Footer />
     </main>
   );
 }

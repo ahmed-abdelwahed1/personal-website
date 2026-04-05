@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import ThemeToggle from "@/components/ThemeToggle";
 import JsonLd from "@/components/JsonLd";
 import Analytics from "@/components/Analytics";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const SITE_URL = "https://ahmedabdelwahed.me";
@@ -92,6 +93,7 @@ export default function RootLayout({
         <ThemeProvider attribute="data-theme" defaultTheme="dark" enableSystem={false}>
           <ThemeToggle />
           {children}
+          <Footer />
         </ThemeProvider>
         <JsonLd />
         <Analytics />
