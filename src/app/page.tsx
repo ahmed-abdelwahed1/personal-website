@@ -65,7 +65,15 @@ export default function Home() {
   }>("content/badges");
 
   const allPosts = getAllPosts();
-  const latestPosts = allPosts.slice(0, 2);
+  const configuredHomeBlogPosts = Number.parseInt(
+    process.env.HOMEPAGE_BLOG_POSTS_COUNT ?? process.env.BLOG_POSTS_PER_PAGE ?? "3",
+    10
+  );
+  const homeBlogPostsCount =
+    Number.isFinite(configuredHomeBlogPosts) && configuredHomeBlogPosts > 0
+      ? configuredHomeBlogPosts
+      : 3;
+  const latestPosts = allPosts.slice(0, homeBlogPostsCount);
 
   const githubUsername = hero.github ? hero.github.split("/").filter(Boolean).pop() : undefined;
 
