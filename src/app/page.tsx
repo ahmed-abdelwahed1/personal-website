@@ -6,7 +6,6 @@ import ProjectsSection from "@/components/ProjectsSection";
 import BadgesSection from "@/components/BadgesSection";
 import GithubHeatmapSection from "@/components/GithubHeatmapSection";
 import BlogSection from "@/components/BlogSection";
-import Footer from "@/components/Footer";
 import { loadJson, loadJsonDir } from "@/lib/content";
 import { getAllPosts } from "@/lib/blog";
 
@@ -92,7 +91,6 @@ export default function Home() {
       <BadgesSection items={badges} />
 
       <BlogSection posts={latestPosts} />
-      <Footer />
     </main>
   );
 }

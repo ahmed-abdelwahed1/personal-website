@@ -645,7 +645,7 @@ ol {
   padding-bottom: 6px;
 }
 
-.blog-grid--scroll > * {
+.blog-grid--scroll>* {
   flex: 0 0 clamp(280px, 31vw, 360px);
   scroll-snap-align: start;
 }
@@ -1223,7 +1223,7 @@ ol {
     display: flex;
   }
 
-  .blog-grid--scroll > * {
+  .blog-grid--scroll>* {
     flex: 0 0 min(86vw, 320px);
   }
 
