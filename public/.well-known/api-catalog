@@ -1,0 +1,37 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://ahmedabdelwahed.me/",
+      "service-doc": [
+        {
+          "href": "https://ahmedabdelwahed.me/",
+          "type": "text/html",
+          "title": "Ahmed Abdelwahed — Personal Portfolio & Blog"
+        }
+      ],
+      "service-desc": [
+        {
+          "href": "https://ahmedabdelwahed.me/sitemap.xml",
+          "type": "application/xml",
+          "title": "Sitemap"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://ahmedabdelwahed.me/",
+          "title": "Homepage Health Check"
+        }
+      ]
+    },
+    {
+      "anchor": "https://ahmedabdelwahed.me/blog/",
+      "service-doc": [
+        {
+          "href": "https://ahmedabdelwahed.me/blog/",
+          "type": "text/html",
+          "title": "Blog — Data Engineering, Python, and Software"
+        }
+      ]
+    }
+  ]
+}

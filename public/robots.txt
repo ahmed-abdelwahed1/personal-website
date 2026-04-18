@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
+Sitemap: https://ahmedabdelwahed.me/sitemap.xml
+Host: https://ahmedabdelwahed.me

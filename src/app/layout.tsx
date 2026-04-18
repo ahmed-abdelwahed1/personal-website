@@ -114,6 +114,97 @@ export default function RootLayout({
             }
           `}
         </Script>
+        <Script id="webmcp-tools" strategy="afterInteractive">
+          {`
+            (function() {
+              if (!navigator.modelContext || !navigator.modelContext.registerTool) return;
+
+              navigator.modelContext.registerTool({
+                name: "navigate-to-section",
+                description: "Scroll to a named section on the portfolio page. Available sections: hero, experience, volunteering, education, projects, github, badges, blog.",
+                inputSchema: {
+                  type: "object",
+                  properties: {
+                    section: {
+                      type: "string",
+                      description: "The section ID to navigate to",
+                      enum: ["hero", "experience", "volunteering", "education", "projects", "github", "badges", "blog"]
+                    }
+                  },
+                  required: ["section"]
+                },
+                execute: function(input) {
+                  var sectionMap = {
+                    hero: "section-hero",
+                    experience: "section-experience",
+                    volunteering: "section-volunteering",
+                    education: "section-education",
+                    projects: "section-projects",
+                    github: "section-github",
+                    badges: "section-badges",
+                    blog: "section-blog"
+                  };
+                  var id = sectionMap[input.section] || input.section;
+                  var el = document.getElementById(id);
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth" });
+                    return { success: true, section: input.section };
+                  }
+                  return { success: false, error: "Section not found: " + input.section };
+                }
+              });
+
+              navigator.modelContext.registerTool({
+                name: "get-contact-info",
+                description: "Get the site owner's public contact information including email, social media links, and CV download URL.",
+                inputSchema: {
+                  type: "object",
+                  properties: {},
+                  required: []
+                },
+                execute: function() {
+                  var links = {};
+                  document.querySelectorAll("a[href]").forEach(function(a) {
+                    var href = a.getAttribute("href") || "";
+                    if (href.includes("mailto:")) links.email = href.replace("mailto:", "");
+                    if (href.includes("linkedin.com")) links.linkedin = href;
+                    if (href.includes("github.com")) links.github = href;
+                    if (href.includes("x.com") || href.includes("twitter.com")) links.x = href;
+                    if (href.includes("medium.com")) links.medium = href;
+                    if (href.includes("CV.pdf")) links.cv = href;
+                  });
+                  links.name = "Ahmed Abdelwahed";
+                  links.title = "Data Engineer";
+                  return links;
+                }
+              });
+
+              navigator.modelContext.registerTool({
+                name: "list-blog-posts",
+                description: "List all visible blog post titles, dates, and links from the current page.",
+                inputSchema: {
+                  type: "object",
+                  properties: {},
+                  required: []
+                },
+                execute: function() {
+                  var posts = [];
+                  document.querySelectorAll(".blog-card, .blog-listing-card-link").forEach(function(card) {
+                    var title = card.querySelector(".blog-card-title");
+                    var time = card.querySelector("time");
+                    var link = card.closest("a");
+                    posts.push({
+                      title: title ? title.textContent : "",
+                      date: time ? time.getAttribute("datetime") : "",
+                      url: link ? link.getAttribute("href") : ""
+                    });
+                  });
+                  return { posts: posts, count: posts.length };
+                }
+              });
+            })();
+          `}
+        </Script>
       </body>
     </html>
   );

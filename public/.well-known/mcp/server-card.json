@@ -1,0 +1,36 @@
+{
+  "serverInfo": {
+    "name": "ahmedabdelwahed-portfolio",
+    "version": "1.0.0",
+    "title": "Ahmed Abdelwahed — Portfolio & Blog",
+    "description": "Personal portfolio site of Ahmed Abdelwahed, Data Engineer. Browse experience, projects, education, and blog posts."
+  },
+  "endpoint": "https://ahmedabdelwahed.me/",
+  "capabilities": {
+    "resources": true,
+    "tools": false,
+    "prompts": false
+  },
+  "resources": [
+    {
+      "name": "homepage",
+      "uri": "https://ahmedabdelwahed.me/",
+      "description": "Portfolio homepage with experience, projects, education, and contact info"
+    },
+    {
+      "name": "blog",
+      "uri": "https://ahmedabdelwahed.me/blog/",
+      "description": "Blog posts about data engineering, Python, and software development"
+    },
+    {
+      "name": "sitemap",
+      "uri": "https://ahmedabdelwahed.me/sitemap.xml",
+      "description": "XML sitemap listing all pages"
+    },
+    {
+      "name": "cv",
+      "uri": "https://ahmedabdelwahed.me/Ahmed%20Abdelwahed%20-%20CV.pdf",
+      "description": "Downloadable CV/resume in PDF format"
+    }
+  ]
+}

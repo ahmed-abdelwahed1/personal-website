@@ -1,0 +1,8 @@
+{
+  "resource": "https://ahmedabdelwahed.me",
+  "authorization_servers": [
+    "https://ahmedabdelwahed.me"
+  ],
+  "scopes_supported": ["openid", "profile"],
+  "note": "This is a static portfolio site with no protected resources. All content is publicly accessible."
+}

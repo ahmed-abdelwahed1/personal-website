@@ -27,6 +27,48 @@
     X-XSS-Protection = "1; mode=block"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
+# Link headers for agent discovery (RFC 8288 / RFC 9727)
+[[headers]]
+  for = "/"
+  [headers.values]
+    Link = '''</.well-known/api-catalog>; rel="api-catalog", </.well-known/agent-skills/index.json>; rel="describedby", </sitemap.xml>; rel="service-desc"; type="application/xml"'''
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Link = '''</.well-known/api-catalog>; rel="api-catalog", </.well-known/agent-skills/index.json>; rel="describedby", </sitemap.xml>; rel="service-desc"; type="application/xml"'''
+
+# Content-Type for well-known endpoints
+[[headers]]
+  for = "/.well-known/api-catalog"
+  [headers.values]
+    Content-Type = "application/linkset+json"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/.well-known/mcp/server-card.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/.well-known/openid-configuration"
+  [headers.values]
+    Content-Type = "application/json"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/.well-known/oauth-protected-resource"
+  [headers.values]
+    Content-Type = "application/json"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/.well-known/agent-skills/index.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Cache-Control = "public, max-age=86400"
+
 [[headers]]
   for = "/sitemap.xml"
   [headers.values]
@@ -38,3 +80,8 @@
   [headers.values]
     Content-Type = "text/plain"
     Cache-Control = "public, max-age=3600, s-maxage=3600"
+
+# Edge Function for Markdown content negotiation
+[[edge_functions]]
+  function = "markdown-negotiation"
+  path = "/*"
