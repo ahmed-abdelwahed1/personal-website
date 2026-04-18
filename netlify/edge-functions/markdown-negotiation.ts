@@ -1,4 +1,8 @@
-export default async function handler(request: Request, context: any) {
+interface NetlifyContext {
+  next: () => Promise<Response>;
+}
+
+export default async function handler(request: Request, context: NetlifyContext) {
   const acceptHeader = request.headers.get("accept") || "";
 
   // Only intercept if the client explicitly wants markdown
