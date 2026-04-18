@@ -70,101 +70,99 @@ The site exposes tools to AI agents via the browser using the [WebMCP API](https
 ```mermaid
 flowchart TD
 
-subgraph group_group_app["App Router"]
-  node_node_layout["Layout<br/>Next shell<br/>[layout.tsx]"]
-  node_node_home["Homepage<br/>route<br/>[page.tsx]"]
-  node_node_blog_index["Blog Index<br/>route<br/>[page.tsx]"]
-  node_node_blog_post["Blog Post<br/>dynamic route<br/>[page.tsx]"]
-  node_node_seo["SEO<br/>structured data<br/>[robots.txt]"]
+subgraph group_app["Next.js app"]
+  node_layout["App shell<br/>Next layout<br/>[layout.tsx]"]
+  node_home["Home page<br/>Route page<br/>[page.tsx]"]
+  node_blog_index["Blog index<br/>Route page<br/>[page.tsx]"]
+  node_blog_post["Post page<br/>Dynamic route<br/>[page.tsx]"]
+  node_sitemap["Sitemap<br/>Metadata route<br/>[sitemap.ts]"]
+  node_content_lib["Content loader<br/>Content adapter<br/>[content.ts]"]
+  node_blog_lib["Blog loader<br/>Markdown parser<br/>[blog.ts]"]
 end
 
-subgraph group_group_content["Content"]
-  node_node_content_lib["Content Lib<br/>data access<br/>[content.ts]"]
-  node_node_blog_lib["Blog Lib<br/>markdown pipeline<br/>[blog.ts]"]
-  node_node_site_data["Site Data<br/>json content<br/>[hero.json]"]
-  node_node_experience_data["Experience<br/>json content<br/>[cyan-group.json]"]
-  node_node_projects_data["Projects<br/>json content<br/>[stocks-etl.json]"]
-  node_node_education_data["Education<br/>json content<br/>[bachelors.json]"]
-  node_node_badges_data["Badges<br/>json content"]
-  node_node_volunteer_data["Volunteering<br/>json content<br/>[ieee.json]"]
-  node_node_blog_content["Blog Posts<br/>markdown content"]
+subgraph group_components["UI components"]
+  node_theme["Theme<br/>Client provider<br/>[ThemeProvider.tsx]"]
+  node_hero["Hero<br/>Section component<br/>[Hero.tsx]"]
+  node_experience["Experience<br/>Section component"]
+  node_projects["Projects<br/>Section component"]
+  node_education["Education<br/>Section component"]
+  node_badges["Badges<br/>Section component<br/>[BadgesSection.tsx]"]
+  node_volunteering["Volunteering<br/>Section component"]
+  node_heatmap["GitHub heatmap<br/>Section component"]
+  node_blog_ui["Blog UI<br/>Article components"]
+  node_seo["SEO metadata<br/>Structured data<br/>[JsonLd.tsx]"]
+  node_analytics["Analytics<br/>Client tracker<br/>[Analytics.tsx]"]
 end
 
-subgraph group_group_components["Components"]
-  node_node_hero["Hero<br/>section<br/>[Hero.tsx]"]
-  node_node_sections["Sections<br/>presentation"]
-  node_node_motion["Motion UI<br/>interaction layer"]
-  node_node_theme["Theme<br/>client state<br/>[ThemeProvider.tsx]"]
+subgraph group_content["File content"]
+  node_site_content["Profile JSON<br/>Content data<br/>[hero.json]"]
+  node_blog_content["Blog markdown<br/>Post content"]
 end
 
-subgraph group_group_public["Public Assets"]
-  node_node_public["Static Assets<br/>public files<br/>[index.html]"]
+subgraph group_public["Public surface"]
+  node_public_surface[("Public assets<br/>Static assets")]
+  node_well_known["Well-known<br/>Discovery files<br/>[.well-known]"]
+  node_admin["Admin CMS<br/>Static CMS"]
 end
 
-subgraph group_group_agent["Agent Readiness"]
-  node_node_wellknown["Well-Known<br/>discovery endpoints<br/>[api-catalog, agent-skills]"]
-  node_node_webmcp["WebMCP<br/>browser tools<br/>[layout.tsx]"]
-  node_node_markdown["Markdown<br/>content negotiation<br/>[edge function]"]
+subgraph group_deploy["Deploy edge"]
+  node_edge_md["Markdown edge<br/>Netlify edge"]
+  node_netlify_cfg["Netlify config<br/>Hosting config<br/>[netlify.toml]"]
 end
 
-subgraph group_group_ops["Ops"]
-  node_node_build["Deploy Config<br/>hosting config<br/>[netlify.toml]"]
-  node_node_ci["Lint CI<br/>workflow<br/>[lint.yml]"]
-end
+node_layout -->|"provides"| node_theme
+node_layout -->|"loads"| node_analytics
+node_layout -->|"hosts"| node_home
+node_layout -->|"hosts"| node_blog_index
+node_layout -->|"hosts"| node_blog_post
+node_home -->|"reads"| node_content_lib
+node_home -->|"renders"| node_hero
+node_home -->|"renders"| node_experience
+node_home -->|"renders"| node_projects
+node_home -->|"renders"| node_education
+node_home -->|"renders"| node_badges
+node_home -->|"renders"| node_volunteering
+node_home -->|"renders"| node_heatmap
+node_content_lib -->|"loads"| node_site_content
+node_blog_index -->|"reads"| node_blog_lib
+node_blog_post -->|"reads"| node_blog_lib
+node_blog_post -->|"uses"| node_blog_ui
+node_blog_index -->|"uses"| node_seo
+node_blog_post -->|"uses"| node_seo
+node_blog_post -->|"sources"| node_blog_content
+node_sitemap -->|"indexes"| node_public_surface
+node_public_surface -->|"contains"| node_well_known
+node_public_surface -->|"contains"| node_admin
+node_admin -.->|"edits via"| node_content_lib
+node_edge_md -->|"negotiates"| node_blog_lib
+node_netlify_cfg -->|"enables"| node_edge_md
+node_netlify_cfg -->|"serves"| node_public_surface
 
-node_node_layout -->|"wraps"| node_node_theme
-node_node_layout -->|"publishes"| node_node_seo
-node_node_layout -->|"registers"| node_node_webmcp
-node_node_home -->|"renders"| node_node_hero
-node_node_home -->|"composes"| node_node_sections
-node_node_home -->|"loads"| node_node_content_lib
-node_node_blog_index -->|"queries"| node_node_blog_lib
-node_node_blog_post -->|"reads"| node_node_blog_lib
-node_node_blog_post -->|"annotates"| node_node_seo
-node_node_blog_lib -->|"parses"| node_node_blog_content
-node_node_content_lib -->|"loads"| node_node_site_data
-node_node_content_lib -->|"loads"| node_node_experience_data
-node_node_content_lib -->|"loads"| node_node_projects_data
-node_node_content_lib -->|"loads"| node_node_education_data
-node_node_content_lib -->|"loads"| node_node_badges_data
-node_node_content_lib -->|"loads"| node_node_volunteer_data
-node_node_sections -->|"shows"| node_node_experience_data
-node_node_sections -->|"shows"| node_node_projects_data
-node_node_sections -->|"shows"| node_node_education_data
-node_node_sections -->|"shows"| node_node_badges_data
-node_node_sections -->|"shows"| node_node_volunteer_data
-node_node_motion -->|"animates"| node_node_home
-node_node_theme -->|"affects"| node_node_home
-node_node_public -->|"serves"| node_node_layout
-node_node_public -->|"hosts"| node_node_wellknown
-node_node_build -->|"targets"| node_node_layout
-node_node_build -->|"configures"| node_node_markdown
-node_node_ci -->|"checks"| node_node_build
-
-click node_node_layout "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/layout.tsx"
-click node_node_home "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/page.tsx"
-click node_node_blog_index "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/blog/page.tsx"
-click node_node_blog_post "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/blog/[slug]/page.tsx"
-click node_node_content_lib "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/lib/content.ts"
-click node_node_blog_lib "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/lib/blog.ts"
-click node_node_site_data "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/content/site/hero.json"
-click node_node_experience_data "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/content/experience/cyan-group.json"
-click node_node_projects_data "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/content/projects/stocks-etl.json"
-click node_node_education_data "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/content/education/bachelors.json"
-click node_node_badges_data "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/content/badges/data-analyst-ibm.json"
-click node_node_volunteer_data "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/content/volunteering/ieee.json"
-click node_node_blog_content "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/content/blog/building-etl-pipelines.md"
-click node_node_hero "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/Hero.tsx"
-click node_node_sections "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/ExperienceSection.tsx"
-click node_node_motion "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/AnimatedSection.tsx"
-click node_node_theme "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/ThemeProvider.tsx"
-click node_node_seo "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/public/robots.txt"
-click node_node_public "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/public/admin/index.html"
-click node_node_wellknown "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/public/.well-known/api-catalog"
-click node_node_webmcp "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/layout.tsx"
-click node_node_markdown "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/netlify/edge-functions/markdown-negotiation.ts"
-click node_node_build "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/netlify.toml"
-click node_node_ci "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/.github/workflows/lint.yml"
+click node_layout "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/layout.tsx"
+click node_home "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/page.tsx"
+click node_blog_index "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/blog/page.tsx"
+click node_blog_post "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/blog/[slug]/page.tsx"
+click node_sitemap "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/sitemap.ts"
+click node_content_lib "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/lib/content.ts"
+click node_blog_lib "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/lib/blog.ts"
+click node_theme "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/ThemeProvider.tsx"
+click node_hero "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/Hero.tsx"
+click node_experience "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/ExperienceSection.tsx"
+click node_projects "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/ProjectsSection.tsx"
+click node_education "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/EducationSection.tsx"
+click node_badges "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/BadgesSection.tsx"
+click node_volunteering "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/VolunteeringSection.tsx"
+click node_heatmap "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/GithubHeatmapSection.tsx"
+click node_blog_ui "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/ReadingProgress.tsx"
+click node_seo "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/JsonLd.tsx"
+click node_analytics "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/Analytics.tsx"
+click node_site_content "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/content/site/hero.json"
+click node_blog_content "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/content/blog/building-etl-pipelines.md"
+click node_public_surface "https://github.com/ahmed-abdelwahed1/personal-website/tree/main/public"
+click node_well_known "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/public/.well-known"
+click node_admin "https://github.com/ahmed-abdelwahed1/personal-website/tree/main/public/admin"
+click node_edge_md "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/netlify/edge-functions/markdown-negotiation.ts"
+click node_netlify_cfg "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/netlify.toml"
 
 classDef toneNeutral fill:#f8fafc,stroke:#334155,stroke-width:1.5px,color:#0f172a
 classDef toneBlue fill:#dbeafe,stroke:#2563eb,stroke-width:1.5px,color:#172554
@@ -173,13 +171,11 @@ classDef toneMint fill:#dcfce7,stroke:#16a34a,stroke-width:1.5px,color:#14532d
 classDef toneRose fill:#ffe4e6,stroke:#e11d48,stroke-width:1.5px,color:#881337
 classDef toneIndigo fill:#e0e7ff,stroke:#4f46e5,stroke-width:1.5px,color:#312e81
 classDef toneTeal fill:#ccfbf1,stroke:#0f766e,stroke-width:1.5px,color:#134e4a
-classDef tonePurple fill:#ede9fe,stroke:#7c3aed,stroke-width:1.5px,color:#4c1d95
-class node_node_layout,node_node_home,node_node_blog_index,node_node_blog_post,node_node_seo toneBlue
-class node_node_content_lib,node_node_blog_lib,node_node_site_data,node_node_experience_data,node_node_projects_data,node_node_education_data,node_node_badges_data,node_node_volunteer_data,node_node_blog_content toneAmber
-class node_node_hero,node_node_sections,node_node_motion,node_node_theme toneMint
-class node_node_public toneRose
-class node_node_wellknown,node_node_webmcp,node_node_markdown tonePurple
-class node_node_build,node_node_ci toneIndigo
+class node_layout,node_home,node_blog_index,node_blog_post,node_sitemap,node_content_lib,node_blog_lib toneBlue
+class node_theme,node_hero,node_experience,node_projects,node_education,node_badges,node_volunteering,node_heatmap,node_blog_ui,node_seo,node_analytics toneAmber
+class node_site_content,node_blog_content toneMint
+class node_public_surface,node_well_known,node_admin toneRose
+class node_edge_md,node_netlify_cfg toneIndigo
 ```
 
 ## Contact
