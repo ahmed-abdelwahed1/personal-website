@@ -18,6 +18,7 @@ This project is built with Next.js App Router and TypeScript, with content sourc
 - Accessible light and dark theme toggle
 - SEO support with sitemap, robots metadata, Open Graph, and JSON-LD
 - Motion-enhanced interactions using Framer Motion
+- Agent-ready: AI agent discovery, content negotiation, and WebMCP tool exposure
 
 ## Dashboard Preview
 
@@ -33,6 +34,37 @@ This project is built with Next.js App Router and TypeScript, with content sourc
 - Theming: [next-themes](https://github.com/pacocoursey/next-themes)
 - Deployment: [Netlify](https://www.netlify.com/)
 
+## Agent Readiness
+
+This site implements the [IsAgentReady](https://isitagentready.com/) specification, making it fully discoverable and accessible to AI agents.
+
+### Discovery Endpoints
+
+| Endpoint | Purpose | Spec |
+|----------|---------|------|
+| `/.well-known/api-catalog` | API catalog for automated discovery | [RFC 9727](https://www.rfc-editor.org/rfc/rfc9727) |
+| `/.well-known/agent-skills/index.json` | Agent skills discovery index | [Agent Skills Discovery v0.2.0](https://github.com/cloudflare/agent-skills-discovery-rfc) |
+| `/.well-known/mcp/server-card.json` | MCP Server Card for agent discovery | [SEP-1649](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/2127) |
+| `/.well-known/openid-configuration` | OAuth/OIDC discovery metadata | [OpenID Connect Discovery](http://openid.net/specs/openid-connect-discovery-1_0.html) |
+| `/.well-known/oauth-protected-resource` | OAuth Protected Resource metadata | [RFC 9728](https://www.rfc-editor.org/rfc/rfc9728) |
+
+### Content Accessibility
+
+- **Markdown Negotiation**: Requests with `Accept: text/markdown` return a markdown version of any HTML page via a Netlify Edge Function. Response includes `Content-Type: text/markdown` and `x-markdown-tokens` headers.
+- **Content Signals**: `robots.txt` includes `Content-Signal: ai-train=no, search=yes, ai-input=no` per the [Content Signals](https://contentsignals.org/) specification.
+- **Link Headers**: Homepage returns `Link` response headers (per [RFC 8288](https://www.rfc-editor.org/rfc/rfc8288)) pointing to `api-catalog`, `agent-skills`, and `sitemap.xml`.
+
+### WebMCP Tools
+
+The site exposes tools to AI agents via the browser using the [WebMCP API](https://webmachinelearning.github.io/webmcp/):
+
+| Tool | Description |
+|------|-------------|
+| `navigate-to-section` | Scroll to a named section (hero, experience, projects, etc.) |
+| `get-contact-info` | Extract public contact information and social links |
+| `list-blog-posts` | List visible blog post titles, dates, and URLs |
+
+
 ## Architecture Diagram
 
 ```mermaid
@@ -43,7 +75,7 @@ subgraph group_group_app["App Router"]
   node_node_home["Homepage<br/>route<br/>[page.tsx]"]
   node_node_blog_index["Blog Index<br/>route<br/>[page.tsx]"]
   node_node_blog_post["Blog Post<br/>dynamic route<br/>[page.tsx]"]
-  node_node_seo["SEO<br/>structured data<br/>[robots.ts]"]
+  node_node_seo["SEO<br/>structured data<br/>[robots.txt]"]
 end
 
 subgraph group_group_content["Content"]
@@ -69,6 +101,12 @@ subgraph group_group_public["Public Assets"]
   node_node_public["Static Assets<br/>public files<br/>[index.html]"]
 end
 
+subgraph group_group_agent["Agent Readiness"]
+  node_node_wellknown["Well-Known<br/>discovery endpoints<br/>[api-catalog, agent-skills]"]
+  node_node_webmcp["WebMCP<br/>browser tools<br/>[layout.tsx]"]
+  node_node_markdown["Markdown<br/>content negotiation<br/>[edge function]"]
+end
+
 subgraph group_group_ops["Ops"]
   node_node_build["Deploy Config<br/>hosting config<br/>[netlify.toml]"]
   node_node_ci["Lint CI<br/>workflow<br/>[lint.yml]"]
@@ -76,6 +114,7 @@ end
 
 node_node_layout -->|"wraps"| node_node_theme
 node_node_layout -->|"publishes"| node_node_seo
+node_node_layout -->|"registers"| node_node_webmcp
 node_node_home -->|"renders"| node_node_hero
 node_node_home -->|"composes"| node_node_sections
 node_node_home -->|"loads"| node_node_content_lib
@@ -97,7 +136,9 @@ node_node_sections -->|"shows"| node_node_volunteer_data
 node_node_motion -->|"animates"| node_node_home
 node_node_theme -->|"affects"| node_node_home
 node_node_public -->|"serves"| node_node_layout
+node_node_public -->|"hosts"| node_node_wellknown
 node_node_build -->|"targets"| node_node_layout
+node_node_build -->|"configures"| node_node_markdown
 node_node_ci -->|"checks"| node_node_build
 
 click node_node_layout "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/layout.tsx"
@@ -117,8 +158,11 @@ click node_node_hero "https://github.com/ahmed-abdelwahed1/personal-website/blob
 click node_node_sections "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/ExperienceSection.tsx"
 click node_node_motion "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/AnimatedSection.tsx"
 click node_node_theme "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/components/ThemeProvider.tsx"
-click node_node_seo "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/robots.ts"
+click node_node_seo "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/public/robots.txt"
 click node_node_public "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/public/admin/index.html"
+click node_node_wellknown "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/public/.well-known/api-catalog"
+click node_node_webmcp "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/layout.tsx"
+click node_node_markdown "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/netlify/edge-functions/markdown-negotiation.ts"
 click node_node_build "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/netlify.toml"
 click node_node_ci "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/.github/workflows/lint.yml"
 
@@ -129,10 +173,12 @@ classDef toneMint fill:#dcfce7,stroke:#16a34a,stroke-width:1.5px,color:#14532d
 classDef toneRose fill:#ffe4e6,stroke:#e11d48,stroke-width:1.5px,color:#881337
 classDef toneIndigo fill:#e0e7ff,stroke:#4f46e5,stroke-width:1.5px,color:#312e81
 classDef toneTeal fill:#ccfbf1,stroke:#0f766e,stroke-width:1.5px,color:#134e4a
+classDef tonePurple fill:#ede9fe,stroke:#7c3aed,stroke-width:1.5px,color:#4c1d95
 class node_node_layout,node_node_home,node_node_blog_index,node_node_blog_post,node_node_seo toneBlue
 class node_node_content_lib,node_node_blog_lib,node_node_site_data,node_node_experience_data,node_node_projects_data,node_node_education_data,node_node_badges_data,node_node_volunteer_data,node_node_blog_content toneAmber
 class node_node_hero,node_node_sections,node_node_motion,node_node_theme toneMint
 class node_node_public toneRose
+class node_node_wellknown,node_node_webmcp,node_node_markdown tonePurple
 class node_node_build,node_node_ci toneIndigo
 ```
 
