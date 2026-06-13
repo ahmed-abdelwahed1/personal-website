@@ -1,0 +1,6 @@
+{
+  "order": 1,
+  "name": "Hevy Flow",
+  "description": "An end-to-end data pipeline for analyzing and visualizing Hevy App workout logs.",
+  "githubUrl": "https://github.com/ahmed-abdelwahed1/hevy-flow"
+}
