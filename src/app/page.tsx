@@ -9,8 +9,8 @@ import BlogSection from "@/components/BlogSection";
 import { loadJson, loadJsonDir } from "@/lib/content";
 import { getAllPosts } from "@/lib/blog";
 
-export default function Home() {
-  const hero = loadJson<{
+export default async function Home() {
+  const hero = await loadJson<{
     name: string;
     title: string;
     bio: string;
@@ -21,9 +21,9 @@ export default function Home() {
     x: string;
     medium: string;
     cvFile: string;
-  }>("content/site/hero.json");
+  }>("hero.json");
 
-  const experience = loadJsonDir<{
+  const experience = await loadJsonDir<{
     order: number;
     jobTitle: string;
     company: string;
@@ -32,36 +32,36 @@ export default function Home() {
     description: string;
     logo: string;
     isCrossedOut?: boolean;
-  }>("content/experience");
+  }>("experience");
 
-  const volunteering = loadJsonDir<{
+  const volunteering = await loadJsonDir<{
     order: number;
     role: string;
     organization: string;
     dateRange: string;
     description: string;
     logo: string;
-  }>("content/volunteering");
+  }>("volunteering");
 
-  const education = loadJsonDir<{
+  const education = await loadJsonDir<{
     order: number;
     degree: string;
     institution: string;
     dateRange: string;
-  }>("content/education");
+  }>("education");
 
-  const projects = loadJsonDir<{
+  const projects = await loadJsonDir<{
     order: number;
     name: string;
     description: string;
     githubUrl: string;
-  }>("content/projects");
+  }>("projects");
 
-  const badges = loadJsonDir<{
+  const badges = await loadJsonDir<{
     order: number;
     name: string;
     url: string;
-  }>("content/badges");
+  }>("badges");
 
   const allPosts = getAllPosts();
   const configuredHomeBlogPosts = Number.parseInt(
@@ -74,7 +74,9 @@ export default function Home() {
       : 3;
   const latestPosts = allPosts.slice(0, homeBlogPostsCount);
 
-  const githubUsername = hero.github ? hero.github.split("/").filter(Boolean).pop() : undefined;
+  const githubUsername = hero.github
+    ? hero.github.split("/").filter(Boolean).pop()
+    : undefined;
 
   return (
     <main>
@@ -83,13 +85,8 @@ export default function Home() {
       <VolunteeringSection items={volunteering} />
       <EducationSection items={education} />
       <ProjectsSection items={projects} />
-
-      {githubUsername && (
-        <GithubHeatmapSection username={githubUsername} />
-      )}
-
+      {githubUsername && <GithubHeatmapSection username={githubUsername} />}
       <BadgesSection items={badges} />
-
       <BlogSection posts={latestPosts} />
     </main>
   );
