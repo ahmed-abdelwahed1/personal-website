@@ -1,36 +1,21 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"main": ".open-next/worker.js",
 	"name": "personal-website",
 	"compatibility_date": "2026-06-27",
-	"compatibility_flags": [
-		"nodejs_compat",
-		"global_fetch_strictly_public"
-	],
+	"compatibility_flags": ["nodejs_compat"],
+	"main": ".open-next/worker.js",
 	"assets": {
 		"directory": ".open-next/assets",
 		"binding": "ASSETS"
 	},
-	"services": [
-		{
-			// Self-reference service binding, the service name must match the worker name
-			// see https://opennext.js.org/cloudflare/caching
-			"binding": "WORKER_SELF_REFERENCE",
-			"service": "personal-website"
-		}
-	],
-	"images": {
-		// Enable image optimization
-		// see https://opennext.js.org/cloudflare/howtos/image
-		"binding": "IMAGES"
-	},
 	"routes": [
 		{
 			"pattern": "ahmedabdelwahed.me",
-			"zone_name": "ahmedabdelwahed.me",
+			"custom_domain": true
+		},
+		{
+			"pattern": "www.ahmedabdelwahed.me",
 			"custom_domain": true
 		}
-	],
-	"workers_dev": false,
-	"preview_urls": false
+	]
 }
