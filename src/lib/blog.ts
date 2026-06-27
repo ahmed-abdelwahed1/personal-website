@@ -1,11 +1,16 @@
-import fs from "fs";
-import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
 import remarkGfm from "remark-gfm";
 
-const blogDirectory = path.join(process.cwd(), "content/blog");
+// Static imports — bundled at build time, compatible with Cloudflare Workers
+import howToEmailRaw from "@content/blog/how-to-create-a-free-professional-email-with-improvmx-and-gmail.md";
+import improveRuffRaw from "@content/blog/improve-python-code-quality-with-ruff.md";
+
+const blogFiles: Record<string, string> = {
+  "how-to-create-a-free-professional-email-with-improvmx-and-gmail": howToEmailRaw,
+  "improve-python-code-quality-with-ruff": improveRuffRaw,
+};
 
 function estimateReadingTime(text: string): number {
   const words = text.trim().split(/\s+/).length;
@@ -35,19 +40,9 @@ export interface BlogPost extends BlogPostMeta {
 }
 
 export function getAllPosts(): BlogPostMeta[] {
-  if (!fs.existsSync(blogDirectory)) {
-    return [];
-  }
-
-  const fileNames = fs.readdirSync(blogDirectory);
-  const posts = fileNames
-    .filter((fileName) => fileName.endsWith(".md"))
-    .map((fileName) => {
-      const slug = fileName.replace(/\.md$/, "");
-      const fullPath = path.join(blogDirectory, fileName);
-      const fileContents = fs.readFileSync(fullPath, "utf8");
-      const { data, content } = matter(fileContents);
-
+  return Object.entries(blogFiles)
+    .map(([slug, raw]) => {
+      const { data, content } = matter(raw);
       return {
         slug,
         title: data.title || "Untitled",
@@ -57,18 +52,16 @@ export function getAllPosts(): BlogPostMeta[] {
         tags: data.tags || [],
         readingTime: estimateReadingTime(content),
       };
-    });
-
-  return posts.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+    })
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+  const raw = blogFiles[slug];
+  if (!raw) return null;
+
   try {
-    const fullPath = path.join(blogDirectory, `${slug}.md`);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const { data, content } = matter(fileContents);
+    const { data, content } = matter(raw);
 
     const processedContent = await remark()
       .use(remarkGfm)
@@ -93,12 +86,5 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 }
 
 export function getAllPostSlugs(): string[] {
-  if (!fs.existsSync(blogDirectory)) {
-    return [];
-  }
-
-  return fs
-    .readdirSync(blogDirectory)
-    .filter((fileName) => fileName.endsWith(".md"))
-    .map((fileName) => fileName.replace(/\.md$/, ""));
+  return Object.keys(blogFiles);
 }
