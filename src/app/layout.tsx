@@ -5,6 +5,8 @@ import ThemeToggle from "@/components/ThemeToggle";
 import JsonLd from "@/components/JsonLd";
 import Analytics from "@/components/Analytics";
 import Footer from "@/components/Footer";
+import "blobatar/motion.css";
+import "blobatar/gaze.css";
 import "./globals.css";
 
 const SITE_URL = "https://ahmedabdelwahed.me";

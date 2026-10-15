@@ -3,6 +3,7 @@
 import { motion, type Variants } from "framer-motion";
 import { FaLinkedinIn, FaGithub, FaMediumM } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import Blobatar from "@/components/Blobatar";
 
 interface HeroData {
   name: string;
@@ -84,7 +85,11 @@ export default function Hero({ data }: { data: HeroData }) {
         animate="show"
       >
         <motion.h1 className="hero-name" variants={fadeUp}>
-          Hi, I&apos;m {data.name}
+          <span className="hero-greeting">Hi, I&apos;m</span>
+          <span className="hero-name-group">
+            <span className="hero-name-text">{data.name}</span>
+            <Blobatar name="Osmar" className="hero-name-blobatar" />
+          </span>
         </motion.h1>
 
         <motion.p className="hero-title" variants={fadeUp}>
