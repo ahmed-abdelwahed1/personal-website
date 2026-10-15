@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useCallback, useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 import { Blobatar as NativeBlobatar } from "@blobatar/react";
 import { useGaze } from "@blobatar/react/gaze";
@@ -27,7 +27,11 @@ export default function Blobatar({
   size,
   className = "",
 }: BlobatarProps) {
-  const [mounted, setMounted] = useState(false);
+  const isClient = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
   const [currentExpression, setCurrentExpression] = useState<Expression | undefined>(undefined);
   const [clickIndex, setClickIndex] = useState(0);
   const [isBouncing, setIsBouncing] = useState(false);
@@ -37,7 +41,6 @@ export default function Blobatar({
   const { ref } = useGaze({ travel: 3.8, lookAt: "pointer" });
 
   useEffect(() => {
-    setMounted(true);
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
@@ -73,7 +76,7 @@ export default function Blobatar({
 
   const sizeStyle = size ? ({ "--blobatar-size": `${size}px` } as React.CSSProperties) : undefined;
 
-  if (!mounted) {
+  if (!isClient) {
     return (
       <div
         className={`hero-blobatar-interactive ${className}`}
