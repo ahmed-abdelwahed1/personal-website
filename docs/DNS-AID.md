@@ -2,19 +2,35 @@
 
 This document provides the exact DNS records to publish under `ahmedabdelwahed.me` to satisfy **DNS-AID (DNS for AI Discovery)** per [IETF draft-mozleywilliams-dnsop-dnsaid](https://datatracker.ietf.org/doc/draft-mozleywilliams-dnsop-dnsaid/) and [RFC 9460](https://www.rfc-editor.org/rfc/rfc9460), as well as **ARD (Agentic Resource Discovery)** DNS-based discovery.
 
+Zone details for `ahmedabdelwahed.me`:
+- **Zone ID:** `8761d68f8c25e086d34ab31fe9404c9a`
+- **Authoritative Nameservers:** `bob.ns.cloudflare.com`, `demi.ns.cloudflare.com`
+
 ---
 
-## 1. Cloudflare DNS Records to Add
+## Quick Automation via Cloudflare API
 
-Log in to your **Cloudflare Dashboard** → select domain `ahmedabdelwahed.me` → navigate to **DNS** → **Records** → click **Add Record**:
+If you have a Cloudflare API token with `Zone -> DNS -> Edit` and `Zone -> DNSSEC -> Edit` permissions, you can publish all records and activate DNSSEC with a single command:
+
+```powershell
+$env:CLOUDFLARE_API_TOKEN="your_cloudflare_api_token"
+npm run publish:dns-aid
+```
+
+---
+
+## 1. Cloudflare Dashboard Manual Setup
+
+Log in to your **[Cloudflare Dashboard](https://dash.cloudflare.com/)** → select domain **`ahmedabdelwahed.me`** → navigate to **DNS** → **Records** → click **Add Record**:
 
 ### A. Primary DNS-AID Entrypoint Record (HTTPS / SVCB)
-- **Type:** `HTTPS` (or `SVCB` if preferred)
+*Required: Main DNS-AID discoverability entrypoint.*
+- **Type:** `HTTPS` (or `SVCB`)
 - **Name:** `_index._agents`
 - **Priority:** `1`
-- **Target:** `ahmedabdelwahed.me.` (or `.`)
-- **Parameters:** `alpn="h2,h3" port="443"`
-- **TTL:** Auto (or 3600)
+- **Target:** `ahmedabdelwahed.me`
+- **Value / Parameters:** `alpn="h2,h3" port=443`
+- **TTL:** `Auto` (or `3600`)
 - **Proxy status:** DNS only
 
 > **Standard BIND Zone Format:**
@@ -24,27 +40,46 @@ Log in to your **Cloudflare Dashboard** → select domain `ahmedabdelwahed.me` �
 
 ---
 
-### B. Agent-to-Agent (A2A) Discovery Record (Optional)
-- **Type:** `SVCB` (or `HTTPS`)
+### B. Agent-to-Agent (A2A) Discovery Record
+*Direct multi-agent coordination protocol entrypoint.*
+- **Type:** `HTTPS` (or `SVCB`)
 - **Name:** `_a2a._agents`
 - **Priority:** `1`
-- **Target:** `ahmedabdelwahed.me.`
-- **Parameters:** `alpn="a2a" port="443" mandatory="alpn,port"`
-- **TTL:** Auto (or 3600)
+- **Target:** `ahmedabdelwahed.me`
+- **Value / Parameters:** `alpn="a2a" port=443`
+- **TTL:** `Auto` (or `3600`)
 - **Proxy status:** DNS only
 
 > **Standard BIND Zone Format:**
 > ```dns
-> _a2a._agents.ahmedabdelwahed.me. 3600 IN SVCB 1 ahmedabdelwahed.me. alpn="a2a" port=443 mandatory=alpn,port
+> _a2a._agents.ahmedabdelwahed.me. 3600 IN HTTPS 1 ahmedabdelwahed.me. alpn="a2a" port=443
 > ```
 
 ---
 
-### C. ARD Capability Catalog Discovery Record (TXT)
+### C. Model Context Protocol (MCP) Discovery Record
+*Direct MCP agent tools entrypoint.*
+- **Type:** `HTTPS` (or `SVCB`)
+- **Name:** `_mcp._agents`
+- **Priority:** `1`
+- **Target:** `ahmedabdelwahed.me`
+- **Value / Parameters:** `alpn="mcp" port=443`
+- **TTL:** `Auto` (or `3600`)
+- **Proxy status:** DNS only
+
+> **Standard BIND Zone Format:**
+> ```dns
+> _mcp._agents.ahmedabdelwahed.me. 3600 IN HTTPS 1 ahmedabdelwahed.me. alpn="mcp" port=443
+> ```
+
+---
+
+### D. ARD Capability Catalog Discovery Record (TXT)
+*Points agents directly to your ARD catalog.*
 - **Type:** `TXT`
 - **Name:** `_catalog._agents`
 - **Content:** `url=https://ahmedabdelwahed.me/.well-known/ai-catalog.json`
-- **TTL:** Auto (or 3600)
+- **TTL:** `Auto` (or `3600`)
 - **Proxy status:** DNS only
 
 > **Standard BIND Zone Format:**
@@ -54,38 +89,78 @@ Log in to your **Cloudflare Dashboard** → select domain `ahmedabdelwahed.me` �
 
 ---
 
-## 2. DNSSEC Activation
+## 2. Cloudflare API cURL Commands (Alternative)
 
-To ensure validating resolvers return authenticated data:
-1. In Cloudflare Dashboard, go to **DNS** → **Settings**.
-2. Scroll to the **DNSSEC** card.
-3. Click **Enable DNSSEC**.
-4. Copy the generated DS record parameters (`Key Tag`, `Algorithm`, `Digest Type`, `Digest`) into your domain registrar's DNSSEC management page (e.g. Namecheap, Porkbun, Google Domains/Squarespace).
+You can also create these records directly using curl:
+
+```bash
+# 1. Primary _index._agents HTTPS record
+curl -X POST "https://api.cloudflare.com/client/v4/zones/8761d68f8c25e086d34ab31fe9404c9a/dns_records" \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"type":"HTTPS","name":"_index._agents.ahmedabdelwahed.me","ttl":3600,"proxied":false,"data":{"priority":1,"target":"ahmedabdelwahed.me","value":"alpn=\"h2,h3\" port=443"}}'
+
+# 2. _a2a._agents HTTPS record
+curl -X POST "https://api.cloudflare.com/client/v4/zones/8761d68f8c25e086d34ab31fe9404c9a/dns_records" \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"type":"HTTPS","name":"_a2a._agents.ahmedabdelwahed.me","ttl":3600,"proxied":false,"data":{"priority":1,"target":"ahmedabdelwahed.me","value":"alpn=\"a2a\" port=443"}}'
+
+# 3. _mcp._agents HTTPS record
+curl -X POST "https://api.cloudflare.com/client/v4/zones/8761d68f8c25e086d34ab31fe9404c9a/dns_records" \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"type":"HTTPS","name":"_mcp._agents.ahmedabdelwahed.me","ttl":3600,"proxied":false,"data":{"priority":1,"target":"ahmedabdelwahed.me","value":"alpn=\"mcp\" port=443"}}'
+
+# 4. _catalog._agents TXT record
+curl -X POST "https://api.cloudflare.com/client/v4/zones/8761d68f8c25e086d34ab31fe9404c9a/dns_records" \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"type":"TXT","name":"_catalog._agents.ahmedabdelwahed.me","ttl":3600,"proxied":false,"content":"url=https://ahmedabdelwahed.me/.well-known/ai-catalog.json"}'
+```
 
 ---
 
-## 3. Cloudflare "Markdown for Agents" Toggle (Edge-Level)
+## 3. DNSSEC Activation
 
-Cloudflare offers an edge-level toggle for Markdown for Agents:
-1. In Cloudflare Dashboard, go to **Speed** or **Workers / AI** (or **Rules**).
-2. Look for **Markdown for Agents** and switch it to **Enabled**.
-*(Note: Application-level markdown negotiation is also handled automatically via `src/middleware.ts` for full dual-coverage).*
+The DNS-AID specification requires signing the discovery zone with DNSSEC so validating resolvers return authenticated data (`AD=true`):
+
+1. In Cloudflare Dashboard, go to **DNS** → **Settings**.
+2. Scroll to the **DNSSEC** card.
+3. Click **Enable DNSSEC**.
+4. Cloudflare generates DS record parameters:
+   - **Key Tag**
+   - **Algorithm** (usually `13` - ECDSAP256SHA256)
+   - **Digest Type** (usually `2` - SHA-256)
+   - **Digest**
+5. Log in to the domain registrar where `ahmedabdelwahed.me` was registered (e.g., Namecheap, Porkbun, Dynadot, GoDaddy, etc.).
+6. Go to the domain's **DNSSEC** or **DS Records** management section and paste the 4 parameters from Cloudflare.
+7. Save changes. It typically propagates to `.me` root resolvers within 10–60 minutes.
 
 ---
 
 ## 4. Verification
 
-After publishing your DNS records, verify them using DoH (DNS-over-HTTPS) or `dig`:
+Run the built-in audit script to check your records and DNSSEC authentication:
+
+```bash
+npm run verify:dns-aid
+```
+
+Or verify manually using DNS-over-HTTPS:
 
 ```bash
 # Verify DNS-AID HTTPS record
-curl -s -H "accept: application/dns-json" "https://cloudflare-dns.com/dns-query?name=_index._agents.ahmedabdelwahed.me&type=HTTPS"
+curl -s -H "accept: application/dns-json" "https://cloudflare-dns.com/dns-query?name=_index._agents.ahmedabdelwahed.me&type=HTTPS&do=1"
 
 # Verify ARD catalog TXT record
 curl -s -H "accept: application/dns-json" "https://cloudflare-dns.com/dns-query?name=_catalog._agents.ahmedabdelwahed.me&type=TXT"
+
+# Verify DNSSEC validation
+curl -s -H "accept: application/dns-json" "https://cloudflare-dns.com/dns-query?name=ahmedabdelwahed.me&type=DS&do=1"
 ```
 
-Then re-run the agent readiness scan:
+Once propagated, re-run the agent readiness scan:
 ```bash
 curl -X POST https://isitagentready.com/api/scan \
   -H "Content-Type: application/json" \
