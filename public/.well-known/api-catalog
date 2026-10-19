@@ -7,13 +7,28 @@
           "href": "https://ahmedabdelwahed.me/",
           "type": "text/html",
           "title": "Ahmed Abdelwahed — Personal Portfolio & Blog"
+        },
+        {
+          "href": "https://ahmedabdelwahed.me/auth.md",
+          "type": "text/markdown",
+          "title": "Agent Authorization (Auth.md)"
         }
       ],
       "service-desc": [
         {
+          "href": "https://ahmedabdelwahed.me/.well-known/ai-catalog.json",
+          "type": "application/json",
+          "title": "ARD Capability Catalog"
+        },
+        {
           "href": "https://ahmedabdelwahed.me/sitemap.xml",
           "type": "application/xml",
           "title": "Sitemap"
+        },
+        {
+          "href": "https://ahmedabdelwahed.me/.well-known/mcp/server-card.json",
+          "type": "application/mcp-server-card+json",
+          "title": "MCP Server Card"
         }
       ],
       "status": [

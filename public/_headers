@@ -1,4 +1,34 @@
 # https://developers.cloudflare.com/workers/static-assets/headers
 # https://opennext.js.org/cloudflare/caching#static-assets-caching
+
 /_next/static/*
   Cache-Control: public,max-age=31536000,immutable
+
+/*
+  Link: </.well-known/ai-catalog.json>; rel="api-catalog", </.well-known/api-catalog>; rel="api-catalog", </.well-known/oauth-protected-resource>; rel="service-desc", </auth.md>; rel="service-doc", </.well-known/agent-skills/index.json>; rel="service-desc", </sitemap.xml>; rel="service-desc"
+
+/.well-known/ai-catalog.json
+  Access-Control-Allow-Origin: *
+  Content-Type: application/json; charset=utf-8
+
+/.well-known/api-catalog
+  Access-Control-Allow-Origin: *
+  Content-Type: application/json; charset=utf-8
+
+/.well-known/oauth-protected-resource
+  Access-Control-Allow-Origin: *
+  Content-Type: application/json; charset=utf-8
+
+/.well-known/oauth-authorization-server
+  Access-Control-Allow-Origin: *
+  Content-Type: application/json; charset=utf-8
+
+/.well-known/mcp/*
+  Access-Control-Allow-Origin: *
+
+/.well-known/agent-skills/*
+  Access-Control-Allow-Origin: *
+
+/auth.md
+  Access-Control-Allow-Origin: *
+  Content-Type: text/markdown; charset=utf-8

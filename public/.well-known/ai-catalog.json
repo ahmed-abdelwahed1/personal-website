@@ -1,0 +1,41 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Ahmed Abdelwahed",
+    "identifier": "did:web:ahmedabdelwahed.me"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:ahmedabdelwahed.me:server:portfolio-mcp",
+      "displayName": "Portfolio MCP Server",
+      "type": "application/mcp-server-card+json",
+      "url": "https://ahmedabdelwahed.me/.well-known/mcp/server-card.json",
+      "representativeQueries": [
+        "get Ahmed Abdelwahed portfolio information",
+        "find Ahmed Abdelwahed projects and skills",
+        "fetch resume and contact details for Ahmed Abdelwahed"
+      ]
+    },
+    {
+      "identifier": "urn:air:ahmedabdelwahed.me:skill:portfolio-info",
+      "displayName": "Portfolio Info Agent Skill",
+      "type": "text/markdown",
+      "url": "https://ahmedabdelwahed.me/.well-known/agent-skills/portfolio-info/SKILL.md",
+      "representativeQueries": [
+        "read Ahmed Abdelwahed background and experience",
+        "get blog posts and data engineering projects",
+        "how to contact Ahmed Abdelwahed"
+      ]
+    },
+    {
+      "identifier": "urn:air:ahmedabdelwahed.me:catalog:api-catalog",
+      "displayName": "RFC 9727 API Catalog",
+      "type": "application/linkset+json",
+      "url": "https://ahmedabdelwahed.me/.well-known/api-catalog",
+      "representativeQueries": [
+        "discover endpoints and feeds on ahmedabdelwahed.me",
+        "list available sitemaps and services"
+      ]
+    }
+  ]
+}
