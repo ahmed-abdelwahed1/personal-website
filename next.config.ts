@@ -35,7 +35,7 @@ const nextConfig: NextConfig = {
         {
           key: "Link",
           value:
-            '</.well-known/ai-catalog.json>; rel="api-catalog", </.well-known/api-catalog>; rel="api-catalog", </.well-known/oauth-protected-resource>; rel="service-desc", </auth.md>; rel="service-doc", </.well-known/agent-skills/index.json>; rel="service-desc", </sitemap.xml>; rel="service-desc"',
+            '</.well-known/ai-catalog.json>; rel="api-catalog", </.well-known/api-catalog>; rel="api-catalog", </.well-known/oauth-protected-resource>; rel="service-desc", </auth.md>; rel="service-doc", </.well-known/agent-skills/index.json>; rel="service-desc", </sitemap.xml>; rel="service-desc", </.well-known/poppy.json>; rel="service-desc"',
         },
       ],
     },

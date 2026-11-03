@@ -95,6 +95,7 @@ export default function RootLayout({
         <link rel="api-catalog" href="/.well-known/api-catalog" />
         <link rel="ai-catalog" href="/.well-known/ai-catalog.json" />
         <link rel="service-desc" href="/.well-known/oauth-protected-resource" />
+        <link rel="service-desc" href="/.well-known/poppy.json" />
         <link rel="service-doc" href="/auth.md" />
       </head>
       <body suppressHydrationWarning>

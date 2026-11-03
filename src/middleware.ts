@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { getMarkdownResponseForPath, estimateTokens } from "@/lib/agent-markdown";
 
 const LINK_HEADER_VALUE =
-  '</.well-known/ai-catalog.json>; rel="api-catalog", </.well-known/api-catalog>; rel="api-catalog", </.well-known/oauth-protected-resource>; rel="service-desc", </auth.md>; rel="service-doc", </.well-known/agent-skills/index.json>; rel="service-desc", </sitemap.xml>; rel="service-desc"';
+  '</.well-known/ai-catalog.json>; rel="api-catalog", </.well-known/api-catalog>; rel="api-catalog", </.well-known/oauth-protected-resource>; rel="service-desc", </auth.md>; rel="service-doc", </.well-known/agent-skills/index.json>; rel="service-desc", </sitemap.xml>; rel="service-desc", </.well-known/poppy.json>; rel="service-desc"';
 
 export function middleware(request: NextRequest) {
   const host = request.headers.get("host") || "";

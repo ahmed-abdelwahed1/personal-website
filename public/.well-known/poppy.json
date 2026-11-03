@@ -1,0 +1,11 @@
+{
+  "protocol_version": "0.1",
+  "organization": {
+    "name": "Ahmed Abdelwahed",
+    "domain": "ahmedabdelwahed.me"
+  },
+  "auth": {
+    "issuer": "https://ahmedabdelwahed.me"
+  },
+  "web": {}
+}

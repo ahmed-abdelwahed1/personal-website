@@ -6,6 +6,16 @@
   },
   "entries": [
     {
+      "identifier": "urn:air:ahmedabdelwahed.me:protocol:poppy",
+      "displayName": "Personal Agent Protocol (Poppy) Discovery",
+      "type": "application/json",
+      "url": "https://ahmedabdelwahed.me/.well-known/poppy.json",
+      "representativeQueries": [
+        "discover personal agent protocol capabilities",
+        "interact with Ahmed Abdelwahed website via personal agents"
+      ]
+    },
+    {
       "identifier": "urn:air:ahmedabdelwahed.me:server:portfolio-mcp",
       "displayName": "Portfolio MCP Server",
       "type": "application/mcp-server-card+json",

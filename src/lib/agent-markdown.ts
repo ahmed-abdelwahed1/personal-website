@@ -117,6 +117,7 @@ export function getHomepageMarkdown(): string {
 
 ## Machine-Readable Agent Resources
 
+- **Personal Agent Protocol (Poppy):** https://ahmedabdelwahed.me/.well-known/poppy.json
 - **Capability Catalog (ARD):** https://ahmedabdelwahed.me/.well-known/ai-catalog.json
 - **API Catalog (RFC 9727):** https://ahmedabdelwahed.me/.well-known/api-catalog
 - **Agent Skill (SKILL.md):** https://ahmedabdelwahed.me/.well-known/agent-skills/portfolio-info/SKILL.md

@@ -16,6 +16,11 @@
       ],
       "service-desc": [
         {
+          "href": "https://ahmedabdelwahed.me/.well-known/poppy.json",
+          "type": "application/json",
+          "title": "Personal Agent Protocol (Poppy) Manifest"
+        },
+        {
           "href": "https://ahmedabdelwahed.me/.well-known/ai-catalog.json",
           "type": "application/json",
           "title": "ARD Capability Catalog"

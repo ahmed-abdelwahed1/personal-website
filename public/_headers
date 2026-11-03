@@ -5,7 +5,11 @@
   Cache-Control: public,max-age=31536000,immutable
 
 /*
-  Link: </.well-known/ai-catalog.json>; rel="api-catalog", </.well-known/api-catalog>; rel="api-catalog", </.well-known/oauth-protected-resource>; rel="service-desc", </auth.md>; rel="service-doc", </.well-known/agent-skills/index.json>; rel="service-desc", </sitemap.xml>; rel="service-desc"
+  Link: </.well-known/ai-catalog.json>; rel="api-catalog", </.well-known/api-catalog>; rel="api-catalog", </.well-known/oauth-protected-resource>; rel="service-desc", </auth.md>; rel="service-doc", </.well-known/agent-skills/index.json>; rel="service-desc", </sitemap.xml>; rel="service-desc", </.well-known/poppy.json>; rel="service-desc"
+
+/.well-known/poppy.json
+  Access-Control-Allow-Origin: *
+  Content-Type: application/json; charset=utf-8
 
 /.well-known/ai-catalog.json
   Access-Control-Allow-Origin: *
