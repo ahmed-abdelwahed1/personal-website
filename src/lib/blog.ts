@@ -6,8 +6,10 @@ import remarkGfm from "remark-gfm";
 // Static imports — bundled at build time, compatible with Cloudflare Workers
 import howToEmailRaw from "@content/blog/how-to-create-a-free-professional-email-with-improvmx-and-gmail.md";
 import improveRuffRaw from "@content/blog/improve-python-code-quality-with-ruff.md";
+import buildingEtlRaw from "@content/blog/building-etl-pipelines.md";
 
 const blogFiles: Record<string, string> = {
+  "building-etl-pipelines": buildingEtlRaw,
   "how-to-create-a-free-professional-email-with-improvmx-and-gmail": howToEmailRaw,
   "improve-python-code-quality-with-ruff": improveRuffRaw,
 };

@@ -32,7 +32,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
         <AnimatedSection variant="fade">
           <div className="section-header">
             <h2 className="section-title">Blog</h2>
-            <Link href="/blog" className="btn btn-primary btn-sm">
+            <Link href="/blog/" className="btn btn-primary btn-sm">
               View all posts
             </Link>
           </div>
@@ -46,7 +46,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
               variant="scale"
             >
               <Link
-                href={`/blog/${post.slug}`}
+                href={`/blog/${post.slug}/`}
                 className="blog-listing-card-link"
               >
                 <article className="card blog-card">

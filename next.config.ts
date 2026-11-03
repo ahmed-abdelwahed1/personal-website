@@ -18,6 +18,16 @@ const nextConfig: NextConfig = {
       "@content": "./content",
     },
   },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.ahmedabdelwahed.me" }],
+        destination: "https://ahmedabdelwahed.me/:path*",
+        permanent: true,
+      },
+    ];
+  },
   headers: async () => [
     {
       source: "/:path*",

@@ -56,7 +56,7 @@ export default function BlogPage() {
           {posts.map((post) => (
             <Link
               key={post.slug}
-              href={`/blog/${post.slug}`}
+              href={`/blog/${post.slug}/`}
               className="blog-listing-card-link"
             >
               <article className="card blog-card">

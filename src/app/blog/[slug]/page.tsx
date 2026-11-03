@@ -90,7 +90,7 @@ export default async function BlogPostPage({
       <BlogPostTracker title={post.title} slug={slug} />
       <article className="blog-post">
         <nav className="blog-post-nav">
-          <Link href="/blog" className="blog-post-back">
+          <Link href="/blog/" className="blog-post-back">
             <FaArrowLeft /> Back to blog
           </Link>
         </nav>
@@ -135,7 +135,7 @@ export default async function BlogPostPage({
 
         <footer className="blog-post-footer">
           <div className="blog-post-divider" />
-          <Link href="/blog" className="blog-post-back">
+          <Link href="/blog/" className="blog-post-back">
             <FaArrowLeft /> All posts
           </Link>
         </footer>

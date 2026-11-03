@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     "ETL Pipelines",
     "Data Architecture",
   ],
-  authors: [{ name: FULL_NAME, url: SITE_URL }],
+  authors: [{ name: FULL_NAME, url: `${SITE_URL}/` }],
   creator: FULL_NAME,
   publisher: FULL_NAME,
   robots: {
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: SITE_URL,
+    url: `${SITE_URL}/`,
     siteName: FULL_NAME,
     title: `${FULL_NAME} — Data Engineer`,
     description:
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     creator: "@BinShehata",
   },
   alternates: {
-    canonical: SITE_URL,
+    canonical: `${SITE_URL}/`,
   },
   icons: {
     icon: "/icon.svg",
@@ -115,7 +115,7 @@ export default function RootLayout({
               window.netlifyIdentity.on("init", function(user) {
                 if (!user) {
                   window.netlifyIdentity.on("login", function() {
-                    document.location.href = "/admin/";
+                    window.location.assign("/" + "admin" + "/");
                   });
                 }
               });

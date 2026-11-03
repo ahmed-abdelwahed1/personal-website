@@ -1,17 +1,24 @@
 import howToEmailRaw from "@content/blog/how-to-create-a-free-professional-email-with-improvmx-and-gmail.md";
 import improveRuffRaw from "@content/blog/improve-python-code-quality-with-ruff.md";
+import buildingEtlRaw from "@content/blog/building-etl-pipelines.md";
 
 const rawPosts: Record<string, { raw: string; title: string; date: string; excerpt: string }> = {
   "how-to-create-a-free-professional-email-with-improvmx-and-gmail": {
     raw: howToEmailRaw,
     title: "How to Create a Free Professional Email with ImprovMX and Gmail",
-    date: "2025-06-15",
+    date: "2026-04-05",
     excerpt: "Learn how to set up a free custom domain email address using ImprovMX and route messages seamlessly through your personal Gmail account.",
+  },
+  "building-etl-pipelines": {
+    raw: buildingEtlRaw,
+    title: "Building Robust ETL Pipelines with Python",
+    date: "2026-01-01",
+    excerpt: "A deep dive into how I automated data processing flows using Pandas and raw SQL optimization techniques.",
   },
   "improve-python-code-quality-with-ruff": {
     raw: improveRuffRaw,
     title: "Improve Python Code Quality with Ruff",
-    date: "2025-05-10",
+    date: "2025-01-08",
     excerpt: "Discover how Ruff replaces Flake8, Black, isort, and more with an extremely fast Rust-based linter and formatter.",
   },
 };
@@ -102,8 +109,9 @@ export function getHomepageMarkdown(): string {
 
 ## Blog Posts
 
-- [How to Create a Free Professional Email with ImprovMX and Gmail](https://ahmedabdelwahed.me/blog/how-to-create-a-free-professional-email-with-improvmx-and-gmail/) (2025-06-15)
-- [Improve Python Code Quality with Ruff](https://ahmedabdelwahed.me/blog/improve-python-code-quality-with-ruff/) (2025-05-10)
+- [How to Create a Free Professional Email with ImprovMX and Gmail](https://ahmedabdelwahed.me/blog/how-to-create-a-free-professional-email-with-improvmx-and-gmail/) (2026-04-05)
+- [Building Robust ETL Pipelines with Python](https://ahmedabdelwahed.me/blog/building-etl-pipelines/) (2026-01-01)
+- [Improve Python Code Quality with Ruff](https://ahmedabdelwahed.me/blog/improve-python-code-quality-with-ruff/) (2025-01-08)
 
 ---
 
@@ -128,12 +136,17 @@ Articles on data engineering, Python, ETL pipelines, and software development.
 ## Posts
 
 ### How to Create a Free Professional Email with ImprovMX and Gmail
-- **Date:** 2025-06-15
+- **Date:** 2026-04-05
 - **URL:** https://ahmedabdelwahed.me/blog/how-to-create-a-free-professional-email-with-improvmx-and-gmail/
 - **Excerpt:** Learn how to set up a free custom domain email address using ImprovMX and route messages seamlessly through your personal Gmail account.
 
+### Building Robust ETL Pipelines with Python
+- **Date:** 2026-01-01
+- **URL:** https://ahmedabdelwahed.me/blog/building-etl-pipelines/
+- **Excerpt:** A deep dive into how I automated data processing flows using Pandas and raw SQL optimization techniques.
+
 ### Improve Python Code Quality with Ruff
-- **Date:** 2025-05-10
+- **Date:** 2025-01-08
 - **URL:** https://ahmedabdelwahed.me/blog/improve-python-code-quality-with-ruff/
 - **Excerpt:** Discover how Ruff replaces Flake8, Black, isort, and more with an extremely fast Rust-based linter and formatter.
 `;

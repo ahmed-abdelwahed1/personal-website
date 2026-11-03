@@ -10,8 +10,6 @@ tags:
   - Data Engineering
 ---
 
-# Building Robust ETL Pipelines with Python
-
 Data pipelines are the backbone of modern data infrastructure. In this post, I'll walk you through how I built a robust ETL pipeline using Python, Pandas, and raw SQL.
 
 ## Why ETL Matters
