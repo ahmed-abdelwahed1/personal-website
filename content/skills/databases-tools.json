@@ -1,0 +1,5 @@
+{
+  "order": 3,
+  "category": "Databases, Libraries & Tools",
+  "items": ["PostgreSQL", "MySQL", "Supabase", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Next.js", "Git & GitHub", "Ubuntu Linux"]
+}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Space_Grotesk, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ThemeToggle from "@/components/ThemeToggle";
 import JsonLd from "@/components/JsonLd";
@@ -9,6 +10,20 @@ import "blobatar/motion.css";
 import "blobatar/gaze.css";
 import "./globals.css";
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-space-grotesk",
+});
+
+const ibmPlexArabic = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-ibm-plex-arabic",
+});
+
 const SITE_URL = "https://ahmedabdelwahed.me";
 const FULL_NAME = "Ahmed Shehata Said Abdelwahed";
 const DISPLAY_NAME = "Ahmed Abdelwahed";
@@ -16,25 +31,35 @@ const DISPLAY_NAME = "Ahmed Abdelwahed";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: DISPLAY_NAME,
+    default: `${DISPLAY_NAME} | Data Engineer — ${FULL_NAME}`,
     template: `%s — ${DISPLAY_NAME}`,
   },
   description:
-    "Data Engineer who designs systems, builds data pipelines, and turns ideas into working products. Specializing in data engineering, Python, ETL, AI-driven tools, and practical software.",
+    "Official portfolio of Ahmed Shehata Said Abdelwahed (Ahmed Abdelwahed / أحمد شحاتة سعيد عبدالواحد), Data Engineer at Cyan Group and former Data Engineering Intern at Volvo Cars. Specializing in Python, SQL, ETL pipelines, and data architecture.",
   keywords: [
-    "Ahmed Shehata Said Abdelwahed",
     "Ahmed Abdelwahed",
-    "Ahmed Shehata Abdelwahed",
-    "Ahmed Said Abdelwahed",
+    "Ahmed Shehata Said Abdelwahed",
     "Ahmed Shehata",
+    "Ahmed Said Abdelwahed",
+    "Ahmed Shehata Abdelwahed",
+    "Ahmed Abdel Wahed",
+    "Ahmed Abdelwahid",
     "Data Engineer",
-    "Data Engineering Portfolio",
-    "Python Developer",
-    "ETL Developer",
-    "Data Pipelines",
-    "AI Tools",
-    "Software Engineer",
-    "Data Engineer Portfolio",
+    "Ahmed Abdelwahed Data Engineer",
+    "Ahmed Abdelwahed Portfolio",
+    "Ahmed Abdelwahed Volvo",
+    "أحمد شحاته",
+    "أحمد شحاتة",
+    "أحمد شحاتة سعيد",
+    "أحمد شحاته سعيد عبدالواحد",
+    "أحمد شحاتة سعيد عبدالواحد",
+    "أحمد عبدالواحد",
+    "أحمد عبد الواحد",
+    "أحمد شحاتة عبدالواحد",
+    "أحمد سعيد عبدالواحد",
+    "مهندس بيانات",
+    "أحمد عبدالواحد مهندس بيانات",
+    "Python Data Engineer",
     "ETL Pipelines",
     "Data Architecture",
   ],
@@ -55,29 +80,36 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
+    alternateLocale: ["ar_EG"],
     url: `${SITE_URL}/`,
-    siteName: FULL_NAME,
-    title: `${FULL_NAME} — Data Engineer`,
+    siteName: DISPLAY_NAME,
+    title: `${DISPLAY_NAME} | Data Engineer — ${FULL_NAME}`,
     description:
-      "Data Engineer who designs systems, builds data pipelines, and turns ideas into working products. Specializing in Python, ETL, and AI-driven tools.",
+      "Official portfolio of Ahmed Shehata Said Abdelwahed (Ahmed Abdelwahed), Data Engineer specializing in Python, SQL, ETL pipelines, and data architecture.",
     images: [
       {
-        url: `${SITE_URL}/icon.svg`,
-        width: 512,
-        height: 512,
-        alt: FULL_NAME,
+        url: `${SITE_URL}/og-image.png`,
+        width: 1600,
+        height: 800,
+        alt: `${FULL_NAME} (${DISPLAY_NAME}) — Data Engineer`,
       },
     ],
   },
   twitter: {
-    card: "summary",
-    title: `${FULL_NAME} — Data Engineer`,
+    card: "summary_large_image",
+    title: `${DISPLAY_NAME} | Data Engineer — ${FULL_NAME}`,
     description:
-      "Data Engineer who designs systems, builds data pipelines, and turns ideas into working products.",
+      "Official portfolio of Ahmed Shehata Said Abdelwahed (Ahmed Abdelwahed), Data Engineer specializing in Python, SQL, ETL pipelines, and data architecture.",
     creator: "@BinShehata",
+    images: [`${SITE_URL}/og-image.png`],
   },
   alternates: {
     canonical: `${SITE_URL}/`,
+    languages: {
+      en: `${SITE_URL}/`,
+      ar: `${SITE_URL}/ar/`,
+      "x-default": `${SITE_URL}/`,
+    },
   },
   icons: {
     icon: "/icon.svg",
@@ -90,7 +122,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${ibmPlexArabic.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <link rel="api-catalog" href="/.well-known/api-catalog" />
         <link rel="ai-catalog" href="/.well-known/ai-catalog.json" />
@@ -113,28 +149,29 @@ export default function RootLayout({
 
               navigator.modelContext.registerTool({
                 name: "navigate-to-section",
-                description: "Scroll to a named section on the portfolio page. Available sections: hero, experience, volunteering, education, projects, github, badges, blog.",
+                description: "Scroll to a named section on the portfolio page. Available sections: hero, experience, skills, volunteering, education, projects, github, badges, blog.",
                 inputSchema: {
                   type: "object",
                   properties: {
                     section: {
                       type: "string",
                       description: "The section ID to navigate to",
-                      enum: ["hero", "experience", "volunteering", "education", "projects", "github", "badges", "blog"]
+                      enum: ["hero", "experience", "skills", "volunteering", "education", "projects", "github", "badges", "blog"]
                     }
                   },
                   required: ["section"]
                 },
                 execute: function(input) {
                   var sectionMap = {
-                    hero: "section-hero",
-                    experience: "section-experience",
-                    volunteering: "section-volunteering",
-                    education: "section-education",
-                    projects: "section-projects",
-                    github: "section-github",
-                    badges: "section-badges",
-                    blog: "section-blog"
+                    hero: "hero",
+                    experience: "experience",
+                    skills: "skills",
+                    volunteering: "volunteering",
+                    education: "education",
+                    projects: "projects",
+                    github: "github-contributions",
+                    badges: "badges",
+                    blog: "blog"
                   };
                   var id = sectionMap[input.section] || input.section;
                   var el = document.getElementById(id);
@@ -163,9 +200,9 @@ export default function RootLayout({
                     if (href.includes("github.com")) links.github = href;
                     if (href.includes("x.com") || href.includes("twitter.com")) links.x = href;
                     if (href.includes("medium.com")) links.medium = href;
-                    if (href.includes("CV.pdf")) links.cv = href;
+                    if (href.toLowerCase().includes("cv.pdf")) links.cv = href;
                   });
-                  links.name = "Ahmed Abdelwahed";
+                  links.name = "Ahmed Shehata Said Abdelwahed (Ahmed Abdelwahed)";
                   links.title = "Data Engineer";
                   return links;
                 }

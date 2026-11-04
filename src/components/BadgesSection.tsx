@@ -8,14 +8,22 @@ interface BadgeItem {
   url: string;
 }
 
-export default function BadgesSection({ items }: { items: BadgeItem[] }) {
+export default function BadgesSection({
+  items,
+  title = "Badges",
+  viewLabel = "View credential",
+}: {
+  items: BadgeItem[];
+  title?: string;
+  viewLabel?: string;
+}) {
   const sorted = [...items].sort((a, b) => a.order - b.order);
 
   return (
     <section className="section" id="badges">
       <div className="container">
         <AnimatedSection variant="fade">
-          <h2 className="section-title">Badges</h2>
+          <h2 className="section-title">{title}</h2>
         </AnimatedSection>
 
         <AnimatedSection delay={0.08} variant="slide">
@@ -28,8 +36,9 @@ export default function BadgesSection({ items }: { items: BadgeItem[] }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="badge-link"
+                  aria-label={`Verify ${badge.name} credential`}
                 >
-                  View
+                  {viewLabel}
                 </a>
               </div>
             ))}

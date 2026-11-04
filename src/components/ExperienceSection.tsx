@@ -16,8 +16,10 @@ interface ExperienceItem {
 
 export default function ExperienceSection({
   items,
+  title = "Experience",
 }: {
   items: ExperienceItem[];
+  title?: string;
 }) {
   const sorted = [...items].sort((a, b) => a.order - b.order);
 
@@ -25,13 +27,13 @@ export default function ExperienceSection({
     <section className="section" id="experience">
       <div className="container">
         <AnimatedSection variant="fade">
-          <h2 className="section-title">Experience</h2>
+          <h2 className="section-title">{title}</h2>
         </AnimatedSection>
 
         <div className="content-grid">
           {sorted.map((exp, index) => (
             <AnimatedSection
-              key={exp.company}
+              key={`${exp.company}-${exp.jobTitle}`}
               delay={index * 0.1}
               variant="rise"
             >
@@ -39,7 +41,7 @@ export default function ExperienceSection({
                 {exp.logo && (
                   <Image
                     src={exp.logo}
-                    alt={`${exp.company} logo`}
+                    alt={`${exp.company} logo — ${exp.jobTitle}`}
                     width={200}
                     height={40}
                     className="experience-logo"

@@ -1,9 +1,9 @@
 {
   "serverInfo": {
     "name": "ahmedabdelwahed-portfolio",
-    "version": "1.0.0",
-    "title": "Ahmed Abdelwahed — Portfolio & Blog",
-    "description": "Personal portfolio site of Ahmed Abdelwahed, Data Engineer. Browse experience, projects, education, and blog posts."
+    "version": "1.1.0",
+    "title": "Ahmed Abdelwahed (Ahmed Shehata Said Abdelwahed) — Portfolio & Blog",
+    "description": "Official portfolio site of Ahmed Shehata Said Abdelwahed (Ahmed Abdelwahed / أحمد عبدالواحد), Data Engineer. Browse experience, skills, projects, education, and blog posts."
   },
   "endpoint": "https://ahmedabdelwahed.me/",
   "capabilities": {
@@ -15,7 +15,12 @@
     {
       "name": "homepage",
       "uri": "https://ahmedabdelwahed.me/",
-      "description": "Portfolio homepage with experience, projects, education, and contact info"
+      "description": "Portfolio homepage (English) with experience, skills, projects, education, and contact info"
+    },
+    {
+      "name": "homepage-ar",
+      "uri": "https://ahmedabdelwahed.me/ar/",
+      "description": "Portfolio homepage (Arabic / العربية) for أحمد شحاتة سعيد عبدالواحد"
     },
     {
       "name": "blog",
@@ -29,7 +34,7 @@
     },
     {
       "name": "cv",
-      "uri": "https://ahmedabdelwahed.me/Ahmed%20Abdelwahed%20-%20CV.pdf",
+      "uri": "https://ahmedabdelwahed.me/ahmed-abdelwahed-cv.pdf",
       "description": "Downloadable CV/resume in PDF format"
     }
   ]

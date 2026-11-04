@@ -11,6 +11,9 @@ import stocksEtl from "@content/projects/stocks-etl.json";
 import dataAnalystIbm from "@content/badges/data-analyst-ibm.json";
 import databasesSqlIbm from "@content/badges/databases-sql-ibm.json";
 import pythonDsAiIbm from "@content/badges/python-ds-ai-ibm.json";
+import skillsLanguages from "@content/skills/languages.json";
+import skillsDataEngineering from "@content/skills/data-engineering.json";
+import skillsDatabasesTools from "@content/skills/databases-tools.json";
 
 const contentMap: Record<string, unknown[]> = {
   experience: [cyanGroup, freelanceGraphicDesigner, volvo],
@@ -18,6 +21,7 @@ const contentMap: Record<string, unknown[]> = {
   education: [bachelors],
   projects: [budge, hevyFlow, stocksEtl],
   badges: [dataAnalystIbm, databasesSqlIbm, pythonDsAiIbm],
+  skills: [skillsLanguages, skillsDataEngineering, skillsDatabasesTools],
 };
 
 const singleMap: Record<string, unknown> = {

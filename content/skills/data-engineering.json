@@ -1,0 +1,5 @@
+{
+  "order": 2,
+  "category": "Data Engineering & Architecture",
+  "items": ["ETL & ELT Pipelines", "Data Modeling", "Data Architecture", "Data Cleaning & Validation", "Exploratory Data Analysis (EDA)", "Data Visualization"]
+}

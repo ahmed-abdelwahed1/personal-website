@@ -12,8 +12,12 @@ interface ProjectItem {
 
 export default function ProjectsSection({
   items,
+  title = "Projects",
+  ctaLabel = "View on GitHub",
 }: {
   items: ProjectItem[];
+  title?: string;
+  ctaLabel?: string;
 }) {
   const sorted = [...items].sort((a, b) => a.order - b.order);
 
@@ -21,7 +25,7 @@ export default function ProjectsSection({
     <section className="section" id="projects">
       <div className="container">
         <AnimatedSection variant="fade">
-          <h2 className="section-title">Projects</h2>
+          <h2 className="section-title">{title}</h2>
         </AnimatedSection>
 
         <div className="content-grid">
@@ -39,8 +43,9 @@ export default function ProjectsSection({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary btn-sm github-btn"
+                  aria-label={`View ${project.name} source code on GitHub`}
                 >
-                  <FaGithub /> View on GitHub
+                  <FaGithub /> {ctaLabel}
                 </a>
               </div>
             </AnimatedSection>

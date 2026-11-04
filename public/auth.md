@@ -1,6 +1,6 @@
 # Ahmed Abdelwahed Portfolio — auth.md
 
-Welcome to the agent authorization and registration instructions for **Ahmed Abdelwahed's personal portfolio & blog** (`https://ahmedabdelwahed.me`).
+Welcome to the agent authorization and registration instructions for **Ahmed Shehata Said Abdelwahed's personal portfolio & blog** (`https://ahmedabdelwahed.me`).
 
 ## Overview
 
@@ -24,5 +24,5 @@ No token is required for read access to the portfolio, blog, or metadata files. 
 
 ### Contact
 If you represent an automated crawler or agent system with questions or high-volume requirements, please contact:
-- **Email:** [ahmedshehatasaid1@gmail.com](mailto:ahmedshehatasaid1@gmail.com)
+- **Email:** [contact@ahmedabdelwahed.me](mailto:contact@ahmedabdelwahed.me)
 - **GitHub:** [https://github.com/ahmed-abdelwahed1](https://github.com/ahmed-abdelwahed1)

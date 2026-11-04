@@ -1,0 +1,5 @@
+{
+  "order": 1,
+  "category": "Languages",
+  "items": ["Python", "SQL", "TypeScript", "JavaScript", "C#", "VB.NET", "HTML & CSS"]
+}

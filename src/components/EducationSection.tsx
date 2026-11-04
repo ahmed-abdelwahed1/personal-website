@@ -11,8 +11,10 @@ interface EducationItem {
 
 export default function EducationSection({
   items,
+  title = "Education",
 }: {
   items: EducationItem[];
+  title?: string;
 }) {
   const sorted = [...items].sort((a, b) => a.order - b.order);
 
@@ -20,7 +22,7 @@ export default function EducationSection({
     <section className="section" id="education">
       <div className="container">
         <AnimatedSection variant="fade">
-          <h2 className="section-title">Education</h2>
+          <h2 className="section-title">{title}</h2>
         </AnimatedSection>
 
         <div className="content-grid">

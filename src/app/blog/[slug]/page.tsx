@@ -27,29 +27,35 @@ export async function generateMetadata({
   if (!post) return { title: "Post Not Found" };
 
   const postUrl = `${SITE_URL}/blog/${slug}/`;
+  const ogImageUrl = post.coverImage
+    ? post.coverImage.startsWith("http")
+      ? post.coverImage
+      : `${SITE_URL}${post.coverImage}`
+    : `${SITE_URL}/og-image.png`;
 
   return {
     title: post.title,
     description: post.excerpt,
+    authors: [{ name: "Ahmed Shehata Said Abdelwahed", url: `${SITE_URL}/` }],
     alternates: {
       canonical: postUrl,
     },
     openGraph: {
-      title: `${post.title} | Ahmed Abdelwahed`,
+      title: `${post.title} — Ahmed Abdelwahed`,
       description: post.excerpt,
       url: postUrl,
       type: "article",
       publishedTime: post.date,
-      authors: ["Ahmed Abdelwahed"],
+      authors: ["Ahmed Shehata Said Abdelwahed", "Ahmed Abdelwahed"],
       tags: post.tags,
-      ...(post.coverImage && {
-        images: [{ url: post.coverImage, alt: post.title }],
-      }),
+      images: [{ url: ogImageUrl, alt: post.title }],
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
+      title: `${post.title} — Ahmed Abdelwahed`,
       description: post.excerpt,
+      creator: "@BinShehata",
+      images: [ogImageUrl],
     },
   };
 }
@@ -89,7 +95,7 @@ export default async function BlogPostPage({
       />
       <BlogPostTracker title={post.title} slug={slug} />
       <article className="blog-post">
-        <nav className="blog-post-nav">
+        <nav className="blog-post-nav" aria-label="Breadcrumb">
           <Link href="/blog/" className="blog-post-back">
             <FaArrowLeft /> Back to blog
           </Link>
@@ -100,6 +106,10 @@ export default async function BlogPostPage({
             <time dateTime={post.date}>{formatDate(post.date)}</time>
             <span className="blog-post-meta-sep">·</span>
             <span>{post.readingTime} min read</span>
+            <span className="blog-post-meta-sep">·</span>
+            <span>
+              By <Link href="/">Ahmed Abdelwahed</Link>
+            </span>
           </div>
           <h1 className="blog-post-title">{post.title}</h1>
           {post.tags && post.tags.length > 0 && (
@@ -117,7 +127,7 @@ export default async function BlogPostPage({
           <div className="blog-post-cover">
             <Image
               src={post.coverImage}
-              alt={post.title}
+              alt={`${post.title} — Article by Ahmed Abdelwahed`}
               width={680}
               height={383}
               priority
@@ -135,6 +145,15 @@ export default async function BlogPostPage({
 
         <footer className="blog-post-footer">
           <div className="blog-post-divider" />
+          <div className="blog-post-author-box">
+            <p>
+              Written by{" "}
+              <strong>
+                <Link href="/">Ahmed Shehata Said Abdelwahed (Ahmed Abdelwahed)</Link>
+              </strong>{" "}
+              — Data Engineer specializing in Python, SQL, and ETL pipelines.
+            </p>
+          </div>
           <Link href="/blog/" className="blog-post-back">
             <FaArrowLeft /> All posts
           </Link>

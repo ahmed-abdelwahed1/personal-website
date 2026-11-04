@@ -32,13 +32,16 @@ function stripFrontmatter(content: string): string {
 }
 
 export function getHomepageMarkdown(): string {
-  return `# Ahmed Abdelwahed — Data Engineer
+  return `# Ahmed Abdelwahed (Ahmed Shehata Said Abdelwahed | أحمد شحاتة سعيد عبدالواحد) — Data Engineer
 
-> I design systems, build data pipelines, and turn ideas into working products. Interested in data engineering, AI-driven tools, and practical software that people actually use. Currently studying and building along the way.
+> I design systems, build data pipelines, and turn ideas into working products. Interested in data engineering, data architecture, AI-driven tools, and practical software that people actually use. Currently studying and building along the way.
 
+- **Full Name:** Ahmed Shehata Said Abdelwahed (أحمد شحاتة سعيد عبدالواحد)
+- **Professional Name:** Ahmed Abdelwahed (أحمد عبدالواحد)
 - **Title:** Data Engineer
-- **Website:** https://ahmedabdelwahed.me/
-- **Email:** ahmedshehatasaid1@gmail.com
+- **Website (English):** https://ahmedabdelwahed.me/
+- **Website (Arabic):** https://ahmedabdelwahed.me/ar/
+- **Email:** contact@ahmedabdelwahed.me
 - **LinkedIn:** https://linkedin.com/in/ahmed-abdelwahed
 - **GitHub:** https://github.com/ahmed-abdelwahed1
 - **X (Twitter):** https://x.com/BinShehata
@@ -55,7 +58,7 @@ export function getHomepageMarkdown(): string {
 - **Duration:** January 2026 – Present
 - **Details:** Designing efficient PostgreSQL schemas (via Supabase) to capture complex order workflows, automating data flow between inventory and production stages, and establishing validation rules to ensure accurate real-time tracking for decision-making.
 
-### Intern Data Engineer — Volvo Cars
+### Data Engineer Intern — Volvo Cars
 - **Location:** Gothenburg, Sweden
 - **Duration:** February 2024 – July 2024
 - **Details:** Participated in developing automated data pipelines using Python, authored technical documentation for data collection and processing, engineered reliable methods for data recording throughout testing, and improved data integrity using cleaning techniques.
@@ -67,15 +70,23 @@ export function getHomepageMarkdown(): string {
 
 ---
 
-## Projects
+## Technical Skills
 
-### BUDGE
-- **Description:** A smart Personal Expense Tracker built with VB.NET and MS Access. Features a modern dashboard for tracking income, expenses, and categories.
-- **Repository:** https://github.com/ahmed-abdelwahed1/BUDGE
+- **Languages:** Python, SQL, TypeScript, JavaScript, C#, VB.NET, HTML & CSS
+- **Data Engineering & Architecture:** ETL & ELT Pipelines, Data Modeling, Data Architecture, Data Cleaning & Validation, Exploratory Data Analysis (EDA), Data Visualization
+- **Databases, Libraries & Tools:** PostgreSQL, MySQL, Supabase, Pandas, NumPy, Matplotlib, Seaborn, Next.js, Git & GitHub, Ubuntu Linux
+
+---
+
+## Projects
 
 ### Hevy Flow
 - **Description:** An end-to-end data pipeline for analyzing and visualizing Hevy App workout logs.
 - **Repository:** https://github.com/ahmed-abdelwahed1/hevy-flow
+
+### BUDGE
+- **Description:** A smart Personal Expense Tracker built with VB.NET and MS Access. Features a modern dashboard for tracking income, expenses, and categories.
+- **Repository:** https://github.com/ahmed-abdelwahed1/BUDGE
 
 ### X-Unbookmarker
 - **Description:** Chrome Extension designed to help you manage your digital footprint on X (formerly Twitter) by automating the process of removing bookmarks.
@@ -102,8 +113,8 @@ export function getHomepageMarkdown(): string {
 ## Certifications & Badges
 
 - **Data Analyst Professional Certificate - IBM:** https://www.credly.com/badges/771aa249-d545-4e8c-9ff4-98a0a24a97bd/public_url
-- **Databases and SQL for Data Science with Python - IBM:** https://www.credly.com/badges/databases-and-sql-for-data-science-with-python
-- **Python for Data Science, AI & Development - IBM:** https://www.credly.com/badges/python-for-data-science-ai-development
+- **Databases and SQL for Data Science - IBM:** https://www.credly.com/badges/29ad6e62-7522-4c39-94b5-aa735b49701a/public_url
+- **Python for Data Science and AI - IBM:** https://www.credly.com/badges/6bb53c3e-c6b4-4db5-83a2-eb262849701a/public_url
 
 ---
 
@@ -129,10 +140,58 @@ export function getHomepageMarkdown(): string {
 `;
 }
 
+export function getArabicHomepageMarkdown(): string {
+  return `# أحمد عبدالواحد (أحمد شحاتة سعيد عبدالواحد | Ahmed Shehata Said Abdelwahed) — مهندس بيانات
+
+> أحمد شحاتة سعيد عبدالواحد (أحمد عبدالواحد / أحمد عبد الواحد / أحمد شحاته) — مهندس بيانات ومطور برمجيات متخصص في هندسة البيانات (Data Engineering)، تصميم قواعد البيانات (Data Architecture)، وبناء خطوط أنابيب البيانات المؤتمتة (ETL Pipelines) باستخدام Python وSQL.
+
+- **الاسم الكامل:** أحمد شحاتة سعيد عبدالواحد (Ahmed Shehata Said Abdelwahed)
+- **الاسم المهني:** أحمد عبدالواحد (Ahmed Abdelwahed)
+- **المسمى الوظيفي:** مهندس بيانات (Data Engineer)
+- **الموقع الرسمي (العربية):** https://ahmedabdelwahed.me/ar/
+- **الموقع الرسمي (English):** https://ahmedabdelwahed.me/
+- **البريد الإلكتروني:** contact@ahmedabdelwahed.me
+- **لينكدإن:** https://linkedin.com/in/ahmed-abdelwahed
+- **جيت هاب:** https://github.com/ahmed-abdelwahed1
+- **إكس (تويتر):** https://x.com/BinShehata
+- **ميديم:** https://medium.com/@ahmed-abdelwahed
+- **السيرة الذاتية (CV):** https://ahmedabdelwahed.me/ahmed-abdelwahed-cv.pdf
+
+---
+
+## الخبرات العملية
+
+### مهندس بيانات (Junior Data Engineer) — Cyan Group
+- **الموقع:** الكويت (عن بُعد)
+- **الفترة:** يناير 2026 – الحاضر
+- **التفاصيل:** تصميم مخططات قواعد بيانات PostgreSQL عالية الكفاءة (عبر Supabase) لإدارة تدفقات الطلبات المعقدة، وأتمتة حركة البيانات بين مراحل المخزون والإنتاج، وبناء قواعد التحقق من جودة البيانات.
+
+### متدرب هندسة بيانات (Data Engineer Intern) — Volvo Cars (فولفو للسيارات)
+- **الموقع:** غوتنبرغ، السويد
+- **الفترة:** فبراير 2024 – يوليو 2024
+- **التفاصيل:** المشاركة في تطوير خطوط أنابيب بيانات مؤتمتة باستخدام لغة Python، وإعداد التوثيق التقني لإجراءات جمع ومعالجة البيانات، وتطبيق تقنيات تنظيف البيانات.
+
+---
+
+## التعليم
+
+### بكالوريوس التربية النوعية في علوم الحاسب والتربية
+- **المؤسسة:** جامعة المنصورة، كلية التربية النوعية
+- **الفترة:** 2022 – الحاضر (التخرج المتوقع: يوليو 2027)
+
+---
+
+## العمل التطوعي
+
+### متطوع في لجنة هندسة البيانات — فرع جمعية الحاسبات IEEE بجامعة المنصورة
+- **الفترة:** نوفمبر 2024 – أكتوبر 2025
+`;
+}
+
 export function getBlogIndexMarkdown(): string {
   return `# Ahmed Abdelwahed — Blog
 
-Articles on data engineering, Python, ETL pipelines, and software development.
+Articles by Ahmed Shehata Said Abdelwahed (Ahmed Abdelwahed) on data engineering, Python, ETL pipelines, and software development.
 
 ## Posts
 
@@ -160,7 +219,7 @@ export function getBlogPostMarkdown(slug: string): string | null {
   return `# ${post.title}
 
 - **Date:** ${post.date}
-- **Author:** Ahmed Abdelwahed
+- **Author:** Ahmed Shehata Said Abdelwahed (Ahmed Abdelwahed)
 - **Canonical URL:** https://ahmedabdelwahed.me/blog/${slug}/
 
 ${body}`;
@@ -172,6 +231,10 @@ export function getMarkdownResponseForPath(pathname: string): string | null {
 
   if (cleanPath === "/") {
     return getHomepageMarkdown();
+  }
+
+  if (cleanPath === "/ar") {
+    return getArabicHomepageMarkdown();
   }
 
   if (cleanPath === "/blog") {

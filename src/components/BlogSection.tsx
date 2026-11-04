@@ -23,7 +23,17 @@ function formatDate(dateStr: string): string {
   });
 }
 
-export default function BlogSection({ posts }: { posts: BlogPost[] }) {
+export default function BlogSection({
+  posts,
+  title = "Blog",
+  viewAllLabel = "View all posts",
+  readLabel = "Read article",
+}: {
+  posts: BlogPost[];
+  title?: string;
+  viewAllLabel?: string;
+  readLabel?: string;
+}) {
   const useHorizontalScroll = posts.length > 3;
 
   return (
@@ -31,9 +41,9 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
       <div className="container">
         <AnimatedSection variant="fade">
           <div className="section-header">
-            <h2 className="section-title">Blog</h2>
+            <h2 className="section-title">{title}</h2>
             <Link href="/blog/" className="btn btn-primary btn-sm">
-              View all posts
+              {viewAllLabel}
             </Link>
           </div>
         </AnimatedSection>
@@ -54,7 +64,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
                     <div className="blog-card-cover">
                       <Image
                         src={post.coverImage}
-                        alt={post.title}
+                        alt={`${post.title} — Technical article by Ahmed Abdelwahed`}
                         width={600}
                         height={340}
                         className="blog-card-cover-img"
@@ -71,7 +81,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
                     <p className="blog-card-excerpt">{post.excerpt}</p>
                   </div>
                   <span className="blog-read-link">
-                    Read <FaArrowRight />
+                    {readLabel} <FaArrowRight />
                   </span>
                 </article>
               </Link>

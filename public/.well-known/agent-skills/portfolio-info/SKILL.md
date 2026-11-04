@@ -4,26 +4,28 @@ Retrieve professional information from Ahmed Abdelwahed's personal portfolio sit
 
 ## Overview
 
-This skill allows agents to extract structured information about Ahmed Abdelwahed, a Data Engineer, from his portfolio website at https://ahmedabdelwahed.me.
+This skill allows agents to extract structured information about Ahmed Shehata Said Abdelwahed (Ahmed Abdelwahed / أحمد شحاتة سعيد عبدالواحد), a Data Engineer, from his portfolio website at https://ahmedabdelwahed.me.
 
 ## Available Information
 
-- **Professional Summary** — Name, title, bio, and current availability
-- **Work Experience** — Past and present positions with companies, roles, and descriptions
-- **Education** — Degrees and institutions
+- **Professional Summary** — Full name, Arabic name, title, bio, and current availability
+- **Work Experience** — Past and present positions with companies (Cyan Group, Volvo Cars), roles, and descriptions
+- **Technical Skills** — Languages (Python, SQL, TypeScript), Data Engineering & Architecture, and Databases/Tools
+- **Education** — Degrees and institutions (Mansoura University)
 - **Projects** — Open-source and personal projects with GitHub links
 - **Blog Posts** — Articles on data engineering, Python, ETL, and software development
-- **Contact Information** — Email, LinkedIn, GitHub, X (Twitter), and Medium profiles
-- **CV/Resume** — Downloadable PDF at `/Ahmed%20Abdelwahed%20-%20CV.pdf`
+- **Contact Information** — Email (`contact@ahmedabdelwahed.me`), LinkedIn, GitHub, X (Twitter), and Medium profiles
+- **CV/Resume** — Downloadable PDF at `/ahmed-abdelwahed-cv.pdf`
 
 ## Endpoints
 
 | Resource | URL | Format |
 |----------|-----|--------|
-| Homepage | `https://ahmedabdelwahed.me/` | HTML |
-| Blog | `https://ahmedabdelwahed.me/blog/` | HTML |
+| Homepage (EN) | `https://ahmedabdelwahed.me/` | HTML / Markdown |
+| Homepage (AR) | `https://ahmedabdelwahed.me/ar/` | HTML / Markdown |
+| Blog | `https://ahmedabdelwahed.me/blog/` | HTML / Markdown |
 | Sitemap | `https://ahmedabdelwahed.me/sitemap.xml` | XML |
-| CV | `https://ahmedabdelwahed.me/Ahmed%20Abdelwahed%20-%20CV.pdf` | PDF |
+| CV | `https://ahmedabdelwahed.me/ahmed-abdelwahed-cv.pdf` | PDF |
 
 ## Content Negotiation
 

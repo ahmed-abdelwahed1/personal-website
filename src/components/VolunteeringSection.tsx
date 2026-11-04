@@ -14,8 +14,10 @@ interface VolunteeringItem {
 
 export default function VolunteeringSection({
   items,
+  title = "Volunteering",
 }: {
   items: VolunteeringItem[];
+  title?: string;
 }) {
   const sorted = [...items].sort((a, b) => a.order - b.order);
 
@@ -23,7 +25,7 @@ export default function VolunteeringSection({
     <section className="section" id="volunteering">
       <div className="container">
         <AnimatedSection variant="fade">
-          <h2 className="section-title">Volunteering</h2>
+          <h2 className="section-title">{title}</h2>
         </AnimatedSection>
 
         <div className="content-grid">
@@ -37,7 +39,7 @@ export default function VolunteeringSection({
                 {vol.logo && (
                   <Image
                     src={vol.logo}
-                    alt={`${vol.organization} logo`}
+                    alt={`${vol.organization} logo — ${vol.role}`}
                     width={200}
                     height={40}
                     className="experience-logo"

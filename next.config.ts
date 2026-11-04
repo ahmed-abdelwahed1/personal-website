@@ -26,6 +26,11 @@ const nextConfig: NextConfig = {
         destination: "https://ahmedabdelwahed.me/:path*",
         permanent: true,
       },
+      {
+        source: "/Ahmed%20Abdelwahed%20-%20CV.pdf",
+        destination: "/ahmed-abdelwahed-cv.pdf",
+        permanent: true,
+      },
     ];
   },
   headers: async () => [

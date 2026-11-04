@@ -7,6 +7,8 @@ import Blobatar from "@/components/Blobatar";
 
 interface HeroData {
   name: string;
+  fullName?: string;
+  arabicName?: string;
   title: string;
   bio: string;
   openTo: string;
@@ -75,7 +77,17 @@ const iconPop: Variants = {
   },
 };
 
-export default function Hero({ data }: { data: HeroData }) {
+export default function Hero({
+  data,
+  greeting = "Hi, I'm",
+  downloadLabel = "Download CV",
+  contactLabel = "Contact me",
+}: {
+  data: HeroData;
+  greeting?: string;
+  downloadLabel?: string;
+  contactLabel?: string;
+}) {
   return (
     <section className="hero" id="hero">
       <motion.div
@@ -85,7 +97,7 @@ export default function Hero({ data }: { data: HeroData }) {
         animate="show"
       >
         <motion.h1 className="hero-name" variants={fadeUp}>
-          <span className="hero-greeting">Hi, I&apos;m</span>
+          {greeting && <span className="hero-greeting">{greeting}</span>}
           <span className="hero-name-group">
             <span className="hero-name-text">{data.name}</span>
             <Blobatar name="Osmar" className="hero-name-blobatar" />
@@ -95,6 +107,22 @@ export default function Hero({ data }: { data: HeroData }) {
         <motion.p className="hero-title" variants={fadeUp}>
           {data.title}
         </motion.p>
+
+        {(data.fullName || data.arabicName) && (
+          <motion.p className="hero-identity-meta" variants={fadeUp}>
+            {data.fullName && <span>{data.fullName}</span>}
+            {data.fullName && data.arabicName && (
+              <span className="hero-identity-sep" aria-hidden="true">
+                ·
+              </span>
+            )}
+            {data.arabicName && (
+              <span lang="ar" dir="rtl">
+                {data.arabicName}
+              </span>
+            )}
+          </motion.p>
+        )}
 
         <motion.div
           className="hero-divider divider"
@@ -113,10 +141,10 @@ export default function Hero({ data }: { data: HeroData }) {
         <motion.div className="hero-actions" variants={fadeUp}>
           <div className="hero-buttons">
             <a href={data.cvFile} className="btn btn-primary" download>
-              Download CV
+              {downloadLabel}
             </a>
             <a href={`mailto:${data.email}`} className="btn btn-outline">
-              Contact me
+              {contactLabel}
             </a>
           </div>
 
@@ -136,7 +164,7 @@ export default function Hero({ data }: { data: HeroData }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
-                aria-label={link.label}
+                aria-label={`${data.name} on ${link.label}`}
                 variants={iconPop}
                 whileHover={{ y: -3, scale: 1.15 }}
                 whileTap={{ scale: 0.95 }}
