@@ -106,23 +106,6 @@ export default function RootLayout({
         </ThemeProvider>
         <JsonLd />
         <Analytics />
-        <Script
-          src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-          strategy="afterInteractive"
-        />
-        <Script id="netlify-identity-redirect" strategy="afterInteractive">
-          {`
-            if (window.netlifyIdentity) {
-              window.netlifyIdentity.on("init", function(user) {
-                if (!user) {
-                  window.netlifyIdentity.on("login", function() {
-                    window.location.assign("/" + "admin" + "/");
-                  });
-                }
-              });
-            }
-          `}
-        </Script>
         <Script id="webmcp-tools" strategy="afterInteractive">
           {`
             (function() {

@@ -32,7 +32,7 @@ This project is built with Next.js App Router and TypeScript, with content sourc
 - Animations: [Framer Motion](https://www.framer.com/motion/)
 - Content: Markdown with remark plugins and local JSON
 - Theming: [next-themes](https://github.com/pacocoursey/next-themes)
-- Deployment: [Netlify](https://www.netlify.com/)
+- Deployment: [Cloudflare Workers](https://workers.cloudflare.com/) via [@opennextjs/cloudflare](https://opennext.js.org/cloudflare)
 
 ## Agent Readiness
 
@@ -42,17 +42,19 @@ This site implements the [IsAgentReady](https://isitagentready.com/) specificati
 
 | Endpoint | Purpose | Spec |
 |----------|---------|------|
+| `/.well-known/poppy.json` | Personal Agent Protocol (Poppy) discovery | [Poppy v0.1](https://personalagentprotocol.org/docs/spec#3-discovery) |
 | `/.well-known/api-catalog` | API catalog for automated discovery | [RFC 9727](https://www.rfc-editor.org/rfc/rfc9727) |
 | `/.well-known/agent-skills/index.json` | Agent skills discovery index | [Agent Skills Discovery v0.2.0](https://github.com/cloudflare/agent-skills-discovery-rfc) |
 | `/.well-known/mcp/server-card.json` | MCP Server Card for agent discovery | [SEP-1649](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/2127) |
 | `/.well-known/openid-configuration` | OAuth/OIDC discovery metadata | [OpenID Connect Discovery](http://openid.net/specs/openid-connect-discovery-1_0.html) |
 | `/.well-known/oauth-protected-resource` | OAuth Protected Resource metadata | [RFC 9728](https://www.rfc-editor.org/rfc/rfc9728) |
+| `/.well-known/oauth-authorization-server` | OAuth Authorization Server metadata | [RFC 8414](https://www.rfc-editor.org/rfc/rfc8414) |
 
 ### Content Accessibility
 
-- **Markdown Negotiation**: Requests with `Accept: text/markdown` return a markdown version of any HTML page via a Netlify Edge Function. Response includes `Content-Type: text/markdown` and `x-markdown-tokens` headers.
+- **Markdown Negotiation**: Requests with `Accept: text/markdown` return a markdown version of any HTML page via Next.js Middleware on Cloudflare Workers. Response includes `Content-Type: text/markdown` and `x-markdown-tokens` headers.
 - **Content Signals**: `robots.txt` includes `Content-Signal: ai-train=no, search=yes, ai-input=no` per the [Content Signals](https://contentsignals.org/) specification.
-- **Link Headers**: Homepage returns `Link` response headers (per [RFC 8288](https://www.rfc-editor.org/rfc/rfc8288)) pointing to `api-catalog`, `agent-skills`, and `sitemap.xml`.
+- **Link Headers**: Homepage returns `Link` response headers (per [RFC 8288](https://www.rfc-editor.org/rfc/rfc8288)) pointing to `api-catalog`, `agent-skills`, `poppy.json`, and `sitemap.xml`.
 
 ### WebMCP Tools
 
@@ -102,12 +104,12 @@ end
 subgraph group_public["Public surface"]
   node_public_surface[("Public assets<br/>Static assets")]
   node_well_known["Well-known<br/>Discovery files<br/>[.well-known]"]
-  node_admin["Admin CMS<br/>Static CMS"]
+  node_admin["Admin CMS<br/>Decap CMS<br/>[public/admin]"]
 end
 
 subgraph group_deploy["Deploy edge"]
-  node_edge_md["Markdown edge<br/>Netlify edge"]
-  node_netlify_cfg["Netlify config<br/>Hosting config<br/>[netlify.toml]"]
+  node_worker["Cloudflare Worker<br/>OpenNext runtime<br/>[wrangler.jsonc]"]
+  node_middleware["Middleware<br/>Markdown negotiation<br/>[middleware.ts]"]
 end
 
 node_layout -->|"provides"| node_theme
@@ -134,9 +136,9 @@ node_sitemap -->|"indexes"| node_public_surface
 node_public_surface -->|"contains"| node_well_known
 node_public_surface -->|"contains"| node_admin
 node_admin -.->|"edits via"| node_content_lib
-node_edge_md -->|"negotiates"| node_blog_lib
-node_netlify_cfg -->|"enables"| node_edge_md
-node_netlify_cfg -->|"serves"| node_public_surface
+node_worker -->|"runs"| node_middleware
+node_worker -->|"serves"| node_public_surface
+node_middleware -->|"negotiates"| node_blog_lib
 
 click node_layout "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/layout.tsx"
 click node_home "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/app/page.tsx"
@@ -161,8 +163,8 @@ click node_blog_content "https://github.com/ahmed-abdelwahed1/personal-website/b
 click node_public_surface "https://github.com/ahmed-abdelwahed1/personal-website/tree/main/public"
 click node_well_known "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/public/.well-known"
 click node_admin "https://github.com/ahmed-abdelwahed1/personal-website/tree/main/public/admin"
-click node_edge_md "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/netlify/edge-functions/markdown-negotiation.ts"
-click node_netlify_cfg "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/netlify.toml"
+click node_worker "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/wrangler.jsonc"
+click node_middleware "https://github.com/ahmed-abdelwahed1/personal-website/blob/main/src/middleware.ts"
 
 classDef toneNeutral fill:#f8fafc,stroke:#334155,stroke-width:1.5px,color:#0f172a
 classDef toneBlue fill:#dbeafe,stroke:#2563eb,stroke-width:1.5px,color:#172554
@@ -175,7 +177,7 @@ class node_layout,node_home,node_blog_index,node_blog_post,node_sitemap,node_con
 class node_theme,node_hero,node_experience,node_projects,node_education,node_badges,node_volunteering,node_heatmap,node_blog_ui,node_seo,node_analytics toneAmber
 class node_site_content,node_blog_content toneMint
 class node_public_surface,node_well_known,node_admin toneRose
-class node_edge_md,node_netlify_cfg toneIndigo
+class node_worker,node_middleware toneIndigo
 ```
 
 ## Contact
