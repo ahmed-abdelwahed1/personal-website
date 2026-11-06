@@ -40,11 +40,7 @@ export default function Footer() {
               </>
             )}
           </nav>
-          <p className="footer-text">
-            {isArabic
-              ? "© 2026 أحمد شحاتة سعيد عبدالواحد (أحمد عبدالواحد) — مهندس بيانات"
-              : "© 2026 Ahmed Shehata Said Abdelwahed (Ahmed Abdelwahed) — Data Engineer"}
-          </p>
+          <p className="footer-text">© 2026 Ahmed Abdelwahed</p>
         </div>
       </AnimatedSection>
     </footer>

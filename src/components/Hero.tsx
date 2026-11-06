@@ -7,8 +7,6 @@ import Blobatar from "@/components/Blobatar";
 
 interface HeroData {
   name: string;
-  fullName?: string;
-  arabicName?: string;
   title: string;
   bio: string;
   openTo: string;
@@ -107,22 +105,6 @@ export default function Hero({
         <motion.p className="hero-title" variants={fadeUp}>
           {data.title}
         </motion.p>
-
-        {(data.fullName || data.arabicName) && (
-          <motion.p className="hero-identity-meta" variants={fadeUp}>
-            {data.fullName && <span>{data.fullName}</span>}
-            {data.fullName && data.arabicName && (
-              <span className="hero-identity-sep" aria-hidden="true">
-                ·
-              </span>
-            )}
-            {data.arabicName && (
-              <span lang="ar" dir="rtl">
-                {data.arabicName}
-              </span>
-            )}
-          </motion.p>
-        )}
 
         <motion.div
           className="hero-divider divider"

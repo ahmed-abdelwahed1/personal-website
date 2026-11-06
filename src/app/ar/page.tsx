@@ -16,7 +16,7 @@ const SITE_URL = "https://ahmedabdelwahed.me";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "أحمد عبدالواحد | مهندس بيانات — أحمد شحاتة سعيد عبدالواحد",
+    absolute: "أحمد عبدالواحد | مهندس بيانات — Ahmed Abdelwahed",
   },
   description:
     "الموقع الرسمي لـ أحمد شحاتة سعيد عبدالواحد (أحمد عبدالواحد / أحمد شحاته / أحمد عبد الواحد)، مهندس بيانات متخصص في هندسة البيانات، بايثون (Python)، قواعد البيانات SQL، وبناء أنظمة خطوط أنابيب البيانات ETL. خبرة عملية في Cyan Group وتدريب سابق في شركة فولفو للسيارات (Volvo Cars) بالسويد.",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US"],
     url: `${SITE_URL}/ar/`,
     siteName: "أحمد عبدالواحد — مهندس بيانات",
-    title: "أحمد عبدالواحد | مهندس بيانات — أحمد شحاتة سعيد عبدالواحد",
+    title: "أحمد عبدالواحد | مهندس بيانات — Ahmed Abdelwahed",
     description:
       "الموقع الرسمي لـ أحمد شحاتة سعيد عبدالواحد (أحمد عبدالواحد)، مهندس بيانات ومطور برمجيات متخصص في هندسة البيانات وبناء خطوط أنابيب البيانات ETL وتصميم قواعد البيانات.",
     firstName: "أحمد",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "أحمد عبدالواحد | مهندس بيانات — أحمد شحاتة سعيد عبدالواحد",
+    title: "أحمد عبدالواحد | مهندس بيانات — Ahmed Abdelwahed",
     description:
       "الموقع الرسمي لـ أحمد شحاتة سعيد عبدالواحد (أحمد عبدالواحد)، مهندس بيانات متخصص في هندسة البيانات وتصميم الأنظمة وقواعد البيانات.",
     creator: "@BinShehata",
@@ -78,11 +78,9 @@ export const metadata: Metadata = {
 
 const arabicHero = {
   name: "أحمد عبدالواحد",
-  fullName: "أحمد شحاتة سعيد عبدالواحد",
-  arabicName: "Ahmed Shehata Said Abdelwahed",
-  title: "مهندس بيانات (Data Engineer)",
-  bio: "أحمد شحاتة سعيد عبدالواحد (أحمد عبدالواحد / أحمد عبد الواحد / أحمد شحاته) — مهندس بيانات ومطور برمجيات متخصص في هندسة البيانات (Data Engineering)، تصميم قواعد البيانات (Data Architecture)، وبناء خطوط أنابيب البيانات المؤتمتة (ETL Pipelines) باستخدام Python وSQL. أهتم بتحويل البيانات المعقدة إلى أنظمة عملية وموثوقة تدعم اتخاذ القرار.",
-  openTo: "متاح للتعاون المهني والفرص في مجال هندسة البيانات وتطوير الأنظمة.",
+  title: "Data Engineer",
+  bio: "مهندس بيانات ومطور برمجيات متخصص في هندسة البيانات وتصميم الأنظمة وقواعد البيانات، وبناء خطوط أنابيب البيانات المؤتمتة باستخدام Python وSQL. أهتم بتحويل الأفكار والبيانات إلى حلول ومنتجات عملية.",
+  openTo: "متاح للتعاون المهني والفرص في مجال هندسة البيانات وتطوير البرمجيات.",
   email: "contact@ahmedabdelwahed.me",
   linkedin: "https://linkedin.com/in/ahmed-abdelwahed",
   github: "https://github.com/ahmed-abdelwahed1",
@@ -94,30 +92,30 @@ const arabicHero = {
 const arabicExperience = [
   {
     order: 1,
-    jobTitle: "مهندس بيانات (Junior Data Engineer)",
+    jobTitle: "Junior Data Engineer",
     company: "Cyan Group",
-    location: "الكويت (عن بُعد)",
-    dateRange: "يناير 2026 – الحاضر",
+    location: "Remote, Kuwait",
+    dateRange: "January 2026 – Present",
     description:
       "تصميم مخططات قواعد بيانات PostgreSQL عالية الكفاءة (عبر Supabase) لإدارة تدفقات الطلبات المعقدة، وأتمتة حركة البيانات بين مراحل المخزون والإنتاج، وبناء قواعد التحقق من جودة البيانات لضمان دقة التتبع اللحظي ودعم اتخاذ القرار.",
     logo: "/images/logos/logo.svg",
   },
   {
     order: 2,
-    jobTitle: "متدرب هندسة بيانات (Data Engineer Intern)",
-    company: "Volvo Cars (فولفو للسيارات)",
-    location: "غوتنبرغ، السويد",
-    dateRange: "فبراير 2024 – يوليو 2024",
+    jobTitle: "Data Engineer Intern",
+    company: "Volvo Cars",
+    location: "Gothenburg, Sweden",
+    dateRange: "February 2024 – July 2024",
     description:
       "المشاركة في تطوير خطوط أنابيب بيانات مؤتمتة باستخدام لغة Python لتقليل المعالجة اليدوية والأخطاء، وإعداد التوثيق التقني الشامل لإجراءات جمع ومعالجة البيانات، وتطوير آليات موثوقة لتسجيل البيانات أثناء مراحل الاختبار، وتطبيق تقنيات تنظيف البيانات مما ساهم في رفع دقة التقارير بنسبة 25%.",
     logo: "/images/logos/volvo-logo.svg",
   },
   {
     order: 3,
-    jobTitle: "مصمم جرافيك مستقل (Freelance Graphic Designer)",
-    company: "عمل حر",
-    location: "عن بُعد",
-    dateRange: "يناير 2019 – ديسمبر 2023",
+    jobTitle: "Freelance Graphic Designer",
+    company: "Freelance",
+    location: "Remote",
+    dateRange: "January 2019 – December 2023",
     description:
       "تقديم خدمات التصميم الجرافيكي والهويات البصرية والمواد التسويقية والأصول الرقمية لعملاء متعددين.",
     logo: "",
@@ -125,48 +123,12 @@ const arabicExperience = [
   },
 ];
 
-const arabicSkills = [
-  {
-    order: 1,
-    category: "لغات البرمجة",
-    items: ["Python", "SQL", "TypeScript", "JavaScript", "C#", "VB.NET", "HTML & CSS"],
-  },
-  {
-    order: 2,
-    category: "هندسة وتصميم البيانات",
-    items: [
-      "خطوط أنابيب البيانات (ETL & ELT)",
-      "نمذجة البيانات (Data Modeling)",
-      "معمارية البيانات (Data Architecture)",
-      "تنظيف والتحقق من البيانات",
-      "تحليل البيانات الاستكشافي (EDA)",
-      "تصوير البيانات (Data Visualization)",
-    ],
-  },
-  {
-    order: 3,
-    category: "قواعد البيانات والأدوات",
-    items: [
-      "PostgreSQL",
-      "MySQL",
-      "Supabase",
-      "Pandas",
-      "NumPy",
-      "Matplotlib",
-      "Seaborn",
-      "Next.js",
-      "Git & GitHub",
-      "Ubuntu Linux",
-    ],
-  },
-];
-
 const arabicVolunteering = [
   {
     order: 1,
-    role: "متطوع في لجنة هندسة البيانات (Data Engineering Committee)",
-    organization: "فرع جمعية الحاسبات IEEE بجامعة المنصورة (IEEE Mansoura Computer Society Chapter)",
-    dateRange: "نوفمبر 2024 – أكتوبر 2025",
+    role: "Data Engineering Committee Volunteer",
+    organization: "IEEE Mansoura Computer Society Chapter",
+    dateRange: "November 2024 – October 2025",
     description:
       "المشاركة في أنشطة لجنة هندسة البيانات من خلال ورش العمل التطبيقية والتعاون في حل المشكلات التقنية في مجال البيانات.",
     logo: "/images/logos/ieee-mansoura-computer-society.svg",
@@ -176,9 +138,9 @@ const arabicVolunteering = [
 const arabicEducation = [
   {
     order: 1,
-    degree: "بكالوريوس التربية النوعية في علوم الحاسب والتربية",
-    institution: "جامعة المنصورة، كلية التربية النوعية (Mansoura University)",
-    dateRange: "2022 – الحاضر (التخرج المتوقع: يوليو 2027)",
+    degree: "Bachelor of Specific Education in Computer Science and Education",
+    institution: "Mansoura University, Faculty of Specific Education",
+    dateRange: "2022 – Present (Expected Graduation: July 2027)",
   },
 ];
 
@@ -207,6 +169,12 @@ const arabicProjects = [
 ];
 
 export default async function ArabicHomePage() {
+  const skills = await loadJsonDir<{
+    order: number;
+    category: string;
+    items: string[];
+  }>("skills");
+
   const badges = await loadJsonDir<{
     order: number;
     name: string;
@@ -220,7 +188,7 @@ export default async function ArabicHomePage() {
     "@type": "ProfilePage",
     "@id": `${SITE_URL}/ar/#profilepage`,
     url: `${SITE_URL}/ar/`,
-    name: "أحمد عبدالواحد | مهندس بيانات — أحمد شحاتة سعيد عبدالواحد",
+    name: "أحمد عبدالواحد | مهندس بيانات — Ahmed Abdelwahed",
     description:
       "الموقع الرسمي لـ أحمد شحاتة سعيد عبدالواحد (أحمد عبدالواحد)، مهندس بيانات متخصص في هندسة البيانات وبناء خطوط أنابيب البيانات ETL وقواعد البيانات.",
     inLanguage: "ar",
@@ -257,29 +225,29 @@ export default async function ArabicHomePage() {
       <Hero
         data={arabicHero}
         greeting="أهلاً، أنا"
-        downloadLabel="تحميل السيرة الذاتية (CV)"
-        contactLabel="تواصل معي"
+        downloadLabel="Download CV"
+        contactLabel="Contact me"
       />
-      <ExperienceSection items={arabicExperience} title="الخبرات العملية" />
-      <SkillsSection items={arabicSkills} title="المهارات التقنية" />
-      <VolunteeringSection items={arabicVolunteering} title="العمل التطوعي" />
-      <EducationSection items={arabicEducation} title="التعليم" />
+      <ExperienceSection items={arabicExperience} title="Experience" />
+      <SkillsSection items={skills} title="Skills" />
+      <VolunteeringSection items={arabicVolunteering} title="Volunteering" />
+      <EducationSection items={arabicEducation} title="Education" />
       <ProjectsSection
         items={arabicProjects}
-        title="المشاريع التقنية"
-        ctaLabel="عرض على GitHub"
+        title="Projects"
+        ctaLabel="View on GitHub"
       />
       <GithubHeatmapSection username="ahmed-abdelwahed1" />
       <BadgesSection
         items={badges}
-        title="الشهادات والاعتمادات المهنية"
-        viewLabel="عرض الشهادة"
+        title="Badges"
+        viewLabel="View"
       />
       <BlogSection
         posts={allPosts}
-        title="المدونة التقنية (بالإنجليزية)"
-        viewAllLabel="عرض جميع المقالات"
-        readLabel="اقرأ المقال"
+        title="Blog"
+        viewAllLabel="View all posts"
+        readLabel="Read"
       />
     </main>
   );

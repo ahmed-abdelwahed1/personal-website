@@ -413,22 +413,6 @@ ol {
   margin-bottom: 8px;
 }
 
-.hero-identity-meta {
-  font-size: var(--fs-small);
-  font-weight: 300;
-  text-align: center;
-  color: var(--text-muted);
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.hero-identity-sep {
-  color: var(--border-muted);
-}
 
 .hero-divider {
   margin: 24px auto;
@@ -1780,14 +1764,8 @@ html body {
 }
 
 @media (max-width: 768px) {
-  .hero-identity-meta {
-    justify-content: flex-start;
-    text-align: left;
-  }
-
   .rtl-layout .hero-name,
   .rtl-layout .hero-title,
-  .rtl-layout .hero-identity-meta,
   .rtl-layout .hero-bio,
   .rtl-layout .hero-open,
   .rtl-layout .experience-date,
